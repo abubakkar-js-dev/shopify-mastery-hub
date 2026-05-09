@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { AnimatePresence, motion } from "motion/react";
 import { useRouter } from "next/navigation";
-import { ElementType, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   FiBarChart2 as BarChart3,
   FiEdit2 as Edit3,
@@ -33,6 +33,7 @@ import {
   LuUsers as Users,
   LuX as X,
   LuYoutube as Youtube,
+  LuMenu as Menu
 } from "react-icons/lu";
 import {
   Area,
@@ -59,12 +60,15 @@ import {
   UserProfile,
   Video,
 } from "../types";
+import TabButton from "./admin/TabButton";
+import StatCard from "./admin/StatCard";
 
 type Tab = "overview" | "content" | "users" | "settings";
 
 export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
   const navigate = useRouter();
   const [activeTab, setActiveTab] = useState<Tab>("overview");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [admins, setAdmins] = useState<AdminRecord[]>([]);
   const [modules, setModules] = useState<Module[]>([]);
@@ -239,10 +243,25 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
   const COLORS = ["#06b6d4", "#f97316", "#8b5cf6"];
 
   return (
-    <div className="fixed inset-0 z-50 flex bg-[#0A0A0A]">
+    <div className="fixed inset-0 z-50 flex bg-brand-bg">
+      {/* Mobile Sidebar Overlay */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 z-40 md:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 border-r border-white/10 bg-[#0F0F0F] flex flex-col">
-        <div className="p-8 border-b border-white/10 flex items-center justify-between">
+      <aside
+        className={cn(
+          "fixed md:relative z-50 h-full w-64 border-r border-white/10 bg-[#0F0F0F] flex flex-col transition-transform duration-300",
+          isSidebarOpen
+            ? "translate-x-0"
+            : "-translate-x-full md:translate-x-0",
+        )}
+      >
+        <div className="p-6 md:p-8 border-b border-white/10 flex items-center justify-between">
           <div>
             <h2 className="text-xl font-black uppercase tracking-tighter italic">
               Admin
@@ -262,25 +281,37 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
         <nav className="flex-1 p-4 space-y-2">
           <TabButton
             active={activeTab === "overview"}
-            onClick={() => setActiveTab("overview")}
+            onClick={() => {
+              setActiveTab("overview");
+              setIsSidebarOpen(false);
+            }}
             icon={BarChart3}
             label="Overview"
           />
           <TabButton
             active={activeTab === "content"}
-            onClick={() => setActiveTab("content")}
+            onClick={() => {
+              setActiveTab("content");
+              setIsSidebarOpen(false);
+            }}
             icon={BookOpen}
             label="Content"
           />
           <TabButton
             active={activeTab === "users"}
-            onClick={() => setActiveTab("users")}
+            onClick={() => {
+              setActiveTab("users");
+              setIsSidebarOpen(false);
+            }}
             icon={Users}
             label="Users"
           />
           <TabButton
             active={activeTab === "settings"}
-            onClick={() => setActiveTab("settings")}
+            onClick={() => {
+              setActiveTab("settings");
+              setIsSidebarOpen(false);
+            }}
             icon={Settings}
             label="Settings"
           />
@@ -303,7 +334,13 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
 
       {/* Main Content */}
       <main className="flex-1 overflow-y-auto">
-        <div className="p-12 max-w-7xl mx-auto">
+        <div className="p-6 md:p-12 max-w-7xl mx-auto">
+          <button
+            onClick={() => setIsSidebarOpen(true)}
+            className="md:hidden mb-6 text-white/60 hover:text-white transition-colors"
+          >
+            <Menu size={24} />
+          </button>
           <AnimatePresence mode="wait">
             {activeTab === "overview" && (
               <motion.div
@@ -314,7 +351,7 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
                 className="space-y-10"
               >
                 <header>
-                  <h1 className="text-4xl font-black uppercase tracking-tighter italic mb-4">
+                  <h1 className="text-2xl md:text-4xl font-black uppercase tracking-tighter italic mb-3 md:mb-4">
                     Platform Overview
                   </h1>
                   <p className="text-white/40 uppercase tracking-widest text-xs font-bold">
@@ -322,29 +359,24 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
                   </p>
                 </header>
 
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-px bg-white/10 border border-white/10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 border border-white/10">
                   {stats.map((stat, i) => (
-                    <div
+                    <StatCard
                       key={i}
-                      className="p-8 bg-[#0F0F0F] group hover:bg-white/5 transition-colors"
-                    >
-                      <stat.icon className={cn("w-6 h-6 mb-6", stat.color)} />
-                      <p className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em] mb-2">
-                        {stat.label}
-                      </p>
-                      <h3 className="text-4xl font-black italic tracking-tighter">
-                        {stat.value}
-                      </h3>
-                    </div>
+                      label={stat.label}
+                      value={stat.value}
+                      icon={stat.icon}
+                      color={stat.color}
+                    />
                   ))}
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  <div className="lg:col-span-2 bg-[#0F0F0F] border border-white/10 p-8">
-                    <h3 className="text-xs font-black uppercase tracking-widest text-white/40 mb-8 px-2 border-l-2 border-brand-primary">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+                  <div className="lg:col-span-2 bg-[#0F0F0F] border border-white/10 p-6 md:p-8">
+                    <h3 className="text-xs font-black uppercase tracking-widest text-white/40 mb-6 md:mb-8 px-2 border-l-2 border-brand-primary">
                       Monthly Activity Overview
                     </h3>
-                    <div className="h-80">
+                    <div className="h-64 md:h-80">
                       <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={monthlyActivityData}>
                           <defs>
@@ -430,11 +462,11 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
                     </div>
                   </div>
 
-                  <div className="bg-[#0F0F0F] border border-white/10 p-8">
+                  <div className="bg-[#0F0F0F] border border-white/10 p-6 md:p-8">
                     <h3 className="text-xs font-black uppercase tracking-widest text-white/40 mb-8 px-2 border-l-2 border-brand-primary">
                       Content Difficulty
                     </h3>
-                    <div className="h-80 flex flex-col">
+                    <div className="h-64 md:h-80 flex flex-col">
                       <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
                           <Pie
@@ -489,11 +521,11 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
                   </div>
                 </div>
 
-                <div className="mt-10 bg-[#0F0F0F] border border-white/10 p-8">
+                <div className="mt-8 md:mt-10 bg-[#0F0F0F] border border-white/10 p-6 md:p-8">
                   <h3 className="text-xs font-black uppercase tracking-widest text-white/40 mb-8 px-2 border-l-2 border-brand-primary">
                     Top User Progress
                   </h3>
-                  <div className="h-64">
+                  <div className="h-56 md:h-64">
                     <ResponsiveContainer width="100%" height="100%">
                       <AreaChart data={progressData}>
                         <defs>
@@ -1017,7 +1049,7 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
                   </p>
                 </header>
 
-                <div className="bg-[#141414] border border-white/10 overflow-hidden">
+                <div className="bg-brand-surface border border-white/10 overflow-hidden">
                   <table className="w-full text-left">
                     <thead>
                       <tr className="bg-white/5 border-b border-white/10">
@@ -1039,7 +1071,7 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
                       {users.map((user) => (
                         <tr
                           key={user.uid}
-                          className="hover:bg-white/[0.02] transition-colors group"
+                          className="hover:bg-white/2 transition-colors group"
                         >
                           <td className="px-8 py-4">
                             <div className="flex items-center gap-3">
@@ -1050,7 +1082,7 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
                                 <p className="text-sm font-bold uppercase tracking-tight">
                                   {user.displayName}
                                 </p>
-                                <p className="text-[10px] text-white/20 uppercase truncate max-w-[200px]">
+                                <p className="text-[10px] text-white/20 uppercase truncate max-w-50">
                                   {user.email}
                                 </p>
                               </div>
@@ -1112,7 +1144,7 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
                 </header>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                  <div className="p-8 bg-[#141414] border border-white/10">
+                  <div className="p-8 bg-brand-surface border border-white/10">
                     <h3 className="section-label mb-8">Course Policy</h3>
                     <div className="space-y-6">
                       <ToggleSetting
@@ -1132,7 +1164,7 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
                     </div>
                   </div>
 
-                  <div className="p-8 bg-[#141414] border border-white/10">
+                  <div className="p-8 bg-brand-surface border border-white/10">
                     <h3 className="section-label mb-8">Admin Access</h3>
                     <div className="space-y-4">
                       {admins.length > 0 ? (
@@ -1173,7 +1205,7 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
                   </div>
                 </div>
 
-                <div className="p-8 bg-[#141414] border border-white/10">
+                <div className="p-8 bg-brand-surface border border-white/10">
                   <h3 className="section-label mb-8">System Maintenance</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="p-6 bg-black/40 border border-white/5">
@@ -1230,33 +1262,6 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
         )}
       </AnimatePresence>
     </div>
-  );
-}
-
-function TabButton({
-  active,
-  onClick,
-  icon: Icon,
-  label,
-}: {
-  active: boolean;
-  onClick: () => void;
-  icon: ElementType;
-  label: string;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      className={cn(
-        "w-full flex items-center gap-4 px-6 py-4 transition-all uppercase tracking-widest font-black text-[10px]",
-        active
-          ? "bg-brand-primary text-black"
-          : "text-white/40 hover:bg-white/5 hover:text-white",
-      )}
-    >
-      <Icon size={16} />
-      {label}
-    </button>
   );
 }
 
