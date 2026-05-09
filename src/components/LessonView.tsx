@@ -6,8 +6,6 @@ import type { Lesson } from '../types';
 
 export default function LessonView({
   lesson,
-  isCompleted,
-  onToggleComplete,
   onBack,
   completedTasks,
   onToggleTask,
@@ -17,8 +15,6 @@ export default function LessonView({
   onToggleVideo,
 }: {
   lesson: Lesson;
-  isCompleted: boolean;
-  onToggleComplete: () => void;
   onBack: () => void;
   completedTasks: string[];
   onToggleTask: (id: string) => void;
@@ -192,7 +188,7 @@ export default function LessonView({
               <span className="section-label">Active Workshop</span>
               <div className="h-px w-10 bg-white/10" />
               <span className="text-[10px] font-mono text-white/60">
-                L-{lesson.order} // {lesson.difficulty}
+                {`L-${lesson.order} // ${lesson.difficulty}`}
               </span>
             </div>
             {activeVideo && (

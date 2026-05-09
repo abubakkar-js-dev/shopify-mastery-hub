@@ -1,17 +1,13 @@
 import { format } from "date-fns";
 import {
-  collection,
   deleteDoc,
   doc,
-  onSnapshot,
-  orderBy,
-  query,
   setDoc,
   updateDoc,
 } from "firebase/firestore";
 import { AnimatePresence, motion } from "motion/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   FiBarChart2 as BarChart3,
   FiEdit2 as Edit3,
@@ -53,32 +49,32 @@ import { INITIAL_LESSONS, INITIAL_MODULES } from "../data/modules";
 import { db } from "../lib/firebase";
 import { cn } from "../lib/utils";
 import {
-  AdminRecord,
   Lesson,
   Module,
   Task,
-  UserProfile,
   Video,
 } from "../types";
 import StatCard from "./admin/StatCard";
 import TabButton from "./admin/TabButton";
 
+import { useAppContext } from "../context/AppContext";
+
 type Tab = "overview" | "content" | "users" | "settings";
 
 export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
   const navigate = useRouter();
+  const { users, admins, modules, lessons } = useAppContext();
+  
   const [activeTab, setActiveTab] = useState<Tab>("overview");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [users, setUsers] = useState<UserProfile[]>([]);
-  const [admins, setAdmins] = useState<AdminRecord[]>([]);
-  const [modules, setModules] = useState<Module[]>([]);
-  const [lessons, setLessons] = useState<Lesson[]>([]);
+  
   const [isEditingModule, setIsEditingModule] = useState<Module | null>(null);
   const [isEditingLesson, setIsEditingLesson] = useState<Lesson | null>(null);
   const [isSeeding, setIsSeeding] = useState(false);
   const [collapsedMonths, setCollapsedMonths] = useState<Set<number>>(
     new Set(),
   );
+
   const monthlyActivityData = useMemo(
     () => [
       { name: "Jan", users: 35, lessons: 120 },
@@ -87,81 +83,11 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
       {
         name: "Apr",
         users: users.length,
-        lessons: users.reduce((acc, u) => acc + u.completedLessons.length, 0),
+        lessons: users.reduce((acc, u) => acc + (u.completedLessons?.length || 0), 0),
       },
     ],
     [users],
   );
-
-  useEffect(() => {
-    const qUsers = query(collection(db, "users"));
-    const unsubUsers = onSnapshot(
-      qUsers,
-      (snapshot) => {
-        setUsers(snapshot.docs.map((doc) => doc.data() as UserProfile));
-      },
-      (error) => {
-        console.error("Users list error:", error);
-      },
-    );
-
-    const qAdmins = query(collection(db, "admins"));
-    const unsubAdmins = onSnapshot(
-      qAdmins,
-      (snapshot) => {
-        setAdmins(snapshot.docs.map((doc) => doc.data() as AdminRecord));
-      },
-      (error) => {
-        console.error("Admins list error:", error);
-      },
-    );
-
-    const qModules = query(collection(db, "modules"), orderBy("order"));
-    const lessonUnsubscribes: { [key: string]: () => void } = {};
-
-    const unsubModules = onSnapshot(
-      qModules,
-      (snapshot) => {
-        const fetchedModules = snapshot.docs.map((doc) => doc.data() as Module);
-        setModules(fetchedModules);
-
-        // Fetch lessons for all modules
-        fetchedModules.forEach((mod) => {
-          if (!lessonUnsubscribes[mod.id]) {
-            const qLessons = query(
-              collection(db, `modules/${mod.id}/lessons`),
-              orderBy("order"),
-            );
-            lessonUnsubscribes[mod.id] = onSnapshot(
-              qLessons,
-              (lSnap) => {
-                setLessons((prev) => {
-                  const fetchedLessons = lSnap.docs.map(
-                    (d) => d.data() as Lesson,
-                  );
-                  const filtered = prev.filter((l) => l.moduleId !== mod.id);
-                  return [...filtered, ...fetchedLessons];
-                });
-              },
-              (error) => {
-                console.error(`Lessons list error for ${mod.id}:`, error);
-              },
-            );
-          }
-        });
-      },
-      (error) => {
-        console.error("Modules list error:", error);
-      },
-    );
-
-    return () => {
-      unsubUsers();
-      unsubAdmins();
-      unsubModules();
-      Object.values(lessonUnsubscribes).forEach((unsub) => unsub());
-    };
-  }, []);
 
   const seedData = async () => {
     if (

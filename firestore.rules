@@ -52,11 +52,11 @@ service cloud.firestore {
 
     // Module Rules
     match /modules/{moduleId} {
-      allow read: if isSignedIn();
+      allow read: if true;
       allow write: if isAdmin();
       
       match /lessons/{lessonId} {
-        allow read: if isSignedIn();
+        allow read: if true;
         allow write: if isAdmin();
       }
     }

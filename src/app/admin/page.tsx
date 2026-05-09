@@ -24,7 +24,7 @@ export default function AdminPage() {
             setIsAdmin(false);
             router.push('/');
           }
-        } catch (error) {
+        } catch {
           setIsAdmin(false);
           router.push('/');
         }
