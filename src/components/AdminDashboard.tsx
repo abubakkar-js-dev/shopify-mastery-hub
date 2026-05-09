@@ -26,6 +26,7 @@ import {
   LuDatabase as Database,
   LuFileText as FileText,
   LuLink as LinkIcon,
+  LuMenu as Menu,
   LuPlus as Plus,
   LuSave as Save,
   LuSettings as Settings,
@@ -33,7 +34,6 @@ import {
   LuUsers as Users,
   LuX as X,
   LuYoutube as Youtube,
-  LuMenu as Menu
 } from "react-icons/lu";
 import {
   Area,
@@ -60,8 +60,8 @@ import {
   UserProfile,
   Video,
 } from "../types";
-import TabButton from "./admin/TabButton";
 import StatCard from "./admin/StatCard";
+import TabButton from "./admin/TabButton";
 
 type Tab = "overview" | "content" | "users" | "settings";
 
@@ -255,7 +255,7 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed md:relative z-50 h-full w-64 border-r border-white/10 bg-[#0F0F0F] flex flex-col transition-transform duration-300",
+          "fixed md:relative z-50 h-full w-72 md:w-80 border-r border-white/10 bg-[#0F0F0F] flex flex-col transition-transform duration-300",
           isSidebarOpen
             ? "translate-x-0"
             : "-translate-x-full md:translate-x-0",

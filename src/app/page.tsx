@@ -12,7 +12,6 @@ import {
 } from "firebase/firestore";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FiCheckCircle as CheckCircle } from "react-icons/fi";
 import {
@@ -50,7 +49,6 @@ export default function Home() {
   const [showPathGenerator, setShowPathGenerator] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
 
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       setUser(firebaseUser);
@@ -87,7 +85,8 @@ export default function Home() {
               if (adminDoc.exists()) {
                 setIsAdmin(true);
               } else if (
-                auth.currentUser?.email?.toLowerCase() === "mdabubakkars182@gmail.com"
+                auth.currentUser?.email?.toLowerCase() ===
+                "mdabubakkars182@gmail.com"
               ) {
                 await setDoc(adminDocRef, {
                   uid,
@@ -115,9 +114,9 @@ export default function Home() {
 
   useEffect(() => {
     if (!user) {
-// defer state update to next tick to avoid cascading renders
-Promise.resolve().then(() => setModules(INITIAL_MODULES));
-Promise.resolve().then(() => setLessons(INITIAL_LESSONS));
+      // defer state update to next tick to avoid cascading renders
+      Promise.resolve().then(() => setModules(INITIAL_MODULES));
+      Promise.resolve().then(() => setLessons(INITIAL_LESSONS));
       return;
     }
 
@@ -342,7 +341,7 @@ Promise.resolve().then(() => setLessons(INITIAL_LESSONS));
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed md:relative z-50 h-full w-72 md:w-80 bg-brand-bg border-r border-white/10 flex flex-col transition-transform duration-300",
+          "fixed md:relative z-50 h-full w-72 md:w-96 bg-brand-bg border-r border-white/10 flex flex-col transition-transform duration-300",
           isSidebarOpen
             ? "translate-x-0"
             : "-translate-x-full md:translate-x-0",
