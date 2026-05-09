@@ -17,6 +17,7 @@ export interface Video {
   title: string;
   youtubeId: string;
   duration: string;
+  embedUrl?: string;
 }
 
 export interface Lesson {
