@@ -181,9 +181,9 @@ export default function LandingPage({ onLogin }: { onLogin: () => void }) {
         </section>
 
         {/* Feature Grid */}
-        <section className="bg-[#0A0A0A] border-y border-white/5 py-24 md:py-40 relative overflow-hidden">
+        <section className="bg-brand-bg border-y border-white/5 py-24 md:py-40 relative overflow-hidden">
           {/* Subtle Background Accent */}
-          <div className="hidden md:block absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/5 blur-[120px] rounded-full -mr-64 -mt-64" />
+          <div className="hidden md:block absolute top-0 right-0 w-125 h-125 bg-brand-primary/5 blur-[120px] rounded-full -mr-64 -mt-64" />
           
           <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 md:mb-32 gap-10">
@@ -250,7 +250,7 @@ export default function LandingPage({ onLogin }: { onLogin: () => void }) {
                   transition={{ delay: 0.1 * i }}
                   whileHover={{ y: -8 }}
                   className={cn(
-                    "p-10 md:p-14 relative overflow-hidden group cursor-crosshair bg-white/[0.02] border border-white/5 transition-all duration-500",
+                    "p-10 md:p-14 relative overflow-hidden group cursor-crosshair bg-white/2 border border-white/5 transition-all duration-500",
                     feature.borderColor
                   )}
                 >
@@ -291,7 +291,7 @@ export default function LandingPage({ onLogin }: { onLogin: () => void }) {
                 className="hidden md:block absolute w-64 h-64 border border-brand-primary/5 rounded-full will-change-transform"
               />
             ))}
-            <div className="hidden md:block absolute inset-0 bg-brand-primary/[0.03] blur-[140px]" />
+            <div className="hidden md:block absolute inset-0 bg-brand-primary/3 blur-[140px]" />
           </div>
 
           <motion.div
@@ -339,7 +339,7 @@ export default function LandingPage({ onLogin }: { onLogin: () => void }) {
         </section>
       </main>
 
-      <footer className="border-t border-white/5 bg-[#0A0A0A] py-12 md:py-16">
+      <footer className="border-t border-white/5 bg-brand-bg py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-12">
             {/* Brand Cluster */}
@@ -371,7 +371,7 @@ export default function LandingPage({ onLogin }: { onLogin: () => void }) {
             </div>
           </div>
           
-          <div className="mt-12 pt-8 border-t border-white/[0.03] flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="mt-12 pt-8 border-t border-white/3 flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-[8px] font-black uppercase tracking-[0.3em] text-white/10">
               © 2024 Shopify Mastery Hub // All Rights Reserved
             </p>
