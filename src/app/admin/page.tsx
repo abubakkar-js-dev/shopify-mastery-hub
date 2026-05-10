@@ -5,8 +5,10 @@ import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '../../lib/firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import { usePageTitle } from '../../hooks/usePageTitle';
 
 export default function AdminPage() {
+  usePageTitle("Central Command");
   const router = useRouter();
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
 

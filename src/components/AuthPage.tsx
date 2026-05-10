@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  FiMail, 
-  FiLock, 
-  FiUser, 
+import {
+  FiMail,
+  FiLock,
+  FiUser,
   FiArrowRight,
-  FiEye, 
+  FiEye,
   FiEyeOff,
   FiAlertCircle,
   FiLoader
 } from 'react-icons/fi';
 import { FcGoogle } from 'react-icons/fc';
-import { 
-  signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword, 
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
   updateProfile,
   signInWithPopup
 } from 'firebase/auth';
 import { auth, googleProvider } from '../lib/firebase';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 interface AuthPageProps {
   onSuccess: () => void;
@@ -53,7 +54,7 @@ export default function AuthPage({ onSuccess }: AuthPageProps) {
       console.error(err);
       let message = "An error occurred during authentication.";
       const errorCode = err && typeof err === 'object' && 'code' in err ? (err as { code: string }).code : null;
-      
+
       if (errorCode === 'auth/user-not-found') message = "No account found with this email.";
       if (errorCode === 'auth/wrong-password') message = "Incorrect password.";
       if (errorCode === 'auth/email-already-in-use') message = "This email is already registered.";
@@ -86,14 +87,14 @@ export default function AuthPage({ onSuccess }: AuthPageProps) {
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-[120px] animate-pulse delay-700" />
       </div>
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-[450px] relative z-10"
       >
         {/* Logo Section */}
         <div className="text-center mb-10">
-          <motion.div 
+          <motion.div
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             className="inline-block mb-4"
@@ -119,7 +120,7 @@ export default function AuthPage({ onSuccess }: AuthPageProps) {
           <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-brand-primary opacity-20 group-hover:opacity-100 transition-opacity" />
 
           {/* Social Auth */}
-          <button 
+          <button
             onClick={handleGoogleSignIn}
             disabled={isLoading}
             className="w-full h-14 bg-white text-black flex items-center justify-center gap-3 font-black uppercase text-[10px] tracking-widest hover:bg-white/90 transition-all mb-8 shadow-[0_0_20px_rgba(255,255,255,0.1)] active:scale-[0.98]"
@@ -146,7 +147,7 @@ export default function AuthPage({ onSuccess }: AuthPageProps) {
                   <label className="text-[10px] font-black uppercase tracking-widest text-white/40 ml-1">Identity Name</label>
                   <div className="relative">
                     <FiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" />
-                    <input 
+                    <input
                       type="text"
                       required
                       placeholder="e.g. John Doe"
@@ -163,7 +164,7 @@ export default function AuthPage({ onSuccess }: AuthPageProps) {
               <label className="text-[10px] font-black uppercase tracking-widest text-white/40 ml-1">Encoded Email</label>
               <div className="relative">
                 <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" />
-                <input 
+                <input
                   type="email"
                   required
                   placeholder="name@example.com"
@@ -185,7 +186,7 @@ export default function AuthPage({ onSuccess }: AuthPageProps) {
               </div>
               <div className="relative">
                 <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" />
-                <input 
+                <input
                   type={showPassword ? "text" : "password"}
                   required
                   placeholder="••••••••"
@@ -193,7 +194,7 @@ export default function AuthPage({ onSuccess }: AuthPageProps) {
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full bg-white/5 border border-white/10 h-12 pl-12 pr-12 text-sm focus:border-brand-primary outline-none transition-colors"
                 />
-                <button 
+                <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-white/20 hover:text-white transition-colors"
@@ -204,7 +205,7 @@ export default function AuthPage({ onSuccess }: AuthPageProps) {
             </div>
 
             {error && (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 className="p-3 bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] font-bold uppercase tracking-wider flex items-center gap-2"
@@ -214,7 +215,7 @@ export default function AuthPage({ onSuccess }: AuthPageProps) {
               </motion.div>
             )}
 
-            <button 
+            <button
               type="submit"
               disabled={isLoading}
               className="w-full h-14 bg-brand-primary text-black flex items-center justify-center gap-3 font-black uppercase text-[10px] tracking-widest hover:scale-[1.02] active:scale-[0.98] transition-all shadow-[0_0_20px_rgba(149,255,0,0.2)] disabled:opacity-50 disabled:cursor-not-allowed group"
@@ -232,7 +233,7 @@ export default function AuthPage({ onSuccess }: AuthPageProps) {
 
           {/* Toggle */}
           <div className="mt-8 text-center">
-            <button 
+            <button
               onClick={() => {
                 setIsLogin(!isLogin);
                 setError(null);

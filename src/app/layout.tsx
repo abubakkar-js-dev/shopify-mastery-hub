@@ -4,6 +4,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Shopify Mastery Hub",
   description: "Uncompromised Shopify Mastery Training Environment.",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+  },
 };
 
 import { AppProvider } from "../context/AppContext";

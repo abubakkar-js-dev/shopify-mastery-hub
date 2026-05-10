@@ -24,10 +24,12 @@ import { Lesson } from "../../types";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "../../context/AppContext";
 import { doc, updateDoc } from "firebase/firestore";
+import { usePageTitle } from "../../hooks/usePageTitle";
 
 export default function DashboardPage() {
   const router = useRouter();
   const { user, profile, isAdmin, modules, lessons, loading } = useAppContext();
+  usePageTitle(profile?.displayName ? `${profile.displayName}'s Terminal` : "Operational Hub");
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showDashboard, setShowDashboard] = useState(false);
