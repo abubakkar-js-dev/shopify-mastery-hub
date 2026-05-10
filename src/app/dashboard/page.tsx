@@ -498,6 +498,7 @@ export default function DashboardPage() {
               return (
                 <LessonView
                   lesson={selectedLesson}
+                  module={activeModule!}
                   onBack={() => {
                     setSelectedLesson(null);
                     setActiveVideo(null);

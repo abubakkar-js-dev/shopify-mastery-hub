@@ -19,10 +19,12 @@ import {
   FiArrowRight
 } from 'react-icons/fi';
 import { cn } from '../lib/utils';
-import type { Lesson } from '../types';
+import type { Lesson, Module } from '../types';
+import ChatCoPilot from './ChatCoPilot';
 
 export default function LessonView({
   lesson,
+  module,
   onBack,
   completedTasks,
   onToggleTask,
@@ -37,6 +39,7 @@ export default function LessonView({
   isLessonCompleted,
 }: {
   lesson: Lesson;
+  module: Module;
   onBack: () => void;
   completedTasks: string[];
   onToggleTask: (id: string) => void;
@@ -435,6 +438,7 @@ export default function LessonView({
           </div>
         </div>
       </div>
+      <ChatCoPilot lesson={lesson} module={module} />
     </div>
   );
 }
