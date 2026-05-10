@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  turbopack: {},
 };
 
 export default process.env.NODE_ENV === "production" ? withSerwist(nextConfig) : nextConfig;

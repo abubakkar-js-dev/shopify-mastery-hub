@@ -373,7 +373,7 @@ export default function LandingPage({ onLogin }: { onLogin: () => void }) {
           
           <div className="mt-12 pt-8 border-t border-white/3 flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-[8px] font-black uppercase tracking-[0.3em] text-white/10">
-              © 2024 Shopify Mastery Hub // All Rights Reserved
+              © {new Date().getFullYear()} Shopify Mastery Hub // All Rights Reserved
             </p>
             <div className="flex gap-8">
               {['Privacy', 'Legal', 'Terms'].map(item => (
