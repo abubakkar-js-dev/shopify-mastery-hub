@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import Link from 'next/link';
 import {
   FiMail,
   FiLock,
@@ -97,20 +98,22 @@ export default function AuthPage({ onSuccess }: AuthPageProps) {
       >
         {/* Logo Section */}
         <div className="text-center mb-10">
-          <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            className="inline-block mb-4"
-          >
-            <div className="flex flex-col items-center">
-              <span className="text-4xl font-black tracking-tighter uppercase leading-none italic">
-                Mastery
-              </span>
-              <span className="text-[10px] font-bold text-brand-primary tracking-[0.3em] uppercase mt-1">
-                Shopify Hub
-              </span>
-            </div>
-          </motion.div>
+          <Link href="/">
+            <motion.div
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              className="inline-block mb-4 hover:opacity-80 transition-opacity"
+            >
+              <div className="flex flex-col items-center">
+                <span className="text-4xl font-black tracking-tighter uppercase leading-none italic text-white">
+                  Mastery
+                </span>
+                <span className="text-[10px] font-bold text-brand-primary tracking-[0.3em] uppercase mt-1">
+                  Shopify Hub
+                </span>
+              </div>
+            </motion.div>
+          </Link>
           <h2 className="text-white/40 text-xs font-bold uppercase tracking-[0.2em]">
             {isLogin ? "Welcome back to the elite path" : "Begin your journey to mastery"}
           </h2>
