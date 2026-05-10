@@ -455,23 +455,67 @@ export default function DashboardPage() {
                 isAdmin={isAdmin}
                 onClose={() => setShowDashboard(false)}
               />
-            ) : selectedLesson ? (
-              <LessonView
-                lesson={selectedLesson}
-                onBack={() => {
-                  setSelectedLesson(null);
+            ) : selectedLesson ? (() => {
+              const moduleLessons = lessons
+                .filter(l => l.moduleId === activeModule?.id)
+                .sort((a, b) => a.order - b.order);
+              const currentIndex = moduleLessons.findIndex(l => l.id === selectedLesson.id);
+              const prevLesson = currentIndex > 0 ? moduleLessons[currentIndex - 1] : null;
+              const nextLesson = currentIndex < moduleLessons.length - 1 ? moduleLessons[currentIndex + 1] : null;
+              
+              const currentVideoId = activeVideo || selectedLesson.videos[0]?.id || "";
+              const currentVideoIndex = selectedLesson.videos.findIndex(v => v.id === currentVideoId);
+              
+              const hasNextVideo = currentVideoIndex < selectedLesson.videos.length - 1;
+              const hasPrevVideo = currentVideoIndex > 0;
+
+              const isNextVideoUnlocked = hasNextVideo && (profile?.completedVideos || []).includes(currentVideoId);
+              
+              const handleNext = () => {
+                if (hasNextVideo) {
+                  if (isNextVideoUnlocked) {
+                    setActiveVideo(selectedLesson.videos[currentVideoIndex + 1].id);
+                  }
+                } else if (nextLesson && profile?.completedLessons.includes(selectedLesson.id)) {
+                  setSelectedLesson(nextLesson);
                   setActiveVideo(null);
-                }}
-                completedTasks={profile?.completedTasks || []}
-                onToggleTask={toggleTaskCompletion}
-                activeVideoId={
-                  activeVideo || selectedLesson.videos[0]?.id || ""
                 }
-                onSelectVideo={setActiveVideo}
-                completedVideos={profile?.completedVideos || []}
-                onToggleVideo={toggleVideoCompletion}
-              />
-            ) : activeModule ? (
+              };
+
+              const handlePrev = () => {
+                if (hasPrevVideo) {
+                  setActiveVideo(selectedLesson.videos[currentVideoIndex - 1].id);
+                } else if (prevLesson) {
+                  setSelectedLesson(prevLesson);
+                  setActiveVideo(null);
+                }
+              };
+
+              const isNextDisabled = hasNextVideo 
+                ? !isNextVideoUnlocked 
+                : !profile?.completedLessons.includes(selectedLesson.id);
+
+              return (
+                <LessonView
+                  lesson={selectedLesson}
+                  onBack={() => {
+                    setSelectedLesson(null);
+                    setActiveVideo(null);
+                  }}
+                  completedTasks={profile?.completedTasks || []}
+                  onToggleTask={toggleTaskCompletion}
+                  activeVideoId={currentVideoId}
+                  onSelectVideo={setActiveVideo}
+                  completedVideos={profile?.completedVideos || []}
+                  onToggleVideo={toggleVideoCompletion}
+                  onPrev={handlePrev}
+                  onNext={handleNext}
+                  isNextDisabled={isNextDisabled}
+                  onToggleLesson={() => toggleLessonCompletion(selectedLesson.id)}
+                  isLessonCompleted={profile?.completedLessons.includes(selectedLesson.id)}
+                />
+              );
+            })() : activeModule ? (
               <ModuleOverview
                 module={activeModule}
                 lessons={lessons.filter(

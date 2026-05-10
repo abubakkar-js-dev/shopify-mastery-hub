@@ -1,6 +1,23 @@
 'use client';
-import { LuAward as Award, LuChevronRight as ChevronRight, LuLock as Lock, LuPlay as Play } from 'react-icons/lu';
-import { FiCheckCircle as CheckCircle, FiCircle as Circle } from 'react-icons/fi';
+import { useState } from 'react';
+import { 
+  LuAward as Award, 
+  LuChevronRight as ChevronRight, 
+  LuLock as Lock, 
+  LuPlay as Play,
+  LuMonitor as Monitor,
+  LuMaximize2 as Maximize
+} from 'react-icons/lu';
+import { motion, AnimatePresence } from 'motion/react';
+import { 
+  FiCheckCircle as CheckCircle, 
+  FiCircle as Circle,
+  FiLayout as Layout,
+  FiChevronDown,
+  FiChevronUp,
+  FiArrowLeft,
+  FiArrowRight
+} from 'react-icons/fi';
 import { cn } from '../lib/utils';
 import type { Lesson } from '../types';
 
@@ -13,6 +30,11 @@ export default function LessonView({
   onSelectVideo,
   completedVideos,
   onToggleVideo,
+  onNext,
+  onPrev,
+  isNextDisabled,
+  onToggleLesson,
+  isLessonCompleted,
 }: {
   lesson: Lesson;
   onBack: () => void;
@@ -22,7 +44,15 @@ export default function LessonView({
   onSelectVideo: (id: string) => void;
   completedVideos: string[];
   onToggleVideo: (id: string) => void;
+  onNext?: () => void;
+  onPrev?: () => void;
+  isNextDisabled?: boolean;
+  onToggleLesson?: () => void;
+  isLessonCompleted?: boolean;
 }) {
+  const [viewMode, setViewMode] = useState<'standard' | 'theater' | 'focus'>('standard');
+  const [isPlaylistCollapsed, setIsPlaylistCollapsed] = useState(false);
+
   const getStartingVideo = () => {
     if (activeVideoId) {
       const selected = lesson.videos.find((v) => v.id === activeVideoId);
@@ -56,26 +86,93 @@ export default function LessonView({
   const isVideoCompleted = (videoId: string) =>
     (completedVideos || []).includes(videoId);
 
+  const currentVideoIndex = lesson.videos.findIndex(v => v.id === activeVideoId);
+  const hasNextVideo = currentVideoIndex < lesson.videos.length - 1;
+  const hasPrevVideo = currentVideoIndex > 0;
+
   return (
     <div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="flex items-center justify-between">
-        <button
-          onClick={onBack}
-          className="flex items-center gap-3 text-white/40 hover:text-white text-[10px] font-black uppercase tracking-widest transition-colors group"
-        >
-          <ChevronRight
-            size={14}
-            className="rotate-180 group-hover:-translate-x-1 transition-transform"
-          />
-          Module Index
-        </button>
-        <span className="font-mono text-xs text-brand-primary font-bold">
-          SESSION ID: {lesson.id.toUpperCase()}
-        </span>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onBack}
+            className="flex items-center gap-3 text-white/40 hover:text-white text-[10px] font-black uppercase tracking-widest transition-colors group"
+          >
+            <ChevronRight
+              size={14}
+              className="rotate-180 group-hover:-translate-x-1 transition-transform"
+            />
+            Module Index
+          </button>
+          
+          {(onPrev || onNext) && (
+            <div className="hidden sm:flex items-center gap-1 border-l border-white/10 ml-2 pl-3">
+              <button
+                onClick={onPrev}
+                disabled={!onPrev}
+                className={cn(
+                  "p-2 transition-all",
+                  onPrev ? "text-white/40 hover:text-white hover:bg-white/5" : "text-white/10 cursor-not-allowed"
+                )}
+                title="Previous Session"
+              >
+                <FiArrowLeft size={14} />
+              </button>
+              <button
+                onClick={onNext}
+                disabled={!onNext || isNextDisabled}
+                className={cn(
+                  "p-2 transition-all",
+                  onNext && !isNextDisabled ? "text-white/40 hover:text-white hover:bg-white/5" : "text-white/10 cursor-not-allowed"
+                )}
+                title={isNextDisabled 
+                  ? (hasNextVideo ? "Watch current video to unlock next" : "Complete this lesson to unlock next") 
+                  : (hasNextVideo ? "Next Video" : "Next Session")
+                }
+              >
+                <FiArrowRight size={14} />
+              </button>
+            </div>
+          )}
+        </div>
+        
+        <div className="flex items-center gap-6">
+          <div className="hidden lg:flex items-center bg-white/5 border border-white/10 p-0.5">
+            {[
+              { id: 'standard', icon: Monitor, label: 'STD' },
+              { id: 'theater', icon: Layout, label: 'THTR' },
+              { id: 'focus', icon: Maximize, label: 'FOCUS' },
+            ].map((mode) => (
+              <button
+                key={mode.id}
+                onClick={() => setViewMode(mode.id as any)}
+                className={cn(
+                  "flex items-center gap-2 px-3 py-1.5 transition-all relative group",
+                  viewMode === mode.id 
+                    ? "bg-brand-primary text-black" 
+                    : "text-white/30 hover:text-white hover:bg-white/5"
+                )}
+              >
+                <mode.icon size={12} />
+                <span className="text-[9px] font-black uppercase tracking-[0.2em]">{mode.label}</span>
+                {viewMode === mode.id && (
+                  <div className="absolute -bottom-0.5 left-0 w-full h-[1px] bg-brand-primary shadow-[0_0_100px_#95FF00]" />
+                )}
+              </button>
+            ))}
+          </div>
+
+          <span className="font-mono text-xs text-brand-primary font-bold">
+            SESSION ID: {lesson.id.toUpperCase()}
+          </span>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-px bg-white/10 border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-        <div className="lg:col-span-3 aspect-video bg-black relative">
+      <div className={cn(
+        "flex flex-col bg-white/10 border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] transition-all duration-300",
+        viewMode === 'standard' ? "lg:flex-row" : "lg:flex-col"
+      )}>
+        <div className="aspect-video bg-black relative flex-1">
           {activeVideo ? (
             <iframe
               className="w-full h-full relative z-10"
@@ -97,88 +194,110 @@ export default function LessonView({
           )}
         </div>
 
-        <div className="bg-brand-bg flex flex-col h-full overflow-hidden border-l border-white/5">
-          <div className="p-4 border-b border-white/10 bg-white/5 flex justify-between items-center">
-            <h3 className="text-[10px] font-black uppercase tracking-widest text-white/60">
-              Workshop Playlist
-            </h3>
-            <span className="text-[10px] font-mono text-brand-primary">
-              {lesson.videos.filter((v) => isVideoCompleted(v.id)).length} /{" "}
-              {lesson.videos.length}
-            </span>
-          </div>
-          <div className="flex-1 overflow-y-auto">
-            {lesson.videos.map((v, i) => {
-              const unlocked = isVideoUnlocked(v.id);
-              const completed = isVideoCompleted(v.id);
-              const isActive = activeVideo?.id === v.id;
+        {viewMode !== 'focus' && (
+          <div className={cn(
+            "bg-brand-bg flex flex-col overflow-hidden transition-all duration-300",
+            viewMode === 'standard' ? "lg:w-[350px] border-l border-white/5" : "w-full border-t border-white/10"
+          )}>
+            <button 
+              onClick={() => setIsPlaylistCollapsed(!isPlaylistCollapsed)}
+              className="p-4 border-b border-white/10 bg-white/5 flex justify-between items-center hover:bg-white/10 transition-colors group/header"
+            >
+              <div className="flex items-center gap-3">
+                <div className={cn(
+                  "transition-transform duration-300",
+                  isPlaylistCollapsed ? "-rotate-90" : "rotate-0"
+                )}>
+                  <FiChevronDown size={14} className="text-white/40 group-hover/header:text-brand-primary" />
+                </div>
+                <h3 className="text-[10px] font-black uppercase tracking-widest text-white/60">
+                  Workshop Playlist
+                </h3>
+              </div>
+              <span className="text-[10px] font-mono text-brand-primary">
+                {currentVideoIndex >= 0 ? currentVideoIndex + 1 : 0} /{" "}
+                {lesson.videos.length}
+              </span>
+            </button>
+            
+            <div className={cn(
+              "flex-1 overflow-y-auto transition-all duration-500 ease-in-out",
+              isPlaylistCollapsed ? "max-h-0 opacity-0 invisible" : "max-h-[1000px] opacity-100 visible"
+            )}>
+              <div className="flex-1 overflow-y-auto max-h-[500px] lg:max-h-none">
+                {lesson.videos.map((v, i) => {
+                  const unlocked = isVideoUnlocked(v.id);
+                  const completed = isVideoCompleted(v.id);
+                  const isActive = activeVideo?.id === v.id;
 
-              return (
-                <button
-                  key={v.id}
-                  disabled={!unlocked}
-                  onClick={() => onSelectVideo(v.id)}
-                  className={cn(
-                    "w-full p-4 flex items-start gap-4 transition-colors border-b border-white/5 text-left group relative",
-                    isActive ? "bg-brand-primary/10" : "hover:bg-white/5",
-                    !unlocked && "opacity-30 cursor-not-allowed",
-                  )}
-                >
-                  <div className="mt-1 relative">
-                    {completed ? (
-                      <CheckCircle
-                        size={14}
-                        className="text-brand-primary fill-brand-primary"
-                      />
-                    ) : isActive ? (
-                      <Play
-                        size={12}
-                        className="text-brand-primary fill-brand-primary animate-pulse"
-                      />
-                    ) : !unlocked ? (
-                      <Lock size={12} className="text-white/20" />
-                    ) : (
-                      <span className="text-[10px] font-mono font-bold text-white/20">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p
+                  return (
+                    <button
+                      key={v.id}
+                      disabled={!unlocked}
+                      onClick={() => onSelectVideo(v.id)}
                       className={cn(
-                        "text-[11px] font-bold uppercase tracking-tight leading-tight mb-1",
-                        isActive
-                          ? "text-brand-primary"
-                          : completed
-                            ? "text-white/60"
-                            : "text-white/80",
+                        "w-full p-4 flex items-start gap-4 transition-colors border-b border-white/5 text-left group relative",
+                        isActive ? "bg-brand-primary/10" : "hover:bg-white/5",
+                        !unlocked && "opacity-30 cursor-not-allowed",
                       )}
                     >
-                      {v?.title}
+                      <div className="mt-1 relative">
+                        {completed ? (
+                          <CheckCircle
+                            size={14}
+                            className="text-brand-primary fill-brand-primary"
+                          />
+                        ) : isActive ? (
+                          <Play
+                            size={12}
+                            className="text-brand-primary fill-brand-primary animate-pulse"
+                          />
+                        ) : !unlocked ? (
+                          <Lock size={12} className="text-white/20" />
+                        ) : (
+                          <span className="text-[10px] font-mono font-bold text-white/20">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p
+                          className={cn(
+                            "text-[11px] font-bold uppercase tracking-tight leading-tight mb-1",
+                            isActive
+                              ? "text-brand-primary"
+                              : completed
+                                ? "text-white/60"
+                                : "text-white/80",
+                          )}
+                        >
+                          {v?.title}
+                        </p>
+                        <div className="flex items-center gap-2">
+                          <p className="text-[9px] font-mono text-white/40">
+                            {v.duration}
+                          </p>
+                          {completed && (
+                            <span className="text-[8px] font-black text-brand-primary uppercase">
+                              Completed
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+                {lesson.videos.length === 0 && (
+                  <div className="p-8 text-center">
+                    <p className="text-[10px] text-white/20 font-black uppercase tracking-widest">
+                      No video content for this assignment.
                     </p>
-                    <div className="flex items-center gap-2">
-                      <p className="text-[9px] font-mono text-white/40">
-                        {v.duration}
-                      </p>
-                      {completed && (
-                        <span className="text-[8px] font-black text-brand-primary uppercase">
-                          Completed
-                        </span>
-                      )}
-                    </div>
                   </div>
-                </button>
-              );
-            })}
-            {lesson.videos.length === 0 && (
-              <div className="p-8 text-center">
-                <p className="text-[10px] text-white/20 font-black uppercase tracking-widest">
-                  No video content for this assignment.
-                </p>
+                )}
               </div>
-            )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="flex flex-col lg:flex-row justify-between items-start gap-6 md:gap-12 pt-4 md:pt-6">
@@ -191,29 +310,53 @@ export default function LessonView({
                 {`L-${lesson.order} // ${lesson.difficulty}`}
               </span>
             </div>
-            {activeVideo && (
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+              {activeVideo && (
+                <button
+                  onClick={() => onToggleVideo(activeVideo.id)}
+                  className={cn(
+                    "flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 text-[10px] font-black uppercase tracking-widest transition-all border w-full sm:w-auto justify-center",
+                    isVideoCompleted(activeVideo.id)
+                      ? "bg-brand-primary/10 text-brand-primary border-brand-primary/20"
+                      : "bg-white/5 text-white/60 border-white/10 hover:bg-white/10",
+                  )}
+                >
+                  {isVideoCompleted(activeVideo.id) ? (
+                    <>
+                      <CheckCircle size={14} />
+                      Video Completed
+                    </>
+                  ) : (
+                    <>
+                      <Circle size={14} />
+                      Mark as Viewed
+                    </>
+                  )}
+                </button>
+              )}
+
               <button
-                onClick={() => onToggleVideo(activeVideo.id)}
+                onClick={onToggleLesson}
                 className={cn(
                   "flex items-center gap-2 px-4 md:px-6 py-2 md:py-3 text-[10px] font-black uppercase tracking-widest transition-all border w-full sm:w-auto justify-center",
-                  isVideoCompleted(activeVideo.id)
+                  isLessonCompleted
                     ? "bg-brand-primary text-black border-brand-primary"
                     : "bg-white/5 text-brand-primary border-brand-primary/40 hover:bg-brand-primary/10",
                 )}
               >
-                {isVideoCompleted(activeVideo.id) ? (
+                {isLessonCompleted ? (
                   <>
                     <CheckCircle size={14} />
-                    Video Completed
+                    Session Secured
                   </>
                 ) : (
                   <>
                     <Circle size={14} />
-                    Mark as Viewed
+                    Complete Session
                   </>
                 )}
               </button>
-            )}
+            </div>
           </div>
           <h1 className="title-lg mb-6 md:mb-8 italic">{lesson?.title}</h1>
 
@@ -253,6 +396,42 @@ export default function LessonView({
                 </div>
               ))}
             </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-4 pt-8 border-t border-white/5">
+            {onPrev && (
+              <button
+                onClick={onPrev}
+                className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-white/5 border border-white/10 text-[11px] font-black uppercase tracking-[0.2em] hover:bg-white/10 transition-all text-white/60 group"
+              >
+                <FiArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                {hasPrevVideo ? "Previous Video" : "Previous Session"}
+              </button>
+            )}
+            {onNext && (
+              <button
+                onClick={onNext}
+                disabled={isNextDisabled}
+                className={cn(
+                  "w-full sm:flex-1 flex items-center justify-center gap-3 px-8 py-4 text-[11px] font-black uppercase tracking-[0.2em] transition-all group",
+                  isNextDisabled 
+                    ? "bg-white/5 border border-white/5 text-white/10 cursor-not-allowed" 
+                    : "bg-brand-primary text-black border-brand-primary hover:scale-[1.01] shadow-[0_0_30px_rgba(149,255,0,0.15)] hover:shadow-[0_0_40px_rgba(149,255,0,0.25)]"
+                )}
+              >
+                {isNextDisabled ? (
+                  <>
+                    <Lock size={14} />
+                    {hasNextVideo ? "Next Video Locked" : "Next Session Locked"}
+                  </>
+                ) : (
+                  <>
+                    {hasNextVideo ? "Next Video" : "Next Session"}
+                    <FiArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </button>
+            )}
           </div>
         </div>
       </div>
