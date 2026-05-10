@@ -70,3 +70,67 @@ export async function generatePersonalizedPath(userGoals: string[]) {
     return null;
   }
 }
+
+/**
+ * AI Syllabus Engine - Iterative Generation
+ */
+export async function generateSyllabusChunk(
+  topic: string,
+  targetMonth: number,
+  targetWeek: number,
+  existingData?: any
+) {
+  try {
+    const systemInstruction = `
+      You are the "Syllabus Architect" for Shopify Mastery Hub.
+      TASK: Generate a high-performance curriculum chunk for: "${topic}".
+      TARGET: Month ${targetMonth}, Week ${targetWeek}.
+      
+      RULES:
+      1. Structure: 1 Module (Week) containing 7 Lessons (Day 1-5: Videos, Day 6-7: Assignments).
+      2. IDs: Module ID must be "week-{absolute_week_number}". Lesson ID must be "day-{absolute_day_number}".
+      3. Content: Each Video Day lesson must have 3-5 videos. Each Video object MUST have: id (e.g. "d1-v1"), title, youtubeId (empty string), and duration ("00:00").
+      4. Content: Each Lesson MUST have tasks. Each Task object MUST have: id (e.g. "d1-t1"), title, and completed (false).
+      5. Preservation: If existingData is provided, fill gaps ONLY. Never overwrite a non-empty "youtubeId".
+      
+      OUTPUT: Return ONLY a valid JSON object:
+      {
+        "module": {
+          "id": "week-1",
+          "title": "Week 1: Title",
+          "description": "Overview",
+          "month": ${targetMonth},
+          "order": ${targetWeek}
+        },
+        "lessons": [
+          {
+            "id": "day-1",
+            "moduleId": "week-1",
+            "order": 1, 
+            "title": "Day 1: Title", 
+            "description": "Objectives",
+            "difficulty": "${targetMonth === 1 ? 'Beginner' : targetMonth === 2 ? 'Intermediate' : 'Advanced'}",
+            "videos": [{ "id": "d1-v1", "title": "Title", "youtubeId": "", "duration": "00:00" }],
+            "tasks": [{ "id": "d1-t1", "title": "Task", "completed": false }]
+          }
+        ]
+      }
+    `;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-3-flash-preview",
+      contents: `Context: ${topic}. Existing Week Data: ${JSON.stringify(existingData || {})}`,
+      config: { 
+        systemInstruction: systemInstruction,
+        responseMimeType: "application/json" 
+      }
+    });
+
+    if (!response.text) throw new Error("Neural Link Failed");
+    return JSON.parse(response.text);
+  } catch (error) {
+    console.error("Syllabus Engine Error:", error);
+    return null;
+  }
+}
+

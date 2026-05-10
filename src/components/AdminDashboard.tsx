@@ -56,6 +56,7 @@ import {
 } from "../types";
 import StatCard from "./admin/StatCard";
 import TabButton from "./admin/TabButton";
+import AISynthesisLab from "./admin/AISynthesisLab";
 
 import { useAppContext } from "../context/AppContext";
 
@@ -570,6 +571,8 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
                     </button>
                   </div>
                 </header>
+
+                <AISynthesisLab onSuccess={() => {}} />
 
                 <div className="space-y-16">
                   {Array.from(
