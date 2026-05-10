@@ -26,7 +26,7 @@ export default function LandingPage({ onLogin }: { onLogin: () => void }) {
 
         {/* Animated Grid */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[40px_40px] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
         </div>
 
         {/* Floating Orbs */}
@@ -51,8 +51,8 @@ export default function LandingPage({ onLogin }: { onLogin: () => void }) {
       </div>
 
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 w-full backdrop-blur-md border-b border-white/5 bg-[#0A0A0A]/80">
-        <div className="absolute bottom-[-1px] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-primary/40 to-transparent opacity-50" />
+      <nav className="sticky top-0 z-50 w-full backdrop-blur-md border-b border-white/5 bg-brand-bg/80">
+        <div className="absolute -bottom-px left-0 w-full h-px bg-linear-to-r from-transparent via-brand-primary/40 to-transparent opacity-50" />
         <div className="max-w-7xl mx-auto px-6 md:px-10 h-20 md:h-24 flex justify-between items-center">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}

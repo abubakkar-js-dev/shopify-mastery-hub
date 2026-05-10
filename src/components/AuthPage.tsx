@@ -29,6 +29,9 @@ export default function AuthPage({ onSuccess }: AuthPageProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  
+  // Set dynamic page title
+  usePageTitle(isLogin ? "Login" : "Register");
 
   // Form State
   const [email, setEmail] = useState('');
