@@ -29,7 +29,7 @@ export default function LandingPage({ onLogin }: { onLogin: () => void }) {
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-size-[40px_40px] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
         </div>
 
-        {/* Floating Orbs */}
+        {/* Floating Orbs - Hidden on mobile to improve performance */}
         <motion.div
           animate={{
             x: [0, 100, 0],
@@ -37,7 +37,7 @@ export default function LandingPage({ onLogin }: { onLogin: () => void }) {
             scale: [1, 1.2, 1]
           }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-primary/10 rounded-full blur-[120px]"
+          className="hidden md:block absolute top-1/4 left-1/4 w-96 h-96 bg-brand-primary/10 rounded-full blur-[120px] will-change-transform"
         />
         <motion.div
           animate={{
@@ -46,7 +46,7 @@ export default function LandingPage({ onLogin }: { onLogin: () => void }) {
             scale: [1, 1.3, 1]
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]"
+          className="hidden md:block absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] will-change-transform"
         />
       </div>
 
@@ -97,7 +97,7 @@ export default function LandingPage({ onLogin }: { onLogin: () => void }) {
       {/* Hero Section */}
       <main className="relative z-10 flex-1 flex flex-col">
         <section className="max-w-7xl mx-auto px-6 md:px-10 pt-20 md:pt-32 pb-20">
-          <motion.div style={{ opacity, scale }}>
+          <motion.div style={{ opacity, scale }} className="will-change-transform">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -183,7 +183,7 @@ export default function LandingPage({ onLogin }: { onLogin: () => void }) {
         {/* Feature Grid */}
         <section className="bg-[#0A0A0A] border-y border-white/5 py-24 md:py-40 relative overflow-hidden">
           {/* Subtle Background Accent */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/5 blur-[120px] rounded-full -mr-64 -mt-64" />
+          <div className="hidden md:block absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/5 blur-[120px] rounded-full -mr-64 -mt-64" />
           
           <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 md:mb-32 gap-10">
@@ -288,10 +288,10 @@ export default function LandingPage({ onLogin }: { onLogin: () => void }) {
                   delay: i * 2,
                   ease: [0.16, 1, 0.3, 1]
                 }}
-                className="absolute w-64 h-64 border border-brand-primary/5 rounded-full"
+                className="hidden md:block absolute w-64 h-64 border border-brand-primary/5 rounded-full will-change-transform"
               />
             ))}
-            <div className="absolute inset-0 bg-brand-primary/[0.03] blur-[140px]" />
+            <div className="hidden md:block absolute inset-0 bg-brand-primary/[0.03] blur-[140px]" />
           </div>
 
           <motion.div
