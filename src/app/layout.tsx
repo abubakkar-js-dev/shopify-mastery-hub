@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 export const viewport: Viewport = {
   themeColor: "#0A0A0A",
@@ -39,6 +40,17 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <AppProvider>
           {children}
+          <Toaster 
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: '#1a1a1a',
+                color: '#fff',
+                border: '1px solid #333',
+              },
+            }}
+          />
         </AppProvider>
       </body>
     </html>

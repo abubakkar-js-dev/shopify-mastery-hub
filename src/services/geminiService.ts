@@ -82,14 +82,25 @@ export async function generateSyllabusChunk(
 ) {
   try {
     const systemInstruction = `
-      You are the "Syllabus Architect" for Shopify Mastery Hub.
+      You are the "Mastery Hub Syllabus Architect" - a world-class curriculum designer for modern software development and digital entrepreneurship.
+      
       TASK: Generate a high-performance curriculum chunk for: "${topic}".
       TARGET: Month ${targetMonth}, Week ${targetWeek}.
       
+      IMPORTANT: This curriculum must NOT be limited to Shopify. It should cover multiple platforms, technologies, and career paths including:
+      - Full-stack web development (frontend, backend, databases)
+      - Modern JavaScript/TypeScript ecosystems
+      - Cloud platforms and DevOps
+      - API design and implementation
+      - Authentication and security
+      - Mobile development (optional)
+      - Career and freelancing guidance
+      - Modern 2026 tech trends
+      
       RULES:
-      1. Structure: 1 Module (Week) containing 7 Lessons (Day 1-5: Videos, Day 6-7: Assignments).
+      1. Structure: 1 Module (Week) containing 7 Lessons (Day 1-5: Learning, Day 6-7: Projects/Practice).
       2. IDs: Module ID must be "week-{absolute_week_number}". Lesson ID must be "day-{absolute_day_number}".
-      3. Content: Each Video Day lesson must have 3-5 videos. Each Video object MUST have: id (e.g. "d1-v1"), title, youtubeId (empty string), and duration ("00:00").
+      3. Content: Each lesson must have 3-5 videos. Each Video object MUST have: id (e.g. "d1-v1"), title, youtubeId (empty string), and duration ("00:00").
       4. Content: Each Lesson MUST have tasks. Each Task object MUST have: id (e.g. "d1-t1"), title, and completed (false).
       5. Preservation: If existingData is provided, fill gaps ONLY. Never overwrite a non-empty "youtubeId".
       
@@ -98,7 +109,7 @@ export async function generateSyllabusChunk(
         "module": {
           "id": "week-1",
           "title": "Week 1: Title",
-          "description": "Overview",
+          "description": "Comprehensive overview of what will be learned this week",
           "month": ${targetMonth},
           "order": ${targetWeek}
         },
@@ -108,10 +119,10 @@ export async function generateSyllabusChunk(
             "moduleId": "week-1",
             "order": 1, 
             "title": "Day 1: Title", 
-            "description": "Objectives",
+            "description": "Clear learning objectives for the day",
             "difficulty": "${targetMonth === 1 ? 'Beginner' : targetMonth === 2 ? 'Intermediate' : 'Advanced'}",
-            "videos": [{ "id": "d1-v1", "title": "Title", "youtubeId": "", "duration": "00:00" }],
-            "tasks": [{ "id": "d1-t1", "title": "Task", "completed": false }]
+            "videos": [{ "id": "d1-v1", "title": "Video Title", "youtubeId": "", "duration": "00:00" }],
+            "tasks": [{ "id": "d1-t1", "title": "Practice Task", "completed": false }]
           }
         ]
       }

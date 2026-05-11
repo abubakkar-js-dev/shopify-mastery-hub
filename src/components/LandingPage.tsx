@@ -3,7 +3,6 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import { FiArrowRight, FiShield, FiZap, FiTarget, FiBox } from 'react-icons/fi';
 import { LuCircleDot } from 'react-icons/lu';
-import Link from 'next/link';
 import { cn } from '../lib/utils';
 import { usePageTitle } from '../hooks/usePageTitle';
 
@@ -55,19 +54,17 @@ export default function LandingPage({ onLogin }: { onLogin: () => void }) {
       <nav className="sticky top-0 z-50 w-full backdrop-blur-md border-b border-white/5 bg-brand-bg/80">
         <div className="absolute -bottom-px left-0 w-full h-px bg-linear-to-r from-transparent via-brand-primary/40 to-transparent opacity-50" />
         <div className="max-w-7xl mx-auto px-6 md:px-10 h-20 md:h-24 flex justify-between items-center">
-          <Link href="/">
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="flex items-center gap-4 hover:opacity-80 transition-opacity"
-            >
-              <div className="w-10 h-10 bg-brand-primary flex items-center justify-center text-black font-black italic">M</div>
-              <div className="flex flex-col">
-                <span className="text-xl font-black tracking-tighter uppercase leading-none">Mastery</span>
-                <span className="text-[8px] font-bold text-brand-primary tracking-[0.3em] uppercase">Shopify Edition</span>
-              </div>
-            </motion.div>
-          </Link>
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex items-center gap-4"
+          >
+            <div className="w-10 h-10 bg-brand-primary flex items-center justify-center text-black font-black italic">M</div>
+            <div className="flex flex-col">
+              <span className="text-xl font-black tracking-tighter uppercase leading-none">Mastery</span>
+              <span className="text-[8px] font-bold text-brand-primary tracking-[0.3em] uppercase">Shopify Edition</span>
+            </div>
+          </motion.div>
 
           <div className="hidden md:flex items-center gap-10">
             {['Curriculum', 'Ecosystem', 'Pricing'].map((item, i) => (
@@ -345,13 +342,14 @@ export default function LandingPage({ onLogin }: { onLogin: () => void }) {
       <footer className="border-t border-white/5 bg-brand-bg py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-12">
-            <Link href="/" className="flex items-center gap-6 hover:opacity-80 transition-opacity">
+            {/* Brand Cluster */}
+            <div className="flex items-center gap-6">
               <div className="w-10 h-10 bg-brand-primary flex items-center justify-center text-black font-black italic shadow-[0_0_20px_rgba(149,255,0,0.2)]">M</div>
               <div className="flex flex-col">
                 <span className="text-sm font-black uppercase tracking-widest text-white">Mastery Hub</span>
                 <span className="text-[8px] font-bold text-brand-primary tracking-[0.4em] uppercase">Shopify Edition</span>
               </div>
-            </Link>
+            </div>
 
             {/* Navigation Nodes */}
             <div className="flex flex-wrap justify-center gap-8 md:gap-16">
