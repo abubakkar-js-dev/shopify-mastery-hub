@@ -118,7 +118,7 @@ export default function ModuleOverview({
                           Media Pending
                         </span>
                         <p className="text-[7px] text-white/10 uppercase tracking-widest font-mono">
-                          ID: {lesson.id.split('-')[1]} // NODE_READY
+                          ID: {lesson.id.split('-')[1]} NODE_READY
                         </p>
                       </div>
                       
@@ -143,7 +143,7 @@ export default function ModuleOverview({
                           Workshop Active
                         </span>
                         <span className="text-[6px] font-mono text-white/10 mt-1 uppercase">
-                          Phase: Construction // 00:00
+                          Phase: Construction 00:00
                         </span>
                       </div>
                       {/* Decorative elements */}

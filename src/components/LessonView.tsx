@@ -8,21 +8,21 @@ import {
   LuMonitor as Monitor,
   LuMaximize2 as Maximize
 } from 'react-icons/lu';
-import { motion, AnimatePresence } from 'motion/react';
 import { 
   FiCheckCircle as CheckCircle, 
   FiCircle as Circle,
   FiLayout as Layout,
   FiChevronDown,
-  FiChevronUp,
   FiArrowLeft,
   FiArrowRight
 } from 'react-icons/fi';
 import { cn } from '../lib/utils';
-import type { Lesson } from '../types';
+import type { Lesson, Module } from '../types';
+import ChatCoPilot from './ChatCoPilot';
 
 export default function LessonView({
   lesson,
+  module,
   onBack,
   completedTasks,
   onToggleTask,
@@ -37,6 +37,7 @@ export default function LessonView({
   isLessonCompleted,
 }: {
   lesson: Lesson;
+  module: Module;
   onBack: () => void;
   completedTasks: string[];
   onToggleTask: (id: string) => void;
@@ -145,7 +146,7 @@ export default function LessonView({
             ].map((mode) => (
               <button
                 key={mode.id}
-                onClick={() => setViewMode(mode.id as any)}
+                onClick={() => setViewMode(mode.id as 'standard' | 'theater' | 'focus')}
                 className={cn(
                   "flex items-center gap-2 px-3 py-1.5 transition-all relative group",
                   viewMode === mode.id 
@@ -435,6 +436,7 @@ export default function LessonView({
           </div>
         </div>
       </div>
+      <ChatCoPilot lesson={lesson} module={module} />
     </div>
   );
 }
