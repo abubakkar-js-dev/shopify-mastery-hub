@@ -1631,8 +1631,36 @@ function LessonEditor({
                   className="p-4 bg-black border border-white/5 space-y-3"
                 >
                   <div className="flex items-center gap-3">
+                    <div className="flex flex-col">
+                      <button
+                        disabled={i === 0}
+                        onClick={() => {
+                          const vids = [...data.videos];
+                          const temp = vids[i - 1];
+                          vids[i - 1] = vids[i];
+                          vids[i] = temp;
+                          setData({ ...data, videos: vids });
+                        }}
+                        className="text-white/20 hover:text-brand-primary disabled:opacity-0 transition-colors"
+                      >
+                        <ChevronUp size={12} />
+                      </button>
+                      <button
+                        disabled={i === data.videos.length - 1}
+                        onClick={() => {
+                          const vids = [...data.videos];
+                          const temp = vids[i + 1];
+                          vids[i + 1] = vids[i];
+                          vids[i] = temp;
+                          setData({ ...data, videos: vids });
+                        }}
+                        className="text-white/20 hover:text-brand-primary disabled:opacity-0 transition-colors"
+                      >
+                        <ChevronDown size={12} />
+                      </button>
+                    </div>
                     <Youtube className="text-red-500 shrink-0" size={18} />
-                    <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-3">
                       <input
                         className="bg-transparent text-xs uppercase font-bold outline-none border-b border-white/10 focus:border-brand-primary"
                         value={v.title}
@@ -1653,8 +1681,18 @@ function LessonEditor({
                           setData({ ...data, videos: vids });
                         }}
                       />
+                      <input
+                        className="bg-transparent text-[10px] font-mono text-white/40 outline-none border-b border-white/10 focus:border-brand-primary"
+                        value={v.youtubeId}
+                        placeholder="YouTube ID"
+                        onChange={(e) => {
+                          const vids = [...data.videos];
+                          vids[i].youtubeId = e.target.value;
+                          setData({ ...data, videos: vids });
+                        }}
+                      />
                       <div className="text-[10px] font-mono text-white/30 flex items-center gap-1">
-                        ID: <span className="text-white/40">{v.youtubeId}</span>
+                        Edit ID &amp; Title
                       </div>
                     </div>
                     <button
