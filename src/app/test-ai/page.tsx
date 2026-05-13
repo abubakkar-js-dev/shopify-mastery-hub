@@ -3,8 +3,14 @@ import { useState } from 'react';
 import { FiCpu, FiZap, FiCheckCircle, FiAlertCircle, FiLoader } from 'react-icons/fi';
 import { motion } from 'motion/react';
 
+interface TestResult {
+  status: 'success' | 'error';
+  response?: string;
+  message?: string;
+}
+
 export default function TestAIPage() {
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<TestResult | null>(null);
   const [loading, setLoading] = useState(false);
 
   const testGemini = async () => {
@@ -14,7 +20,7 @@ export default function TestAIPage() {
       const res = await fetch('/api/ai/test');
       const data = await res.json();
       setResult(data);
-    } catch (error) {
+    } catch {
       setResult({ status: 'error', message: 'Failed to fetch' });
     } finally {
       setLoading(false);

@@ -1,10 +1,13 @@
-'use client';
-import { LuLock as Lock, LuPlay as Play } from 'react-icons/lu';
-import { FiCheckCircle as CheckCircle, FiCircle as Circle } from 'react-icons/fi';
-import Image from 'next/image';
-import { motion } from 'motion/react';
-import { cn } from '../lib/utils';
-import type { Lesson, UserProfile } from '../types';
+"use client";
+import { motion } from "motion/react";
+import Image from "next/image";
+import {
+  FiCheckCircle as CheckCircle,
+  FiCircle as Circle,
+} from "react-icons/fi";
+import { LuLock as Lock, LuPlay as Play } from "react-icons/lu";
+import { cn } from "../lib/utils";
+import type { Lesson, UserProfile } from "../types";
 
 export default function ModuleOverview({
   module,
@@ -101,14 +104,16 @@ export default function ModuleOverview({
                         )}
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          const fallback = target.parentElement?.querySelector('.fallback-thumb') as HTMLElement;
-                          if (fallback) fallback.style.display = 'flex';
+                          target.style.display = "none";
+                          const fallback = target.parentElement?.querySelector(
+                            ".fallback-thumb",
+                          ) as HTMLElement;
+                          if (fallback) fallback.style.display = "flex";
                         }}
                       />
                       {/* Grid Overlay for Premium Feel */}
                       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03] pointer-events-none" />
-                      
+
                       <div className="fallback-thumb absolute inset-0 hidden flex-col items-center justify-center p-4 text-center">
                         <div className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center mb-3 relative">
                           <div className="absolute inset-0 rounded-full bg-brand-primary/5 animate-ping" />
@@ -118,16 +123,20 @@ export default function ModuleOverview({
                           Media Pending
                         </span>
                         <p className="text-[7px] text-white/10 uppercase tracking-widest font-mono">
-                          ID: {lesson.id.split('-')[1]} // NODE_READY
+                          ID: {lesson.id.split("-")[1]} NODE_READY
                         </p>
                       </div>
-                      
+
                       {/* Animated Scanner Line */}
                       {isUnlocked && (
-                        <motion.div 
+                        <motion.div
                           initial={{ top: "-100%" }}
                           animate={{ top: "100%" }}
-                          transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
+                          transition={{
+                            repeat: Infinity,
+                            duration: 3,
+                            ease: "linear",
+                          }}
                           className="absolute inset-x-0 h-1/2 bg-gradient-to-b from-transparent via-brand-primary/5 to-transparent pointer-events-none z-10"
                         />
                       )}
@@ -137,13 +146,13 @@ export default function ModuleOverview({
                       <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/5 to-transparent opacity-50" />
                       <div className="relative z-10 flex flex-col items-center">
                         <div className="w-10 h-10 border border-white/10 flex items-center justify-center mb-3 group-hover/empty:border-brand-primary/30 transition-colors">
-                           <div className="w-1 h-1 bg-brand-primary animate-pulse" />
+                          <div className="w-1 h-1 bg-brand-primary animate-pulse" />
                         </div>
                         <span className="text-[8px] font-black uppercase tracking-[0.4em] text-brand-primary/60">
                           Workshop Active
                         </span>
                         <span className="text-[6px] font-mono text-white/10 mt-1 uppercase">
-                          Phase: Construction // 00:00
+                          Phase: Construction 00:00
                         </span>
                       </div>
                       {/* Decorative elements */}
@@ -208,12 +217,20 @@ export default function ModuleOverview({
                     </span>
                   )}
                 </div>
-                <h3 className={cn(
-                  "text-2xl font-black uppercase tracking-tighter italic mb-2 transition-colors",
-                  isUnlocked ? "group-hover:text-brand-primary" : "text-white/40"
-                )}>{lesson?.title}</h3>
+                <h3
+                  className={cn(
+                    "text-2xl font-black uppercase tracking-tighter italic mb-2 transition-colors",
+                    isUnlocked
+                      ? "group-hover:text-brand-primary"
+                      : "text-white/40",
+                  )}
+                >
+                  {lesson?.title}
+                </h3>
                 <p className="text-white/40 text-sm uppercase tracking-widest font-bold leading-relaxed line-clamp-2">
-                  {isUnlocked ? lesson.description : "Complete the previous day to unlock this content."}
+                  {isUnlocked
+                    ? lesson.description
+                    : "Complete the previous day to unlock this content."}
                 </p>
               </div>
 
@@ -230,10 +247,14 @@ export default function ModuleOverview({
                     ? "bg-brand-primary border-brand-primary text-black"
                     : isUnlocked
                       ? "bg-transparent border-white/10 text-white/20 hover:border-white/40"
-                      : "bg-transparent border-white/5 text-white/5 cursor-not-allowed"
+                      : "bg-transparent border-white/5 text-white/5 cursor-not-allowed",
                 )}
               >
-                {completedLessons.includes(lesson.id) ? <CheckCircle size={24} /> : <Circle size={24} />}
+                {completedLessons.includes(lesson.id) ? (
+                  <CheckCircle size={24} />
+                ) : (
+                  <Circle size={24} />
+                )}
               </button>
             </div>
           );

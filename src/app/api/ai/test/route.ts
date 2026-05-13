@@ -18,15 +18,22 @@ export async function GET() {
       contents: "Say 'Gemini System Operational' if you can hear me.",
     });
 
-    return NextResponse.json({ 
-      status: "success", 
-      response: response.text 
+    return NextResponse.json({
+      status: "success",
+      response: response.text,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Gemini API Error:", error);
-    return NextResponse.json({ 
-      status: "error", 
-      message: error.message || "Failed to connect to Gemini" 
-    }, { status: 500 });
+    const errorMessage =
+      error && typeof error === "object" && "message" in error
+        ? String(error.message)
+        : "Failed to connect to Gemini";
+    return NextResponse.json(
+      {
+        status: "error",
+        message: errorMessage,
+      },
+      { status: 500 },
+    );
   }
 }

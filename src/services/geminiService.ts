@@ -78,7 +78,7 @@ export async function generateSyllabusChunk(
   topic: string,
   targetMonth: number,
   targetWeek: number,
-  existingData?: any
+  existingData?: unknown
 ) {
   try {
     const systemInstruction = `

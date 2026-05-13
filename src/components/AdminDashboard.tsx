@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import {
+  collection,
   deleteDoc,
   doc,
   setDoc,
@@ -48,16 +49,13 @@ import {
 import { INITIAL_LESSONS, INITIAL_MODULES } from "../data/modules";
 import { db } from "../lib/firebase";
 import { cn } from "../lib/utils";
-import {
-  Lesson,
-  Module,
-  Task,
-  Video,
-} from "../types";
+import { Lesson, Module, Task, Video } from "../types";
+import AISynthesisLab from "./admin/AISynthesisLab";
 import StatCard from "./admin/StatCard";
 import TabButton from "./admin/TabButton";
-import AISynthesisLab from "./admin/AISynthesisLab";
 
+import toast from "react-hot-toast";
+import { RiFileLine } from "react-icons/ri";
 import { useAppContext } from "../context/AppContext";
 
 type Tab = "overview" | "content" | "users" | "settings";
@@ -65,16 +63,19 @@ type Tab = "overview" | "content" | "users" | "settings";
 export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
   const navigate = useRouter();
   const { users, admins, modules, lessons } = useAppContext();
-  
+
   const [activeTab, setActiveTab] = useState<Tab>("overview");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  
+
   const [isEditingModule, setIsEditingModule] = useState<Module | null>(null);
   const [isEditingLesson, setIsEditingLesson] = useState<Lesson | null>(null);
   const [isSeeding, setIsSeeding] = useState(false);
   const [collapsedMonths, setCollapsedMonths] = useState<Set<number>>(
     new Set(),
   );
+  const [isImportModalOpen, setIsImportModalOpen] = useState(false);
+  const [importJson, setImportJson] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
 
   const monthlyActivityData = useMemo(
     () => [
@@ -84,7 +85,10 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
       {
         name: "Apr",
         users: users.length,
-        lessons: users.reduce((acc, u) => acc + (u.completedLessons?.length || 0), 0),
+        lessons: users.reduce(
+          (acc, u) => acc + (u.completedLessons?.length || 0),
+          0,
+        ),
       },
     ],
     [users],
@@ -114,6 +118,92 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
       alert("Failed to seed data.");
     }
     setIsSeeding(false);
+  };
+
+  const handleImportJson = async () => {
+    if (!importJson.trim()) {
+      toast.error("Please paste JSON data first");
+      return;
+    }
+
+    try {
+      const parsedData = JSON.parse(importJson);
+
+      if (!parsedData.modules || !Array.isArray(parsedData.modules)) {
+        toast.error("Invalid JSON format. Expected { modules: [...] }");
+        return;
+      }
+
+      setIsSaving(true);
+      toast.loading("Saving imported modules...", { id: "import" });
+
+      for (const modData of parsedData.modules) {
+        await setDoc(
+          doc(db, "modules", modData.id),
+          {
+            ...modData,
+            id: modData.id,
+          },
+          { merge: true },
+        );
+
+        if (modData.lessons && Array.isArray(modData.lessons)) {
+          const lessonsRef = collection(db, `modules/${modData.id}/lessons`);
+          for (const lesson of modData.lessons) {
+            await setDoc(
+              doc(lessonsRef, lesson.id),
+              {
+                ...lesson,
+                id: lesson.id,
+                moduleId: modData.id,
+              },
+              { merge: true },
+            );
+          }
+        }
+      }
+
+      setIsImportModalOpen(false);
+      setImportJson("");
+      toast.success("Modules imported successfully!", { id: "import" });
+    } catch (error) {
+      console.error("Import failed:", error);
+      toast.error("Failed to import JSON. Please check the format.", {
+        id: "import",
+      });
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const getExampleJson = () => {
+    return JSON.stringify(
+      {
+        modules: [
+          {
+            id: "week-1",
+            title: "Week 1: Example Module",
+            description: "Example module description",
+            order: 1,
+            month: 1,
+            lessons: [
+              {
+                id: "day-1",
+                moduleId: "week-1",
+                title: "Day 1: Example Lesson",
+                description: "Example lesson description",
+                order: 1,
+                difficulty: "Beginner",
+                videos: [],
+                tasks: [],
+              },
+            ],
+          },
+        ],
+      },
+      null,
+      2,
+    );
   };
 
   const stats = [
@@ -551,6 +641,13 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
                         Initialize Roadmap
                       </button>
                     )}
+                                        <button
+                      onClick={() => setIsImportModalOpen(true)}
+                      disabled={isSaving}
+                      className="flex items-center gap-2 bg-white/5 border border-white/10 text-white/60 px-6 py-3 font-black uppercase tracking-widest text-[10px] hover:bg-white/10 transition-all disabled:opacity-30"
+                    >
+                      <RiFileLine size={16} /> Import JSON
+                    </button>
                     <button
                       onClick={() => {
                         const nextOrder =
@@ -652,9 +749,9 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
                                     {monthModules.map((mod, modIdx) => (
                                       <div
                                         key={mod.id}
-                                        className="bg-[#141414] border border-white/10 overflow-hidden"
+                                        className="bg-brand-surface border border-white/10 overflow-hidden"
                                       >
-                                        <div className="p-6 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
+                                        <div className="p-6 border-b border-white/5 flex items-center justify-between bg-white/2">
                                           <div className="flex items-center gap-4">
                                             <div className="flex flex-col">
                                               <button
@@ -1188,6 +1285,96 @@ export default function AdminDashboard({ onClose }: { onClose?: () => void }) {
               setIsEditingLesson(null);
             }}
           />
+        )}
+        {isImportModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-60 flex items-center justify-center bg-black/80"
+            onClick={() => setIsImportModalOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-[#0F0F0F] border border-white/10 p-8 w-full max-w-4xl max-h-[80vh] overflow-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-xl font-black uppercase tracking-tighter italic text-brand-primary">
+                  Import Modules from JSON
+                </h3>
+                <button
+                  onClick={() => setIsImportModalOpen(false)}
+                  className="text-white/40 hover:text-white transition-colors"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 block mb-2">
+                    Paste your JSON data below:
+                  </label>
+                  <textarea
+                    value={importJson}
+                    onChange={(e) => setImportJson(e.target.value)}
+                    placeholder='{"modules": [...]}'
+                    className="w-full bg-black/40 border border-white/10 px-4 py-4 text-[10px] text-white/70 outline-none focus:border-brand-primary transition-all resize-none h-64 font-mono"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-white/40 block mb-2">
+                    Example Format (click to copy):
+                  </label>
+                  <textarea
+                    readOnly
+                    value={getExampleJson()}
+                    onClick={async (e) => {
+                      e.currentTarget.select();
+                      try {
+                        await navigator.clipboard.writeText(getExampleJson());
+                        toast.success("Example copied to clipboard!");
+                      } catch {
+                        document.execCommand("copy");
+                        toast.success("Example copied to clipboard!");
+                      }
+                    }}
+                    className="w-full bg-black/20 border border-white/5 px-4 py-4 text-[9px] text-white/50 outline-none resize-none h-48 font-mono cursor-pointer"
+                  />
+                </div>
+
+                <div className="flex justify-end gap-4 pt-4 border-t border-white/10">
+                  <button
+                    onClick={() => setIsImportModalOpen(false)}
+                    className="px-6 py-3 bg-white/5 border border-white/10 text-white/60 font-black uppercase tracking-widest text-[10px] hover:bg-white/10 transition-all"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleImportJson}
+                    disabled={isSaving || !importJson.trim()}
+                    className="px-6 py-3 bg-brand-primary text-black font-black uppercase tracking-widest text-[10px] flex items-center gap-2 hover:scale-105 transition-all disabled:opacity-50"
+                  >
+                    {isSaving ? (
+                      <>
+                        <Loader2 className="animate-spin" size={16} />
+                        Saving...
+                      </>
+                    ) : (
+                      <>
+                        <Save size={16} />
+                        Import & Save
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>
