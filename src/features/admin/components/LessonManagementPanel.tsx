@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import { useState } from "react";
 import {
   LuChevronDown as ChevronDown,
@@ -152,7 +153,13 @@ export default function LessonManagementPanel() {
                     </button>
                   </div>
                   {lesson.videos[0] ? (
-                    <img src={`https://img.youtube.com/vi/${lesson.videos[0].youtubeId}/mqdefault.jpg`} alt="thumbnail" className="w-20 h-12 object-cover border border-white/10" />
+                    <Image 
+                      src={`https://img.youtube.com/vi/${lesson.videos[0].youtubeId}/mqdefault.jpg`} 
+                      alt="thumbnail" 
+                      width={80}
+                      height={48}
+                      className="w-20 h-12 object-cover border border-white/10" 
+                    />
                   ) : (
                     <div className="w-20 h-12 bg-white/5 flex items-center justify-center text-[8px] uppercase font-black text-white/20 border border-white/10 border-dashed">No Video</div>
                   )}

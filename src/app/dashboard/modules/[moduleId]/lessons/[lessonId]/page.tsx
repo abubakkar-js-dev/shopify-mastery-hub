@@ -2,7 +2,8 @@
 
 import { use, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAppContext } from "../../../../../../context/AppContext";
+import { useAuth } from "../../../../../../context/AuthContext";
+import { useLearningData } from "../../../../../../context/LearningDataContext";
 import LessonView from "../../../../../../components/LessonView";
 import { lessonService } from "../../../../../../features/lessons/services/lessonService";
 import { getLessonNavigationState } from "../../../../../../features/lessons/utils/videoUnlocking";
@@ -19,7 +20,8 @@ type LessonPageProps = {
 export default function LessonPage({ params }: LessonPageProps) {
   const router = useRouter();
   const { moduleId, lessonId } = use(params);
-  const { user, profile, modules, lessons, loading } = useAppContext();
+  const { user, profile, loading } = useAuth();
+  const { modules, lessons } = useLearningData();
   const [activeVideo, setActiveVideo] = useState<string | null>(null);
 
   const selectedLesson = lessons.find((lesson) => lesson.id === lessonId);

@@ -2,7 +2,8 @@
 
 import { use } from "react";
 import { useRouter } from "next/navigation";
-import { useAppContext } from "../../../../context/AppContext";
+import { useAuth } from "../../../../context/AuthContext";
+import { useLearningData } from "../../../../context/LearningDataContext";
 import ModuleOverview from "../../../../components/ModuleOverview";
 import { lessonService } from "../../../../features/lessons/services/lessonService";
 import { Lesson } from "../../../../types";
@@ -16,7 +17,8 @@ type ModulePageProps = {
 export default function ModulePage({ params }: ModulePageProps) {
   const router = useRouter();
   const { moduleId } = use(params);
-  const { user, profile, modules, lessons, loading } = useAppContext();
+  const { user, profile, loading } = useAuth();
+  const { modules, lessons } = useLearningData();
 
   const activeModule = modules.find((m) => m.id === moduleId);
 

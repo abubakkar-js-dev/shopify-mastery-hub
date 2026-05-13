@@ -1,8 +1,10 @@
-import { useAppContext } from "../../../context/AppContext";
+import { useAdmin } from "../../../context/AdminContext";
+import { useLearningData } from "../../../context/LearningDataContext";
 import { adminService } from "../services/adminService";
 
 export function useAdminUsers() {
-  const { users, admins, lessons } = useAppContext();
+  const { users, admins } = useAdmin();
+  const { lessons } = useLearningData();
   
   const toggleAdmin = async (uid: string, currentIsAdmin: boolean) => {
     await adminService.toggleAdmin(uid, !currentIsAdmin);

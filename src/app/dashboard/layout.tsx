@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAppContext } from "../../context/AppContext";
+import { useAuth } from "../../context/AuthContext";
 import Sidebar from "../../features/dashboard/components/Sidebar";
 import Header from "../../features/dashboard/components/Header";
 import { usePageTitle } from "../../hooks/usePageTitle";
@@ -13,7 +13,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  const { user, profile, loading } = useAppContext();
+  const { user, profile, loading } = useAuth();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState<number>(1);
 

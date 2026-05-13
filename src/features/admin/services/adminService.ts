@@ -1,6 +1,6 @@
-import { collection, deleteDoc, doc, setDoc, updateDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDoc, onSnapshot, query, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../../lib/firebase";
-import { Lesson, Module } from "../../../types";
+import { Lesson, Module, UserProfile, AdminRecord } from "../../../types";
 import { INITIAL_LESSONS, INITIAL_MODULES } from "../../modules/seed";
 import toast from "react-hot-toast";
 
@@ -115,9 +115,27 @@ export const adminService = {
 
   async deleteUser(uid: string) {
     if (confirm("Delete this user's data from Firestore? This cannot be undone.")) {
-      await deleteDoc(doc(db, "profiles", uid));
+      await deleteDoc(doc(db, "users", uid));
       return true;
     }
     return false;
+  },
+
+  async checkAdmin(uid: string, email?: string | null): Promise<boolean> {
+    const adminDocRef = doc(db, "admins", uid);
+    const adminDoc = await getDoc(adminDocRef);
+    return adminDoc.exists() || email?.toLowerCase() === "mdabubakkars182@gmail.com";
+  },
+
+  syncUsers(callback: (users: UserProfile[]) => void): () => void {
+    return onSnapshot(query(collection(db, "users")), (snapshot) => {
+      callback(snapshot.docs.map(d => d.data() as UserProfile));
+    });
+  },
+
+  syncAdmins(callback: (admins: AdminRecord[]) => void): () => void {
+    return onSnapshot(query(collection(db, "admins")), (snapshot) => {
+      callback(snapshot.docs.map(d => d.data() as AdminRecord));
+    });
   }
 };

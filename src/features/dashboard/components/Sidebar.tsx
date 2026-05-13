@@ -10,10 +10,11 @@ import {
   LuShieldCheck as ShieldCheck,
   LuUser as UserIcon,
 } from "react-icons/lu";
-import { useAppContext } from "../../../context/AppContext";
+import { useAuth } from "../../../context/AuthContext";
+import { useAdmin } from "../../../context/AdminContext";
+import { useLearningData } from "../../../context/LearningDataContext";
 import { logout } from "../../../lib/firebase";
 import { cn } from "../../../lib/utils";
-import { Lesson, Module } from "../../../types";
 
 type DashboardSidebarProps = {
   isSidebarOpen: boolean;
@@ -30,7 +31,9 @@ export default function DashboardSidebar({
 }: DashboardSidebarProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const { profile, isAdmin, modules, lessons } = useAppContext();
+  const { profile } = useAuth();
+  const { isAdmin } = useAdmin();
+  const { modules, lessons } = useLearningData();
 
   const handleLogout = async () => {
     await logout();

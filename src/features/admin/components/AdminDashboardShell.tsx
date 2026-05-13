@@ -8,7 +8,6 @@ import {
   FiUsers as Users,
 } from "react-icons/fi";
 import {
-  LuBookOpen as BookOpen,
   LuMenu as Menu,
   LuSettings as Settings,
   LuX as X,

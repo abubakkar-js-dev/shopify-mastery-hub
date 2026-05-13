@@ -1,8 +1,8 @@
-import { useAppContext } from "../../../context/AppContext";
+import { useAuth } from "../../../context/AuthContext";
 import { lessonService } from "../services/lessonService";
 
 export function useLessonProgress() {
-  const { user, profile } = useAppContext();
+  const { user, profile } = useAuth();
 
   const toggleLesson = async (lessonId: string) => {
     if (!user || !profile) return;

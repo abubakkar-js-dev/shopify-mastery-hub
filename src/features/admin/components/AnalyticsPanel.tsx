@@ -22,13 +22,15 @@ import {
   YAxis,
 } from "recharts";
 import StatCard from "./StatCard";
-import { useAppContext } from "../../../context/AppContext";
+import { useAdmin } from "../../../context/AdminContext";
+import { useLearningData } from "../../../context/LearningDataContext";
 import { useMemo } from "react";
 
 const COLORS = ["#06b6d4", "#f97316", "#8b5cf6"];
 
 export default function AnalyticsPanel() {
-  const { users, modules, lessons } = useAppContext();
+  const { users } = useAdmin();
+  const { modules, lessons } = useLearningData();
 
   const monthlyActivityData = useMemo(
     () => [

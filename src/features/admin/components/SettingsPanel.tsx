@@ -3,13 +3,13 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { LuSave as Save, LuLoader as Loader, LuX as X, LuFileCode as RiFileLine } from "react-icons/lu";
-import { useAppContext } from "../../../context/AppContext";
+import { useAdmin } from "../../../context/AdminContext";
 import { adminService } from "../services/adminService";
 import { cn } from "../../../lib/utils";
 import toast from "react-hot-toast";
 
 export default function SettingsPanel() {
-  const { admins } = useAppContext();
+  const { admins } = useAdmin();
   const [isSeeding, setIsSeeding] = useState(false);
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [importJson, setImportJson] = useState("");

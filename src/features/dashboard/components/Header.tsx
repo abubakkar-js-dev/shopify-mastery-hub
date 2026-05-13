@@ -3,7 +3,8 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { LuChevronRight as ChevronRight, LuMenu as Menu, LuSparkles as Sparkles } from "react-icons/lu";
-import { useAppContext } from "../../../context/AppContext";
+import { useAuth } from "../../../context/AuthContext";
+import { useLearningData } from "../../../context/LearningDataContext";
 import { usePathname } from "next/navigation";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../lib/firebase";
@@ -16,7 +17,8 @@ type DashboardHeaderProps = {
 
 export default function DashboardHeader({ setIsSidebarOpen }: DashboardHeaderProps) {
   const pathname = usePathname();
-  const { user, profile, modules } = useAppContext();
+  const { user, profile } = useAuth();
+  const { modules } = useLearningData();
   const [showPathGenerator, setShowPathGenerator] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
 

@@ -1,9 +1,11 @@
-import { useAppContext } from "../../../context/AppContext";
+import { useAuth } from "../../../context/AuthContext";
+import { useLearningData } from "../../../context/LearningDataContext";
 import { adminService } from "../services/adminService";
 import { Lesson, Module } from "../../../types";
 
 export function useAdminContent() {
-  const { modules, lessons, profile } = useAppContext();
+  const { profile } = useAuth();
+  const { modules, lessons } = useLearningData();
 
   const seedData = async () => {
     return await adminService.seedData();
