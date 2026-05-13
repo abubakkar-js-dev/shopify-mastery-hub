@@ -14,7 +14,7 @@ import {
 import { auth, db } from "../lib/firebase";
 import { handleFirestoreError, OperationType } from "../lib/firestore-errors";
 import { Lesson, Module, UserProfile, AdminRecord } from "../types";
-import { INITIAL_LESSONS, INITIAL_MODULES } from "../data/modules";
+import { INITIAL_LESSONS, INITIAL_MODULES } from "../features/modules/seed";
 
 interface AppContextType {
   user: User | null;
