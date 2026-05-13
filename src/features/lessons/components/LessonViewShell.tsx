@@ -1,10 +1,13 @@
 "use client";
+import ChatCoPilot from "@/features/ai/components/ChatCoPilot";
+import { cn } from "@/lib/utils";
+import type { Lesson, Module } from "@/types";
 import { useState } from "react";
 import {
+  FiCheckCircle as CheckCircle,
+  FiCircle as Circle,
   FiArrowLeft,
   FiArrowRight,
-  FiCircle as Circle,
-  FiCheckCircle as CheckCircle,
   FiLayout as Layout,
 } from "react-icons/fi";
 import {
@@ -13,13 +16,10 @@ import {
   LuMonitor as Monitor,
 } from "react-icons/lu";
 import { getLessonVideoState } from "../utils/videoUnlocking";
-import { cn } from "../../../lib/utils";
-import type { Lesson, Module } from "../../../types";
-import ChatCoPilot from "../../../components/ChatCoPilot";
-import { LessonVideoPlayer } from "./LessonVideoPlayer";
+import { LessonNavigation } from "./LessonNavigation";
 import { LessonPlaylist } from "./LessonPlaylist";
 import { LessonTaskList } from "./LessonTaskList";
-import { LessonNavigation } from "./LessonNavigation";
+import { LessonVideoPlayer } from "./LessonVideoPlayer";
 
 export interface LessonViewShellProps {
   lesson: Lesson;

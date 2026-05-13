@@ -12,9 +12,9 @@ import { HiSparkles, HiUser } from 'react-icons/hi2';
 import { CgSpinner } from 'react-icons/cg';
 import { motion, AnimatePresence } from 'motion/react';
 import ReactMarkdown from 'react-markdown';
-import { getCoPilotResponse } from '../services/geminiService';
-import { Lesson, Module } from '../types';
-import { cn } from '../lib/utils';
+import { getCoPilotResponse } from '@/services/geminiService';
+import { Lesson, Module } from '@/types';
+import { cn } from '@/lib/utils';
 
 interface Message {
   role: 'user' | 'model';

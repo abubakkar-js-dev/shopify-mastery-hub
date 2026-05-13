@@ -3,8 +3,8 @@ import { LuLock as Lock, LuPlay as Play } from 'react-icons/lu';
 import { FiCheckCircle as CheckCircle, FiCircle as Circle } from 'react-icons/fi';
 import Image from 'next/image';
 import { motion } from 'motion/react';
-import { cn } from '../lib/utils';
-import type { Lesson, UserProfile } from '../types';
+import { cn } from '@/lib/utils';
+import type { Lesson, UserProfile } from '@/types';
 
 export default function ModuleOverview({
   module,

@@ -3,8 +3,8 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import { FiArrowRight, FiShield, FiZap, FiTarget, FiBox } from 'react-icons/fi';
 import { LuCircleDot } from 'react-icons/lu';
-import { cn } from '../lib/utils';
-import { usePageTitle } from '../hooks/usePageTitle';
+import { cn } from '@/lib/utils';
+import { usePageTitle } from '@/hooks/usePageTitle';
 
 export default function LandingPage({ onLogin }: { onLogin: () => void }) {
   usePageTitle("Uncompromised Learning");

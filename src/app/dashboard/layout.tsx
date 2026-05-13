@@ -1,10 +1,11 @@
 "use client";
 
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { useAuth } from "../../context/AuthContext";
-import Sidebar from "../../features/dashboard/components/Sidebar";
+import { useLearningData } from "../../context/LearningDataContext";
 import Header from "../../features/dashboard/components/Header";
+import Sidebar from "../../features/dashboard/components/Sidebar";
 import { usePageTitle } from "../../hooks/usePageTitle";
 
 export default function DashboardLayout({
@@ -13,7 +14,9 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
   const { user, profile, loading } = useAuth();
+  const { modules } = useLearningData();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedMonth, setSelectedMonth] = useState<number>(1);
 
@@ -28,6 +31,19 @@ export default function DashboardLayout({
       router.push("/auth");
     }
   }, [user, loading, router]);
+
+  useEffect(() => {
+    if (pathname.includes("/modules/")) {
+      const moduleId = pathname.split("/modules/")[1]?.split("/")[0];
+      if (moduleId) {
+        const mod = modules.find((m) => m.id === moduleId);
+        if (mod && mod.month !== selectedMonth) {
+          // eslint-disable-next-line react-hooks/set-state-in-effect
+          setSelectedMonth(mod.month);
+        }
+      }
+    }
+  }, [pathname, modules, selectedMonth]);
 
   if (loading || !user) {
     return (
@@ -51,9 +67,7 @@ export default function DashboardLayout({
 
         {/* Content Area */}
         <div className="flex-1 overflow-y-auto p-4 md:p-8">
-          <div className="max-w-5xl mx-auto">
-            {children}
-          </div>
+          <div className="max-w-5xl mx-auto">{children}</div>
         </div>
       </main>
     </div>

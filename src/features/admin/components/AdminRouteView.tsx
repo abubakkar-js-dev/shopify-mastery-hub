@@ -4,9 +4,9 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { type ReactNode, useEffect, useState } from "react";
-import AdminDashboardShell from "../features/admin/components/AdminDashboardShell";
-import { usePageTitle } from "../hooks/usePageTitle";
-import { auth, db } from "../lib/firebase";
+import AdminDashboardShell from "./AdminDashboardShell";
+import { usePageTitle } from "@/hooks/usePageTitle";
+import { auth, db } from "@/lib/firebase";
 
 type AdminRouteViewProps = {
   children?: ReactNode;

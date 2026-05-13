@@ -3,24 +3,27 @@
 import { AnimatePresence } from "motion/react";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import { FiBarChart2 as BarChart3, FiUsers as Users } from "react-icons/fi";
 import {
-  FiBarChart2 as BarChart3,
-  FiUsers as Users,
-} from "react-icons/fi";
-import {
+  LuBook as Book,
+  LuCpu as Cpu,
+  LuDownload as Download,
+  LuLayers as Layers,
   LuMenu as Menu,
   LuSettings as Settings,
   LuX as X,
 } from "react-icons/lu";
 import { cn } from "../../../lib/utils";
 import TabButton from "./TabButton";
-import {
-  LuBook as Book,
-  LuCpu as Cpu,
-  LuLayers as Layers,
-} from "react-icons/lu";
 
-export type AdminTab = "overview" | "modules" | "lessons" | "ai" | "users" | "settings";
+export type AdminTab =
+  | "overview"
+  | "modules"
+  | "lessons"
+  | "ai"
+  | "users"
+  | "settings"
+  | "import";
 
 function getAdminTabFromPath(pathname: string): AdminTab {
   if (pathname.startsWith("/admin/users")) return "users";
@@ -28,6 +31,7 @@ function getAdminTabFromPath(pathname: string): AdminTab {
   if (pathname.startsWith("/admin/modules")) return "modules";
   if (pathname.startsWith("/admin/lessons")) return "lessons";
   if (pathname.startsWith("/admin/ai")) return "ai";
+  if (pathname.startsWith("/admin/import")) return "import";
   return "overview";
 }
 
@@ -136,6 +140,15 @@ export default function AdminDashboardShell({
             icon={Settings}
             label="Settings"
           />
+          <TabButton
+            active={currentTab === "import"}
+            onClick={() => {
+              setIsSidebarOpen(false);
+              router.push("/admin/import");
+            }}
+            icon={Download}
+            label="Import Playlist"
+          />
         </nav>
 
         <div className="p-6 border-t border-white/10 flex items-center gap-3">
@@ -163,9 +176,7 @@ export default function AdminDashboardShell({
             <Menu size={24} />
           </button>
 
-          <AnimatePresence mode="wait">
-            {children}
-          </AnimatePresence>
+          <AnimatePresence mode="wait">{children}</AnimatePresence>
         </div>
       </main>
     </div>

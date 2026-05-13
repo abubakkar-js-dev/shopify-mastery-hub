@@ -1,26 +1,22 @@
 "use client";
 
-import { use } from "react";
-import { useRouter } from "next/navigation";
-import { useAuth } from "../../../../context/AuthContext";
-import { useLearningData } from "../../../../context/LearningDataContext";
-import ModuleOverview from "../../../../components/ModuleOverview";
-import { lessonService } from "../../../../features/lessons/services/lessonService";
-import { Lesson } from "../../../../types";
+import { useAuth } from "@/context/AuthContext";
+import { useLearningData } from "@/context/LearningDataContext";
+import { lessonService } from "@/features/lessons/services/lessonService";
+import ModuleOverview from "@/features/modules/components/ModuleOverview";
+import { usePageTitle } from "@/hooks/usePageTitle";
+import { Lesson } from "@/types";
+import { useParams, useRouter } from "next/navigation";
 
-type ModulePageProps = {
-  params: Promise<{
-    moduleId: string;
-  }>;
-};
-
-export default function ModulePage({ params }: ModulePageProps) {
+export default function ModulePage() {
   const router = useRouter();
-  const { moduleId } = use(params);
+  const { moduleId } = useParams<{ moduleId: string }>();
   const { user, profile, loading } = useAuth();
   const { modules, lessons } = useLearningData();
 
   const activeModule = modules.find((m) => m.id === moduleId);
+
+  usePageTitle(activeModule?.title || "Module");
 
   const openLesson = (lesson: Lesson) => {
     router.push(`/dashboard/modules/${moduleId}/lessons/${lesson.id}`);

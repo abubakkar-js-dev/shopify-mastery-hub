@@ -14,6 +14,7 @@ Important files today:
 - `src/features/lessons/components/`: lesson UI components (all split now!).
 - `src/features/lessons/hooks/`: useLessonProgress already exists!
 - `src/features/lessons/utils/`: videoUnlocking.ts already exists!
+- `src/shared/lib/firestorePaths.ts`: centralized Firestore path definitions!
 - `src/context/`: global state (AppContext.tsx, LearningDataContext.tsx, AdminContext.tsx).
 - `src/features/modules/seed/`: initial module and lesson seed data (split by month).
 - `src/lib`: shared utilities and Firebase setup.
@@ -23,7 +24,7 @@ Important files today:
 The largest scale risks right now are:
 
 - `src/components/AdminDashboard.tsx` was split, but maybe need to check if fully migrated.
-- `src/context/AppContext.tsx` still owns multiple domains (auth, profile, users).
+- AppContext is fully split into AuthContext, LearningDataContext, and AdminContext (done!).
 
 ## Recommended Structure
 
@@ -172,10 +173,11 @@ Keep Firebase paths and Firestore calls centralized:
 - `features/modules/services/moduleService.ts`
 - `features/lessons/services/lessonService.ts`
 - `features/admin/services/adminService.ts`
+- `shared/lib/firestorePaths.ts` (centralized path definitions)
 
 Components and hooks should call these service functions instead of constructing Firestore paths directly.
 
-**Progress**: `src/features/admin/services/adminService.ts` and `src/features/modules/services/moduleService.ts` already exist.
+**Progress**: All services exist and firestorePaths.ts is now created and used by all services!
 
 ## Code Ownership Rules
 
@@ -318,14 +320,14 @@ If tests are added later, also run the relevant test command.
 Do this gradually:
 
 1. ~~Create `features` and `shared` folders.~~ **(COMPLETED)**
-2. Move admin dashboard subcomponents first because `AdminDashboard.tsx` is the largest file.
-3. Extract lesson progress and video unlocking logic from `LessonView.tsx`.
+2. ~~Move admin dashboard subcomponents first because `AdminDashboard.tsx` is the largest file.~~ **(COMPLETED)**
+3. ~~Extract lesson progress and video unlocking logic from `LessonView.tsx`.~~
    - ~~videoUnlocking.ts~~ **(COMPLETED)**
-4. Move Firestore calls from contexts/components into services.
-5. Split `AppContext` into auth, learning data, and admin contexts.
-   - ~~LearningDataContext.tsx~~ **(PARTIALLY COMPLETED)**
+4. ~~Move Firestore calls from contexts/components into services.~~ **(COMPLETED)**
+5. ~~Split `AppContext` into auth, learning data, and admin contexts.~~
+   - ~~LearningDataContext.tsx~~ **(COMPLETED)**
 6. ~~Split seed course data by module.~~ **(COMPLETED)**
-7. Add tests around extracted logic before changing behavior.
+7. ~~Add tests around extracted logic before changing behavior.~~ **(COMPLETED - videoUnlocking, cn utility, and module/lesson utils tests completed!)**
 
 Avoid large refactors that move everything at once. Small, behavior-preserving moves are safer and easier to review.
 
@@ -348,3 +350,81 @@ A change is complete when:
 - Components have clear ownership and readable props.
 - New structure follows the feature-first direction above.
 - No unrelated user changes are reverted.
+
+## YouTube Playlist Import Feature
+
+### Requirements
+
+- Import any **public YouTube playlist** (any creator's playlist)
+- Generate a complete course module from the playlist
+- Use YouTube Data API v3 (no OAuth required, just an API key)
+- Add new admin page for the import feature
+
+### Feature Flow
+
+1. Admin visits `/admin/import` page
+2. Paste any public YouTube playlist URL
+3. Validate and extract playlist ID from URL
+4. Fetch playlist details and videos from YouTube API
+5. Preview all videos in the playlist
+6. Allow admin to edit titles/descriptions (optional)
+7. Click "Generate Course" to create module + lessons
+8. Save everything to Firestore
+
+### YouTube Playlist URL Formats
+
+Handle all these formats:
+
+- `https://www.youtube.com/playlist?list=PLAYLIST_ID`
+- `https://youtube.com/playlist?list=PLAYLIST_ID`
+- `https://youtu.be/playlist?list=PLAYLIST_ID`
+
+### Data Mapping (YouTube → Course)
+
+| YouTube Data         | Course Data                          |
+| -------------------- | ------------------------------------ |
+| Playlist Title       | Module Title                         |
+| Playlist Description | Module Description (AI-enhanced)     |
+| Playlist Videos      | Lessons (1 video per lesson)         |
+| Video Title          | Lesson Title                         |
+| Video Description    | Lesson Content (AI-enhanced)         |
+| Video Thumbnail      | Lesson thumbnail                     |
+| Video ID             | Store YouTube video ID for embedding |
+
+### Files to Create
+
+```
+src/
+  app/
+    admin/
+      import/
+        page.tsx              # New admin import page
+    api/
+      youtube/
+        playlist/
+          route.ts            # API route to fetch playlist (server-side)
+  features/
+    admin/
+      components/
+        YouTubeImportPanel.tsx  # Import UI component
+        YouTubeVideoPreview.tsx  # Video preview component
+    modules/
+      services/
+        youtubeImportService.ts  # Service to handle import logic
+```
+
+### Environment Variables
+
+Add to `.env.local`:
+
+```
+YOUTUBE_API_KEY=your_youtube_data_api_key_here
+```
+
+### Rules to Follow
+
+- Keep YouTube API calls on the server (in API routes) - never expose API key to client
+- Use existing AI service (Gemini) to enhance descriptions and generate tasks
+- Follow existing project conventions (feature-first structure, TypeScript, Tailwind CSS)
+- Add proper error handling for invalid URLs, API errors, etc.
+- Allow admin to review and edit before saving to Firestore

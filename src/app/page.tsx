@@ -1,9 +1,9 @@
 "use client";
-import LandingPage from "../components/LandingPage";
+import LandingPage from "@/features/landing/components/LandingPage";
+import { auth } from "@/lib/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../lib/firebase";
 
 export default function Home() {
   const router = useRouter();
@@ -27,9 +27,5 @@ export default function Home() {
     );
   }
 
-  return (
-    <LandingPage 
-      onLogin={() => router.push("/auth")} 
-    />
-  );
+  return <LandingPage onLogin={() => router.push("/auth")} />;
 }

@@ -1,8 +1,11 @@
 "use client";
 
 import { motion } from "motion/react";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 export default function DashboardModulesPage() {
+  usePageTitle("Modules");
+
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-8">
       <div className="relative w-64 h-px bg-white/5 overflow-hidden">
