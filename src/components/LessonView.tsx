@@ -179,7 +179,7 @@ export default function LessonView({
                   {mode.label}
                 </span>
                 {viewMode === mode.id && (
-                  <div className="absolute -bottom-0.5 left-0 w-full h-[1px] bg-brand-primary shadow-[0_0_100px_#95FF00]" />
+                  <div className="absolute -bottom-0.5 left-0 w-full h-px bg-brand-primary shadow-[0_0_100px_#95FF00]" />
                 )}
               </button>
             ))}
@@ -201,7 +201,10 @@ export default function LessonView({
           {activeVideo ? (
             <iframe
               className="w-full h-full relative z-10"
-              src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1&rel=0&color=white`}
+              src={
+                activeVideo.embedUrl ||
+                `https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1&rel=0&color=white`
+              }
               title={activeVideo?.title}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
