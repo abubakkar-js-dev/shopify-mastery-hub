@@ -1,9 +1,9 @@
 "use client";
-import AuthPage from "../../components/AuthPage";
+import AuthPage from "@/features/auth/components/AuthPage";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../lib/firebase";
+import { auth } from "@/lib/firebase";
 
 export default function AuthPageRoute() {
   const router = useRouter();

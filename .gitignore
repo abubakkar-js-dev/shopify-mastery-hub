@@ -47,6 +47,9 @@ firebase-debug.log*
 firestore-debug.log*
 ui-debug.log*
 
+# google oauth
+client_secret_*.json
+
 # pwa
 public/sw.js
 public/sw.js.map

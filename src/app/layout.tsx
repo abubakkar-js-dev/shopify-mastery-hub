@@ -28,7 +28,9 @@ export const metadata: Metadata = {
   },
 };
 
-import { AppProvider } from "../context/AppContext";
+import { AuthProvider } from "../context/AuthContext";
+import { AdminProvider } from "../context/AdminContext";
+import { LearningDataProvider } from "../context/LearningDataContext";
 
 export default function RootLayout({
   children,
@@ -38,20 +40,24 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <AppProvider>
-          {children}
-          <Toaster 
-            position="top-right"
-            toastOptions={{
-              duration: 4000,
-              style: {
-                background: '#1a1a1a',
-                color: '#fff',
-                border: '1px solid #333',
-              },
-            }}
-          />
-        </AppProvider>
+        <AuthProvider>
+          <AdminProvider>
+            <LearningDataProvider>
+              {children}
+              <Toaster 
+                position="top-right"
+                toastOptions={{
+                  duration: 4000,
+                  style: {
+                    background: '#1a1a1a',
+                    color: '#fff',
+                    border: '1px solid #333',
+                  },
+                }}
+              />
+            </LearningDataProvider>
+          </AdminProvider>
+        </AuthProvider>
       </body>
     </html>
   );

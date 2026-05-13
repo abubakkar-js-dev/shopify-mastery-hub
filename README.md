@@ -16,13 +16,14 @@ The project features a sleek, industrial aesthetic with fluid animations, provid
 ## ✨ Key Features
 
 - **🏗️ 3-Month Engineering Roadmap**: A structured curriculum covering Liquid, Headless, and App Architecture, designed to scale with the student's expertise.
+- **🎬 YouTube Playlist Import**: Instantly import any public YouTube playlist and generate a complete course module with AI enhancement (or skip AI for quick imports).
 - **⚡ Industrial-Grade Design System**: A "Terminal-First" aesthetic featuring dark mode, glassmorphism, and high-precision micro-animations.
 - **🔐 Enterprise-Grade Security**: Robust onboarding and session management powered by Firebase Auth and granular Firestore Security Rules.
 - **📊 Professional Dashboards**: 
   - **User Dashboard**: Track progress, access blueprints, and manage your engineering curriculum.
   - **Admin Dashboard**: Real-time management of users, courses, and platform analytics with dynamic charts (Recharts).
 - **🔄 Real-time Data Sync**: Centralized state management using React Context and Firestore for instant updates across the app.
-- **🧠 AI-Powered Insights**: (Integrated with Google Gemini) for future-ready commerce logic and assistance.
+- **🧠 AI-Powered Insights**: Integrated with Google Gemini for future-ready commerce logic and assistance.
 - **📱 Fully Responsive**: Optimized for every screen, from high-end ultrawide monitors to mobile devices.
 
 ---
@@ -42,9 +43,34 @@ The project features a sleek, industrial aesthetic with fluid animations, provid
 - **Firebase 12** (Authentication & Firestore)
 - **Firestore Rules** (Granular security and access control)
 
+### AI & APIs
+- **Google Gemini** (AI-powered course generation and assistance)
+- **YouTube Data API v3** (Playlist import functionality)
+
 ### Analytics & Tools
 - **Recharts** (Visualizing platform growth)
 - **Lucide Icons** (Clean, consistent iconography)
+- **Serwist** (PWA support)
+
+---
+
+## 🎬 YouTube Playlist Import (New!)
+
+One of the standout features of Shopify Mastery Hub is the ability to **instantly import any public YouTube playlist** and convert it into a structured course module.
+
+### Key Features:
+- ✅ **Import Any Public Playlist**: Works with any creator's public playlist
+- ✅ **AI-Enhanced Course Generation**: Uses Google Gemini to enhance titles, descriptions, and generate tasks
+- ✅ **Smart Fallback**: If Gemini API is unavailable, automatically falls back to a basic course structure
+- ✅ **Skip AI Option**: Choose to skip AI and use the basic structure immediately
+- ✅ **Preview & Confirm**: Full preview at every step - nothing is saved without explicit confirmation
+
+### How It Works:
+1. Paste YouTube playlist URL
+2. Preview playlist and all videos
+3. Choose: "Skip AI" or "Generate Course (AI-Enhanced)"
+4. Review the complete course
+5. Confirm and save to Firebase
 
 ---
 
@@ -73,6 +99,18 @@ To run this project locally and explore the architecture:
 
 5. **Open the lab:**
    Navigate to [http://localhost:3000](http://localhost:3000) to see the magic.
+
+---
+
+## 🏗️ Architecture & Best Practices
+
+This project follows a **feature-first architecture** with clear separation of concerns:
+
+- **Feature-first structure**: Code organized by feature, not by file type
+- **Centralized Firebase access**: All Firestore paths and operations in one place
+- **Business logic out of UI**: Heavy logic in services, hooks, and utilities
+- **TypeScript throughout**: Full type safety across the entire application
+- **Proper error handling**: Graceful fallbacks and user-friendly error messages
 
 ---
 
