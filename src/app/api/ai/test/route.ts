@@ -18,9 +18,9 @@ export async function GET() {
       contents: "Say 'Gemini System Operational' if you can hear me.",
     });
 
-    return NextResponse.json({
-      status: "success",
-      response: response.text,
+    return NextResponse.json({ 
+      status: "success", 
+      response: response.text 
     });
   } catch (error: unknown) {
     console.error("Gemini API Error:", error);
