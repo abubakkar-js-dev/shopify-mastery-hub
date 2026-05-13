@@ -1,8 +1,10 @@
 "use client";
 
+import { doc, updateDoc } from "firebase/firestore";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { FiCheckCircle as CheckCircle, FiTrendingUp } from "react-icons/fi";
 import {
   LuChevronRight as ChevronRight,
@@ -16,20 +18,25 @@ import {
 import LessonView from "../../components/LessonView";
 import ModuleOverview from "../../components/ModuleOverview";
 import UserDashboard from "../../components/UserDashboard";
+import { useAppContext } from "../../context/AppContext";
+import { usePageTitle } from "../../hooks/usePageTitle";
 import { db, logout } from "../../lib/firebase";
-import { handleFirestoreError, OperationType } from "../../lib/firestore-errors";
+import {
+  handleFirestoreError,
+  OperationType,
+} from "../../lib/firestore-errors";
 import { cn } from "../../lib/utils";
 import { generatePersonalizedPath } from "../../services/geminiService";
 import { Lesson } from "../../types";
-import { useRouter } from "next/navigation";
-import { useAppContext } from "../../context/AppContext";
-import { doc, updateDoc } from "firebase/firestore";
-import { usePageTitle } from "../../hooks/usePageTitle";
 
 export default function DashboardPage() {
   const router = useRouter();
   const { user, profile, isAdmin, modules, lessons, loading } = useAppContext();
-  usePageTitle(profile?.displayName ? `${profile.displayName}'s Terminal` : "Operational Hub");
+  usePageTitle(
+    profile?.displayName
+      ? `${profile.displayName}'s Terminal`
+      : "Operational Hub",
+  );
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showDashboard, setShowDashboard] = useState(false);
@@ -41,7 +48,9 @@ export default function DashboardPage() {
   const [showPathGenerator, setShowPathGenerator] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
 
-  const activeModule = modules.find(m => m.id === selectedModuleId) || (modules.length > 0 ? modules[0] : null);
+  const activeModule =
+    modules.find((m) => m.id === selectedModuleId) ||
+    (modules.length > 0 ? modules[0] : null);
 
   const toggleLessonCompletion = async (lessonId: string) => {
     if (!user || !profile) return;
@@ -49,7 +58,7 @@ export default function DashboardPage() {
     const newCompleted = isCompleted
       ? profile.completedLessons.filter((id) => id !== lessonId)
       : [...profile.completedLessons, lessonId];
-    
+
     const path = `users/${user.uid}`;
     try {
       await updateDoc(doc(db, "users", user.uid), {
@@ -210,8 +219,13 @@ export default function DashboardPage() {
               }}
               className="w-full flex items-center justify-center gap-3 px-4 py-4 bg-white/5 border border-white/10 hover:bg-white/10 transition-all group cursor-pointer"
             >
-              <FiTrendingUp size={16} className="text-brand-primary group-hover:scale-110 transition-transform" />
-              <span className="text-[11px] font-black uppercase tracking-[0.1em]">Metrics & Analytics</span>
+              <FiTrendingUp
+                size={16}
+                className="text-brand-primary group-hover:scale-110 transition-transform"
+              />
+              <span className="text-[11px] font-black uppercase tracking-[0.1em]">
+                Metrics & Analytics
+              </span>
             </button>
 
             {isAdmin && (
@@ -219,8 +233,13 @@ export default function DashboardPage() {
                 href="/admin"
                 className="w-full flex items-center justify-center gap-3 px-4 py-4 bg-brand-primary/10 border border-brand-primary/20 hover:bg-brand-primary/20 transition-all group"
               >
-                <ShieldCheck size={16} className="text-brand-primary group-hover:rotate-12 transition-transform" />
-                <span className="text-[11px] font-black uppercase tracking-[0.1em] text-brand-primary">Admin Dashboard</span>
+                <ShieldCheck
+                  size={16}
+                  className="text-brand-primary group-hover:rotate-12 transition-transform"
+                />
+                <span className="text-[11px] font-black uppercase tracking-[0.1em] text-brand-primary">
+                  Admin Dashboard
+                </span>
               </Link>
             )}
           </div>
@@ -372,14 +391,19 @@ export default function DashboardPage() {
                 Overall Progress
               </span>
               <span className="text-[10px] font-mono text-brand-primary font-black">
-                {Math.round(((profile?.completedLessons.length || 0) / (lessons.length || 1)) * 100)}%
+                {Math.round(
+                  ((profile?.completedLessons.length || 0) /
+                    (lessons.length || 1)) *
+                    100,
+                )}
+                %
               </span>
             </div>
             <div className="w-full h-[2px] bg-white/5 relative overflow-hidden">
               <motion.div
                 initial={{ width: 0 }}
-                animate={{ 
-                  width: `${((profile?.completedLessons.length || 0) / (lessons.length || 1)) * 100}%` 
+                animate={{
+                  width: `${((profile?.completedLessons.length || 0) / (lessons.length || 1)) * 100}%`,
                 }}
                 className="absolute left-0 top-0 h-full bg-brand-primary shadow-[0_0_10px_rgba(149,255,0,0.3)]"
               />
@@ -431,10 +455,14 @@ export default function DashboardPage() {
             {!activeModule && !showDashboard ? (
               <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-8">
                 <div className="relative w-64 h-px bg-white/5 overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     initial={{ left: "-100%" }}
                     animate={{ left: "100%" }}
-                    transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 2,
+                      ease: "linear",
+                    }}
                     className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-brand-primary to-transparent"
                   />
                 </div>
@@ -455,73 +483,100 @@ export default function DashboardPage() {
                 isAdmin={isAdmin}
                 onClose={() => setShowDashboard(false)}
               />
-            ) : selectedLesson ? (() => {
-              const moduleLessons = lessons
-                .filter(l => l.moduleId === activeModule?.id)
-                .sort((a, b) => a.order - b.order);
-              const currentIndex = moduleLessons.findIndex(l => l.id === selectedLesson.id);
-              const prevLesson = currentIndex > 0 ? moduleLessons[currentIndex - 1] : null;
-              const nextLesson = currentIndex < moduleLessons.length - 1 ? moduleLessons[currentIndex + 1] : null;
-              
-              const currentVideoId = activeVideo || selectedLesson.videos[0]?.id || "";
-              const currentVideoIndex = selectedLesson.videos.findIndex(v => v.id === currentVideoId);
-              
-              const hasNextVideo = currentVideoIndex < selectedLesson.videos.length - 1;
-              const hasPrevVideo = currentVideoIndex > 0;
+            ) : selectedLesson ? (
+              (() => {
+                const moduleLessons = lessons
+                  .filter((l) => l.moduleId === activeModule?.id)
+                  .sort((a, b) => a.order - b.order);
+                const currentIndex = moduleLessons.findIndex(
+                  (l) => l.id === selectedLesson.id,
+                );
+                const prevLesson =
+                  currentIndex > 0 ? moduleLessons[currentIndex - 1] : null;
+                const nextLesson =
+                  currentIndex < moduleLessons.length - 1
+                    ? moduleLessons[currentIndex + 1]
+                    : null;
 
-              const isNextVideoUnlocked = hasNextVideo && (profile?.completedVideos || []).includes(currentVideoId);
-              
-              const handleNext = () => {
-                if (hasNextVideo) {
-                  if (isNextVideoUnlocked) {
-                    setActiveVideo(selectedLesson.videos[currentVideoIndex + 1].id);
-                  }
-                } else if (nextLesson && profile?.completedLessons.includes(selectedLesson.id)) {
-                  setSelectedLesson(nextLesson);
-                  setActiveVideo(null);
-                }
-              };
+                const currentVideoId =
+                  activeVideo || selectedLesson.videos[0]?.id || "";
+                const currentVideoIndex = selectedLesson.videos.findIndex(
+                  (v) => v.id === currentVideoId,
+                );
 
-              const handlePrev = () => {
-                if (hasPrevVideo) {
-                  setActiveVideo(selectedLesson.videos[currentVideoIndex - 1].id);
-                } else if (prevLesson) {
-                  setSelectedLesson(prevLesson);
-                  setActiveVideo(null);
-                }
-              };
+                const hasNextVideo =
+                  currentVideoIndex < selectedLesson.videos.length - 1;
+                const hasPrevVideo = currentVideoIndex > 0;
 
-              const isNextDisabled = hasNextVideo 
-                ? !isNextVideoUnlocked 
-                : !profile?.completedLessons.includes(selectedLesson.id);
+                const isNextVideoUnlocked =
+                  hasNextVideo &&
+                  (profile?.completedVideos || []).includes(currentVideoId);
 
-              return (
-                <LessonView
-                  lesson={selectedLesson}
-                  module={activeModule!}
-                  onBack={() => {
-                    setSelectedLesson(null);
+                const handleNext = () => {
+                  if (hasNextVideo) {
+                    if (isNextVideoUnlocked) {
+                      setActiveVideo(
+                        selectedLesson.videos[currentVideoIndex + 1].id,
+                      );
+                    }
+                  } else if (
+                    nextLesson &&
+                    profile?.completedLessons.includes(selectedLesson.id)
+                  ) {
+                    setSelectedLesson(nextLesson);
                     setActiveVideo(null);
-                  }}
-                  completedTasks={profile?.completedTasks || []}
-                  onToggleTask={toggleTaskCompletion}
-                  activeVideoId={currentVideoId}
-                  onSelectVideo={setActiveVideo}
-                  completedVideos={profile?.completedVideos || []}
-                  onToggleVideo={toggleVideoCompletion}
-                  onPrev={handlePrev}
-                  onNext={handleNext}
-                  isNextDisabled={isNextDisabled}
-                  onToggleLesson={() => toggleLessonCompletion(selectedLesson.id)}
-                  isLessonCompleted={profile?.completedLessons.includes(selectedLesson.id)}
-                />
-              );
-            })() : activeModule ? (
+                  }
+                };
+
+                const handlePrev = () => {
+                  if (hasPrevVideo) {
+                    setActiveVideo(
+                      selectedLesson.videos[currentVideoIndex - 1].id,
+                    );
+                  } else if (prevLesson) {
+                    setSelectedLesson(prevLesson);
+                    setActiveVideo(null);
+                  }
+                };
+
+                const isLastLesson = currentIndex === moduleLessons.length - 1;
+                const isNextDisabled = isLastLesson
+                  ? true
+                  : hasNextVideo
+                    ? !isNextVideoUnlocked
+                    : !profile?.completedLessons.includes(selectedLesson.id);
+
+                return (
+                  <LessonView
+                    lesson={selectedLesson}
+                    module={activeModule!}
+                    onBack={() => {
+                      setSelectedLesson(null);
+                      setActiveVideo(null);
+                    }}
+                    completedTasks={profile?.completedTasks || []}
+                    onToggleTask={toggleTaskCompletion}
+                    activeVideoId={currentVideoId}
+                    onSelectVideo={setActiveVideo}
+                    completedVideos={profile?.completedVideos || []}
+                    onToggleVideo={toggleVideoCompletion}
+                    onPrev={handlePrev}
+                    onNext={handleNext}
+                    isNextDisabled={isNextDisabled}
+                    isLastLesson={isLastLesson}
+                    onToggleLesson={() =>
+                      toggleLessonCompletion(selectedLesson.id)
+                    }
+                    isLessonCompleted={profile?.completedLessons.includes(
+                      selectedLesson.id,
+                    )}
+                  />
+                );
+              })()
+            ) : activeModule ? (
               <ModuleOverview
                 module={activeModule}
-                lessons={lessons.filter(
-                  (l) => l.moduleId === activeModule.id,
-                )}
+                lessons={lessons.filter((l) => l.moduleId === activeModule.id)}
                 completedLessons={profile?.completedLessons || []}
                 onSelectLesson={setSelectedLesson}
                 onToggleComplete={toggleLessonCompletion}
@@ -529,7 +584,9 @@ export default function DashboardPage() {
               />
             ) : (
               <div className="flex items-center justify-center h-64 text-white/20 uppercase font-black tracking-widest italic text-center">
-                Select a module from the roadmap to begin<br />your technical mastery journey.
+                Select a module from the roadmap to begin
+                <br />
+                your technical mastery journey.
               </div>
             )}
           </div>

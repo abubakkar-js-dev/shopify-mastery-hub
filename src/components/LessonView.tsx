@@ -1,24 +1,24 @@
-'use client';
-import { useState } from 'react';
-import { 
-  LuAward as Award, 
-  LuChevronRight as ChevronRight, 
-  LuLock as Lock, 
-  LuPlay as Play,
-  LuMonitor as Monitor,
-  LuMaximize2 as Maximize
-} from 'react-icons/lu';
-import { 
-  FiCheckCircle as CheckCircle, 
+"use client";
+import { useState } from "react";
+import {
+  FiCheckCircle as CheckCircle,
   FiCircle as Circle,
-  FiLayout as Layout,
-  FiChevronDown,
   FiArrowLeft,
-  FiArrowRight
-} from 'react-icons/fi';
-import { cn } from '../lib/utils';
-import type { Lesson, Module } from '../types';
-import ChatCoPilot from './ChatCoPilot';
+  FiArrowRight,
+  FiChevronDown,
+  FiLayout as Layout,
+} from "react-icons/fi";
+import {
+  LuAward as Award,
+  LuChevronRight as ChevronRight,
+  LuLock as Lock,
+  LuMaximize2 as Maximize,
+  LuMonitor as Monitor,
+  LuPlay as Play,
+} from "react-icons/lu";
+import { cn } from "../lib/utils";
+import type { Lesson, Module } from "../types";
+import ChatCoPilot from "./ChatCoPilot";
 
 export default function LessonView({
   lesson,
@@ -33,6 +33,7 @@ export default function LessonView({
   onNext,
   onPrev,
   isNextDisabled,
+  isLastLesson,
   onToggleLesson,
   isLessonCompleted,
 }: {
@@ -48,10 +49,13 @@ export default function LessonView({
   onNext?: () => void;
   onPrev?: () => void;
   isNextDisabled?: boolean;
+  isLastLesson?: boolean;
   onToggleLesson?: () => void;
   isLessonCompleted?: boolean;
 }) {
-  const [viewMode, setViewMode] = useState<'standard' | 'theater' | 'focus'>('standard');
+  const [viewMode, setViewMode] = useState<"standard" | "theater" | "focus">(
+    "standard",
+  );
   const [isPlaylistCollapsed, setIsPlaylistCollapsed] = useState(false);
 
   const getStartingVideo = () => {
@@ -70,6 +74,7 @@ export default function LessonView({
   };
 
   const activeVideo = getStartingVideo();
+  console.log("Active Video:", activeVideo);
   const completedTaskCount = lesson.tasks.filter((t) =>
     completedTasks.includes(t.id),
   ).length;
@@ -87,7 +92,9 @@ export default function LessonView({
   const isVideoCompleted = (videoId: string) =>
     (completedVideos || []).includes(videoId);
 
-  const currentVideoIndex = lesson.videos.findIndex(v => v.id === activeVideoId);
+  const currentVideoIndex = lesson.videos.findIndex(
+    (v) => v.id === activeVideoId,
+  );
   const hasNextVideo = currentVideoIndex < lesson.videos.length - 1;
   const hasPrevVideo = currentVideoIndex > 0;
 
@@ -105,7 +112,7 @@ export default function LessonView({
             />
             Module Index
           </button>
-          
+
           {(onPrev || onNext) && (
             <div className="hidden sm:flex items-center gap-1 border-l border-white/10 ml-2 pl-3">
               <button
@@ -113,7 +120,9 @@ export default function LessonView({
                 disabled={!onPrev}
                 className={cn(
                   "p-2 transition-all",
-                  onPrev ? "text-white/40 hover:text-white hover:bg-white/5" : "text-white/10 cursor-not-allowed"
+                  onPrev
+                    ? "text-white/40 hover:text-white hover:bg-white/5"
+                    : "text-white/10 cursor-not-allowed",
                 )}
                 title="Previous Session"
               >
@@ -124,11 +133,20 @@ export default function LessonView({
                 disabled={!onNext || isNextDisabled}
                 className={cn(
                   "p-2 transition-all",
-                  onNext && !isNextDisabled ? "text-white/40 hover:text-white hover:bg-white/5" : "text-white/10 cursor-not-allowed"
+                  onNext && !isNextDisabled
+                    ? "text-white/40 hover:text-white hover:bg-white/5"
+                    : "text-white/10 cursor-not-allowed",
                 )}
-                title={isNextDisabled 
-                  ? (hasNextVideo ? "Watch current video to unlock next" : "Complete this lesson to unlock next") 
-                  : (hasNextVideo ? "Next Video" : "Next Session")
+                title={
+                  isNextDisabled
+                    ? isLastLesson
+                      ? "Week Completed — No Next Session"
+                      : hasNextVideo
+                        ? "Watch current video to unlock next"
+                        : "Complete this lesson to unlock next"
+                    : hasNextVideo
+                      ? "Next Video"
+                      : "Next Session"
                 }
               >
                 <FiArrowRight size={14} />
@@ -136,26 +154,30 @@ export default function LessonView({
             </div>
           )}
         </div>
-        
+
         <div className="flex items-center gap-6">
           <div className="hidden lg:flex items-center bg-white/5 border border-white/10 p-0.5">
             {[
-              { id: 'standard', icon: Monitor, label: 'STD' },
-              { id: 'theater', icon: Layout, label: 'THTR' },
-              { id: 'focus', icon: Maximize, label: 'FOCUS' },
+              { id: "standard", icon: Monitor, label: "STD" },
+              { id: "theater", icon: Layout, label: "THTR" },
+              { id: "focus", icon: Maximize, label: "FOCUS" },
             ].map((mode) => (
               <button
                 key={mode.id}
-                onClick={() => setViewMode(mode.id as 'standard' | 'theater' | 'focus')}
+                onClick={() =>
+                  setViewMode(mode.id as "standard" | "theater" | "focus")
+                }
                 className={cn(
                   "flex items-center gap-2 px-3 py-1.5 transition-all relative group",
-                  viewMode === mode.id 
-                    ? "bg-brand-primary text-black" 
-                    : "text-white/30 hover:text-white hover:bg-white/5"
+                  viewMode === mode.id
+                    ? "bg-brand-primary text-black"
+                    : "text-white/30 hover:text-white hover:bg-white/5",
                 )}
               >
                 <mode.icon size={12} />
-                <span className="text-[9px] font-black uppercase tracking-[0.2em]">{mode.label}</span>
+                <span className="text-[9px] font-black uppercase tracking-[0.2em]">
+                  {mode.label}
+                </span>
                 {viewMode === mode.id && (
                   <div className="absolute -bottom-0.5 left-0 w-full h-[1px] bg-brand-primary shadow-[0_0_100px_#95FF00]" />
                 )}
@@ -169,10 +191,12 @@ export default function LessonView({
         </div>
       </div>
 
-      <div className={cn(
-        "flex flex-col bg-white/10 border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] transition-all duration-300",
-        viewMode === 'standard' ? "lg:flex-row" : "lg:flex-col"
-      )}>
+      <div
+        className={cn(
+          "flex flex-col bg-white/10 border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.5)] transition-all duration-300",
+          viewMode === "standard" ? "lg:flex-row" : "lg:flex-col",
+        )}
+      >
         <div className="aspect-video bg-black relative flex-1">
           {activeVideo ? (
             <iframe
@@ -195,21 +219,30 @@ export default function LessonView({
           )}
         </div>
 
-        {viewMode !== 'focus' && (
-          <div className={cn(
-            "bg-brand-bg flex flex-col overflow-hidden transition-all duration-300",
-            viewMode === 'standard' ? "lg:w-[350px] border-l border-white/5" : "w-full border-t border-white/10"
-          )}>
-            <button 
+        {viewMode !== "focus" && (
+          <div
+            className={cn(
+              "bg-brand-bg flex flex-col overflow-hidden transition-all duration-300",
+              viewMode === "standard"
+                ? "lg:w-[350px] border-l border-white/5"
+                : "w-full border-t border-white/10",
+            )}
+          >
+            <button
               onClick={() => setIsPlaylistCollapsed(!isPlaylistCollapsed)}
               className="p-4 border-b border-white/10 bg-white/5 flex justify-between items-center hover:bg-white/10 transition-colors group/header"
             >
               <div className="flex items-center gap-3">
-                <div className={cn(
-                  "transition-transform duration-300",
-                  isPlaylistCollapsed ? "-rotate-90" : "rotate-0"
-                )}>
-                  <FiChevronDown size={14} className="text-white/40 group-hover/header:text-brand-primary" />
+                <div
+                  className={cn(
+                    "transition-transform duration-300",
+                    isPlaylistCollapsed ? "-rotate-90" : "rotate-0",
+                  )}
+                >
+                  <FiChevronDown
+                    size={14}
+                    className="text-white/40 group-hover/header:text-brand-primary"
+                  />
                 </div>
                 <h3 className="text-[10px] font-black uppercase tracking-widest text-white/60">
                   Workshop Playlist
@@ -220,11 +253,15 @@ export default function LessonView({
                 {lesson.videos.length}
               </span>
             </button>
-            
-            <div className={cn(
-              "flex-1 overflow-y-auto transition-all duration-500 ease-in-out",
-              isPlaylistCollapsed ? "max-h-0 opacity-0 invisible" : "max-h-[1000px] opacity-100 visible"
-            )}>
+
+            <div
+              className={cn(
+                "flex-1 overflow-y-auto transition-all duration-500 ease-in-out",
+                isPlaylistCollapsed
+                  ? "max-h-0 opacity-0 invisible"
+                  : "max-h-[1000px] opacity-100 visible",
+              )}
+            >
               <div className="flex-1 overflow-y-auto max-h-[500px] lg:max-h-none">
                 {lesson.videos.map((v, i) => {
                   const unlocked = isVideoUnlocked(v.id);
@@ -405,7 +442,10 @@ export default function LessonView({
                 onClick={onPrev}
                 className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 bg-white/5 border border-white/10 text-[11px] font-black uppercase tracking-[0.2em] hover:bg-white/10 transition-all text-white/60 group"
               >
-                <FiArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+                <FiArrowLeft
+                  size={16}
+                  className="group-hover:-translate-x-1 transition-transform"
+                />
                 {hasPrevVideo ? "Previous Video" : "Previous Session"}
               </button>
             )}
@@ -415,20 +455,27 @@ export default function LessonView({
                 disabled={isNextDisabled}
                 className={cn(
                   "w-full sm:flex-1 flex items-center justify-center gap-3 px-8 py-4 text-[11px] font-black uppercase tracking-[0.2em] transition-all group",
-                  isNextDisabled 
-                    ? "bg-white/5 border border-white/5 text-white/10 cursor-not-allowed" 
-                    : "bg-brand-primary text-black border-brand-primary hover:scale-[1.01] shadow-[0_0_30px_rgba(149,255,0,0.15)] hover:shadow-[0_0_40px_rgba(149,255,0,0.25)]"
+                  isNextDisabled
+                    ? "bg-white/5 border border-white/5 text-white/10 cursor-not-allowed"
+                    : "bg-brand-primary text-black border-brand-primary hover:scale-[1.01] shadow-[0_0_30px_rgba(149,255,0,0.15)] hover:shadow-[0_0_40px_rgba(149,255,0,0.25)]",
                 )}
               >
                 {isNextDisabled ? (
                   <>
                     <Lock size={14} />
-                    {hasNextVideo ? "Next Video Locked" : "Next Session Locked"}
+                    {isLastLesson
+                      ? "Week Completed — No Next Session"
+                      : hasNextVideo
+                        ? "Next Video Locked"
+                        : "Next Session Locked"}
                   </>
                 ) : (
                   <>
                     {hasNextVideo ? "Next Video" : "Next Session"}
-                    <FiArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                    <FiArrowRight
+                      size={16}
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
                   </>
                 )}
               </button>
