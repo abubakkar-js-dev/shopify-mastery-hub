@@ -1,13 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useAuth } from "../../../context/AuthContext";
 import { useAdmin } from "../../../context/AdminContext";
 import { useLearningData } from "../../../context/LearningDataContext";
-import UserDashboard from "../../../components/UserDashboard";
+import { UserDashboardShell } from "../../../features/dashboard/components/UserDashboardShell";
 
 export default function ProgressPage() {
-  const router = useRouter();
   const { profile } = useAuth();
   const { isAdmin } = useAdmin();
   const { modules, lessons } = useLearningData();
@@ -15,12 +13,11 @@ export default function ProgressPage() {
   if (!profile) return null;
 
   return (
-    <UserDashboard
+    <UserDashboardShell
       profile={profile}
       modules={modules}
       lessons={lessons}
       isAdmin={isAdmin}
-      onClose={() => router.push("/dashboard/modules")}
     />
   );
 }

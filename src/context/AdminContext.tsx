@@ -31,13 +31,20 @@ export function AdminProvider({ children }: { children: ReactNode }) {
         return;
       }
 
-      const isUserAdmin = await adminService.checkAdmin(user.uid, user.email);
-      setIsAdmin(isUserAdmin);
+      try {
+        const isUserAdmin = await adminService.checkAdmin(user.uid, user.email);
+        setIsAdmin(isUserAdmin);
 
-      if (isUserAdmin) {
-        usersUnsub = adminService.syncUsers(setUsers);
-        adminsUnsub = adminService.syncAdmins(setAdmins);
-      } else {
+        if (isUserAdmin) {
+          usersUnsub = adminService.syncUsers(setUsers);
+          adminsUnsub = adminService.syncAdmins(setAdmins);
+        } else {
+          setUsers([]);
+          setAdmins([]);
+        }
+      } catch (error) {
+        console.error("Error during admin setup:", error);
+        setIsAdmin(false);
         setUsers([]);
         setAdmins([]);
       }

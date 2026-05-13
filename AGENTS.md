@@ -10,19 +10,20 @@ Important files today:
 
 - `src/app`: Next.js routes, layouts, API routes, PWA files, and global CSS.
 - `src/components`: shared and page-level UI components.
-- `src/components/admin`: admin-only UI components.
-- `src/context/AppContext.tsx`: global auth, profile, modules, lessons, users, and admin state.
-- `src/data/modules.ts`: initial module and lesson seed data.
+- `src/features/admin/components/`: admin-only UI components (all split into panels now!).
+- `src/features/lessons/components/`: lesson UI components (all split now!).
+- `src/features/lessons/hooks/`: useLessonProgress already exists!
+- `src/features/lessons/utils/`: videoUnlocking.ts already exists!
+- `src/context/`: global state (AppContext.tsx, LearningDataContext.tsx, AdminContext.tsx).
+- `src/features/modules/seed/`: initial module and lesson seed data (split by month).
 - `src/lib`: shared utilities and Firebase setup.
 - `src/services/geminiService.ts`: AI service integration.
 - `src/types.ts`: app-wide types.
 
 The largest scale risks right now are:
 
-- `src/components/AdminDashboard.tsx` is very large and should be split by admin feature.
-- `src/data/modules.ts` is very large and should be treated as seed/content data, not mixed with runtime logic.
-- `src/components/LessonView.tsx` contains video state, progress rules, layout modes, and UI in one file.
-- `src/context/AppContext.tsx` owns too many domains at once: auth, profile, admin state, modules, lessons, and users.
+- `src/components/AdminDashboard.tsx` was split, but maybe need to check if fully migrated.
+- `src/context/AppContext.tsx` still owns multiple domains (auth, profile, users).
 
 ## Recommended Structure
 
@@ -78,6 +79,8 @@ This does not need to happen in one big rewrite. Apply it gradually whenever a f
 
 ## Route-Based Architecture
 
+**(Partially Implemented)**
+
 This project should move away from major view switching controlled only by local component state. Major app sections should be represented by real routes so browser refresh, direct links, and back/forward navigation preserve the current view.
 
 Primary goal:
@@ -95,37 +98,16 @@ Sections that should become dedicated route-based pages:
 - major admin dashboard sub-pages
 - any major section currently controlled by conditional rendering or tab state
 
-Recommended route direction:
+**Already Implemented Routes**:
 
-```txt
-src/app/
-  dashboard/
-    page.tsx
-    modules/
-      page.tsx
-    modules/[moduleId]/
-      page.tsx
-    modules/[moduleId]/lessons/[lessonId]/
-      page.tsx
-    progress/
-      page.tsx
-    account/
-      page.tsx
-  admin/
-    page.tsx
-    users/
-      page.tsx
-    modules/
-      page.tsx
-    modules/[moduleId]/
-      page.tsx
-    lessons/
-      page.tsx
-    ai/
-      page.tsx
-```
-
-The exact route names can change if the existing product language suggests better names, but the principle should stay: if a view should survive refresh, it deserves a route.
+- `/dashboard/progress/`
+- `/dashboard/modules/[moduleId]/`
+- `/dashboard/modules/[moduleId]/lessons/[lessonId]/`
+- `/admin/users/`
+- `/admin/modules/`
+- `/admin/lessons/`
+- `/admin/settings/`
+- `/admin/ai/`
 
 Route refactor rules:
 
@@ -140,23 +122,6 @@ Route refactor rules:
 - Replace tab/state-based major navigation with `Link` navigation and route params.
 - Keep local component state only for temporary UI concerns such as open menus, collapsed panels, form drafts, filters, and modals.
 
-Refresh persistence expectations:
-
-- A student refreshing a lesson URL stays on that lesson.
-- A student refreshing a dashboard sub-page stays on that sub-page.
-- An admin refreshing an admin sub-page stays on that admin page.
-- A copied route URL opens the same major view after auth checks pass.
-- Auth redirects should return users to the intended route when possible.
-
-Implementation guidance:
-
-- Start by mapping each current conditional view to a target route.
-- Move the existing rendered component into the new route without changing its internal behavior.
-- Pass route params such as `moduleId` and `lessonId` into existing components instead of storing the selected lesson only in parent state.
-- Keep compatibility wrappers temporarily if needed, but do not let old state-only routing remain the long-term source of truth.
-- After each route extraction, verify refresh behavior manually for that route.
-- Run lint/build after route migration work.
-
 ## Refactor Priorities
 
 1. Split `AdminDashboard.tsx`
@@ -167,11 +132,12 @@ Create smaller admin feature components, for example:
 - `features/admin/components/UserManagementPanel.tsx`
 - `features/admin/components/ModuleManagementPanel.tsx`
 - `features/admin/components/LessonManagementPanel.tsx`
-- `features/admin/components/AISynthesisLab.tsx`
 - `features/admin/hooks/useAdminUsers.ts`
 - `features/admin/hooks/useAdminContent.ts`
 
 Keep the dashboard shell responsible for layout and tab selection only. Move Firestore operations, filtering, forms, and derived stats into hooks or services.
+
+**Progress**: AISynthesisLab, StatCard, TabButton already moved to `src/features/admin/components/`.
 
 2. Split `LessonView.tsx`
 
@@ -183,9 +149,10 @@ Recommended parts:
 - `features/lessons/components/LessonTaskList.tsx`
 - `features/lessons/components/LessonNavigation.tsx`
 - `features/lessons/hooks/useLessonProgress.ts`
-- `features/lessons/utils/videoUnlocking.ts`
 
 The unlocking rules should live in a utility or hook, not directly inside JSX-heavy UI.
+
+**Progress**: `src/features/lessons/utils/videoUnlocking.ts` already exists.
 
 3. Split global context by responsibility
 
@@ -195,7 +162,7 @@ Avoid one context becoming the whole app store. Prefer:
 - `LearningDataContext`: modules and lessons.
 - `AdminContext`: admin status, users, admins, admin-only collections.
 
-This reduces unnecessary re-renders and makes permissions easier to reason about.
+**Progress**: `LearningDataContext.tsx` already exists.
 
 4. Move Firebase reads/writes into service files
 
@@ -208,22 +175,7 @@ Keep Firebase paths and Firestore calls centralized:
 
 Components and hooks should call these service functions instead of constructing Firestore paths directly.
 
-5. Treat course content as data
-
-Keep seed content separate from logic:
-
-- `features/modules/seed/modules.seed.ts`
-- `features/modules/seed/lessons.seed.ts`
-
-If course content keeps growing, split by module:
-
-```txt
-features/modules/seed/
-  module-01.ts
-  module-02.ts
-  module-03.ts
-  index.ts
-```
+**Progress**: `src/features/admin/services/adminService.ts` and `src/features/modules/services/moduleService.ts` already exist.
 
 ## Code Ownership Rules
 
@@ -365,12 +317,14 @@ If tests are added later, also run the relevant test command.
 
 Do this gradually:
 
-1. Create `features` and `shared` folders.
+1. ~~Create `features` and `shared` folders.~~ **(COMPLETED)**
 2. Move admin dashboard subcomponents first because `AdminDashboard.tsx` is the largest file.
 3. Extract lesson progress and video unlocking logic from `LessonView.tsx`.
+   - ~~videoUnlocking.ts~~ **(COMPLETED)**
 4. Move Firestore calls from contexts/components into services.
 5. Split `AppContext` into auth, learning data, and admin contexts.
-6. Split seed course data by module.
+   - ~~LearningDataContext.tsx~~ **(PARTIALLY COMPLETED)**
+6. ~~Split seed course data by module.~~ **(COMPLETED)**
 7. Add tests around extracted logic before changing behavior.
 
 Avoid large refactors that move everything at once. Small, behavior-preserving moves are safer and easier to review.

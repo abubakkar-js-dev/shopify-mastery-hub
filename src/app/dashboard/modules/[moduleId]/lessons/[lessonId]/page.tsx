@@ -1,11 +1,11 @@
 "use client";
 
-import { use, useState } from "react";
-import { useRouter } from "next/navigation";
+import { use } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useAuth } from "../../../../../../context/AuthContext";
 import { useLearningData } from "../../../../../../context/LearningDataContext";
 import LessonView from "../../../../../../components/LessonView";
-import { lessonService } from "../../../../../../features/lessons/services/lessonService";
+import { useLessonProgress } from "../../../../../../features/lessons/hooks/useLessonProgress";
 import { getLessonNavigationState } from "../../../../../../features/lessons/utils/videoUnlocking";
 
 import { Lesson } from "../../../../../../types";
@@ -19,10 +19,12 @@ type LessonPageProps = {
 
 export default function LessonPage({ params }: LessonPageProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
   const { moduleId, lessonId } = use(params);
   const { user, profile, loading } = useAuth();
   const { modules, lessons } = useLearningData();
-  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+  const { toggleLesson, toggleVideo, toggleTask } = useLessonProgress();
 
   const selectedLesson = lessons.find((lesson) => lesson.id === lessonId);
   const activeModule = modules.find((m) => m.id === moduleId);
@@ -35,7 +37,9 @@ export default function LessonPage({ params }: LessonPageProps) {
     .filter((l) => l.moduleId === activeModule.id)
     .sort((a, b) => a.order - b.order);
 
-  const currentVideoId = activeVideo || selectedLesson.videos[0]?.id || "";
+  const activeVideoId = searchParams.get("v");
+  const currentVideoId = activeVideoId || selectedLesson.videos[0]?.id || "";
+
   const {
     currentVideoIndex,
     hasNextVideo,
@@ -53,15 +57,20 @@ export default function LessonPage({ params }: LessonPageProps) {
     completedLessons: profile.completedLessons || [],
   });
 
+  const updateVideoParam = (videoId: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("v", videoId);
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  };
+
   const openLesson = (lesson: Lesson) => {
     router.push(`/dashboard/modules/${moduleId}/lessons/${lesson.id}`);
-    setActiveVideo(null);
   };
 
   const handleNext = () => {
     if (hasNextVideo) {
       if (isNextVideoUnlocked) {
-        setActiveVideo(selectedLesson.videos[currentVideoIndex + 1].id);
+        updateVideoParam(selectedLesson.videos[currentVideoIndex + 1].id);
       }
     } else if (nextLesson && profile.completedLessons.includes(selectedLesson.id)) {
       openLesson(nextLesson);
@@ -70,22 +79,10 @@ export default function LessonPage({ params }: LessonPageProps) {
 
   const handlePrev = () => {
     if (hasPrevVideo) {
-      setActiveVideo(selectedLesson.videos[currentVideoIndex - 1].id);
+      updateVideoParam(selectedLesson.videos[currentVideoIndex - 1].id);
     } else if (prevLesson) {
       openLesson(prevLesson);
     }
-  };
-
-  const toggleLessonCompletion = async (id: string) => {
-    await lessonService.toggleLessonCompletion(user.uid, profile, id);
-  };
-
-  const toggleVideoCompletion = async (videoId: string) => {
-    await lessonService.toggleVideoCompletion(user.uid, profile, videoId);
-  };
-
-  const toggleTaskCompletion = async (taskId: string) => {
-    await lessonService.toggleTaskCompletion(user.uid, profile, taskId);
   };
 
   return (
@@ -94,16 +91,16 @@ export default function LessonPage({ params }: LessonPageProps) {
       module={activeModule}
       onBack={() => router.push(`/dashboard/modules/${moduleId}`)}
       completedTasks={profile.completedTasks || []}
-      onToggleTask={toggleTaskCompletion}
+      onToggleTask={toggleTask}
       activeVideoId={currentVideoId}
-      onSelectVideo={setActiveVideo}
+      onSelectVideo={updateVideoParam}
       completedVideos={profile.completedVideos || []}
-      onToggleVideo={toggleVideoCompletion}
+      onToggleVideo={toggleVideo}
       onPrev={handlePrev}
       onNext={handleNext}
       isNextDisabled={isNextDisabled}
       isLastLesson={isLastLesson}
-      onToggleLesson={() => toggleLessonCompletion(selectedLesson.id)}
+      onToggleLesson={() => toggleLesson(selectedLesson.id)}
       isLessonCompleted={profile.completedLessons.includes(selectedLesson.id)}
     />
   );

@@ -58,6 +58,25 @@ export const profileService = {
   },
 
   /**
+   * Updates the user's personalized AI training path
+   */
+  async updatePersonalizedPath(uid: string, goals: string[], path: { recommendedModules: string[] }): Promise<void> {
+    try {
+      const docRef = doc(db, "users", uid);
+      await updateDoc(docRef, {
+        personalizedPath: {
+          ...path,
+          goals,
+          lastUpdated: new Date().toISOString(),
+        },
+      });
+    } catch (error) {
+      handleFirestoreError(error as Error, OperationType.UPDATE, `users/${uid}`);
+      throw error;
+    }
+  },
+
+  /**
    * Sets up a real-time snapshot listener for a user's profile
    */
   syncProfile(uid: string, callback: (profile: UserProfile | null) => void): () => void {

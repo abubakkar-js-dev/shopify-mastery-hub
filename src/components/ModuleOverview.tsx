@@ -147,7 +147,7 @@ export default function ModuleOverview({
                         </span>
                       </div>
                       {/* Decorative elements */}
-                      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/5 to-transparent" />
+                      <div className="absolute bottom-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-white/5 to-transparent" />
                     </div>
                   )}
                   <div

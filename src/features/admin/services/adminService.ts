@@ -105,8 +105,8 @@ export const adminService = {
     await setDoc(doc(db, `modules/${lesson.moduleId}/lessons`, lesson.id), lesson);
   },
 
-  async toggleAdmin(uid: string, isAdmin: boolean) {
-    if (isAdmin) {
+  async toggleAdmin(uid: string, shouldBeAdmin: boolean) {
+    if (shouldBeAdmin) {
       await setDoc(doc(db, "admins", uid), { uid, updatedAt: new Date().toISOString() });
     } else {
       await deleteDoc(doc(db, "admins", uid));
@@ -130,12 +130,16 @@ export const adminService = {
   syncUsers(callback: (users: UserProfile[]) => void): () => void {
     return onSnapshot(query(collection(db, "users")), (snapshot) => {
       callback(snapshot.docs.map(d => d.data() as UserProfile));
+    }, (error) => {
+      console.error("Error syncing users:", error);
     });
   },
 
   syncAdmins(callback: (admins: AdminRecord[]) => void): () => void {
     return onSnapshot(query(collection(db, "admins")), (snapshot) => {
       callback(snapshot.docs.map(d => d.data() as AdminRecord));
+    }, (error) => {
+      console.error("Error syncing admins:", error);
     });
   }
 };

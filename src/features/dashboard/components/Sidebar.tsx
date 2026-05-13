@@ -121,35 +121,56 @@ export default function DashboardSidebar({
 
         <nav className="flex-1 overflow-y-auto pt-4 md:pt-6 space-y-1">
           <div className="px-6 md:px-10 mb-8 space-y-3">
-            <Link
-              href="/dashboard/progress"
-              onClick={() => setIsSidebarOpen(false)}
-              className={cn(
-                "w-full flex items-center justify-center gap-3 px-4 py-4 border transition-all group",
-                pathname === "/dashboard/progress"
-                  ? "bg-white/10 border-white/20"
-                  : "bg-white/5 border-white/10 hover:bg-white/10"
-              )}
-            >
-              <FiTrendingUp
-                size={16}
-                className="text-brand-primary group-hover:scale-110 transition-transform"
-              />
-              <span className="text-[11px] font-black uppercase tracking-[0.1em]">
-                Metrics & Analytics
-              </span>
-            </Link>
+            <div className="grid grid-cols-2 gap-3">
+              <Link
+                href="/dashboard/account"
+                onClick={() => setIsSidebarOpen(false)}
+                className={cn(
+                  "flex items-center justify-center gap-2 px-3 py-4 border transition-all group",
+                  pathname === "/dashboard/account"
+                    ? "bg-white/10 border-white/20"
+                    : "bg-white/5 border-white/10 hover:bg-white/10"
+                )}
+              >
+                <UserIcon
+                  size={14}
+                  className="text-brand-primary group-hover:scale-110 transition-transform"
+                />
+                <span className="text-[10px] font-black uppercase tracking-[0.1em] text-center">
+                  Account
+                </span>
+              </Link>
+
+              <Link
+                href="/dashboard/progress"
+                onClick={() => setIsSidebarOpen(false)}
+                className={cn(
+                  "flex items-center justify-center gap-2 px-3 py-4 border transition-all group",
+                  pathname === "/dashboard/progress"
+                    ? "bg-white/10 border-white/20"
+                    : "bg-white/5 border-white/10 hover:bg-white/10"
+                )}
+              >
+                <FiTrendingUp
+                  size={14}
+                  className="text-brand-primary group-hover:scale-110 transition-transform"
+                />
+                <span className="text-[10px] font-black uppercase tracking-[0.1em] text-center">
+                  Metrics
+                </span>
+              </Link>
+            </div>
 
             {isAdmin && (
               <Link
                 href="/admin"
-                className="w-full flex items-center justify-center gap-3 px-4 py-4 bg-brand-primary/10 border border-brand-primary/20 hover:bg-brand-primary/20 transition-all group"
+                className="w-full flex items-center justify-center gap-3 px-4 py-4 bg-brand-primary text-black hover:scale-105 active:scale-95 transition-all group shadow-[0_0_20px_rgba(149,255,0,0.1)]"
               >
                 <ShieldCheck
                   size={16}
-                  className="text-brand-primary group-hover:rotate-12 transition-transform"
+                  className="group-hover:rotate-12 transition-transform"
                 />
-                <span className="text-[11px] font-black uppercase tracking-[0.1em] text-brand-primary">
+                <span className="text-[11px] font-black uppercase tracking-[0.1em]">
                   Admin Dashboard
                 </span>
               </Link>

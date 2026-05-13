@@ -6,9 +6,7 @@ import { LuChevronRight as ChevronRight, LuMenu as Menu, LuSparkles as Sparkles 
 import { useAuth } from "../../../context/AuthContext";
 import { useLearningData } from "../../../context/LearningDataContext";
 import { usePathname } from "next/navigation";
-import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../../lib/firebase";
-import { handleFirestoreError, OperationType } from "../../../lib/firestore-errors";
+import { profileService } from "../../auth/services/profileService";
 import { generatePersonalizedPath } from "../../../services/geminiService";
 
 type DashboardHeaderProps = {
@@ -32,16 +30,10 @@ export default function DashboardHeader({ setIsSidebarOpen }: DashboardHeaderPro
     try {
       const pathValue = await generatePersonalizedPath(goals);
       if (pathValue) {
-        await updateDoc(doc(db, "users", user.uid), {
-          personalizedPath: {
-            ...pathValue,
-            goals,
-            lastUpdated: new Date().toISOString(),
-          },
-        });
+        await profileService.updatePersonalizedPath(user.uid, goals, pathValue);
       }
     } catch (error) {
-      handleFirestoreError(error, OperationType.UPDATE, `users/${user.uid}`);
+      console.error("AI Path Generation Failed:", error);
     }
     setIsGenerating(false);
     setShowPathGenerator(false);
