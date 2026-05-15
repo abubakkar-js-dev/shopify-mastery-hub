@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { FiChevronDown } from "react-icons/fi";
-import { FiCheckCircle as CheckCircle } from "react-icons/fi";
+import { FiCheckCircle as CheckCircle, FiChevronDown } from "react-icons/fi";
 import { LuLock as Lock, LuPlay as Play } from "react-icons/lu";
 import { cn } from "../../../lib/utils";
 import { Lesson, Video } from "../../../types";
@@ -33,7 +32,7 @@ export function LessonPlaylist({
       className={cn(
         "bg-brand-bg flex flex-col overflow-hidden transition-all duration-300",
         viewMode === "standard"
-          ? "lg:w-[350px] border-l border-white/5"
+          ? "lg:w-87.5 border-l border-white/5"
           : "w-full border-t border-white/10",
       )}
     >
@@ -65,13 +64,13 @@ export function LessonPlaylist({
 
       <div
         className={cn(
-          "flex-1 overflow-y-auto transition-all duration-500 ease-in-out",
+          "transition-all duration-500 ease-in-out",
           isPlaylistCollapsed
             ? "max-h-0 opacity-0 invisible"
-            : "max-h-[1000px] opacity-100 visible",
+            : "max-h-82.5 opacity-100 visible",
         )}
       >
-        <div className="flex-1 overflow-y-auto max-h-[500px] lg:max-h-none">
+        <div className="h-full overflow-y-auto max-h-82.5 custom-scrollbar">
           {lesson.videos.map((v, i) => {
             const unlocked = isVideoUnlocked(v.id);
             const completed = isVideoCompleted(v.id);

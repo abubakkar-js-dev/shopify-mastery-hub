@@ -17,7 +17,7 @@ export default function DashboardModulesPage() {
             duration: 2,
             ease: "linear",
           }}
-          className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-brand-primary to-transparent"
+          className="absolute inset-0 w-1/2 bg-linear-to-r from-transparent via-brand-primary to-transparent"
         />
       </div>
       <div className="space-y-2">

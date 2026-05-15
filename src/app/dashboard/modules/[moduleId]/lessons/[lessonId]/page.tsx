@@ -91,6 +91,8 @@ export default function LessonPage() {
     }
   };
 
+  console.log("selectedLesson", selectedLesson);
+
   return (
     <LessonViewShell
       lesson={selectedLesson}
