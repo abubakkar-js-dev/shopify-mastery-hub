@@ -147,11 +147,12 @@ export const adminService = {
     );
   },
 
-  async toggleAdmin(uid: string, shouldBeAdmin: boolean) {
+  async toggleAdmin(uid: string, shouldBeAdmin: boolean, email?: string) {
     if (shouldBeAdmin) {
       await setDoc(doc(db, firestorePaths.admin(uid)), {
         uid,
-        updatedAt: new Date().toISOString(),
+        email: email || "",
+        addedAt: new Date().toISOString(),
       });
     } else {
       await deleteDoc(doc(db, firestorePaths.admin(uid)));
@@ -169,11 +170,20 @@ export const adminService = {
   },
 
   async checkAdmin(uid: string, email?: string | null): Promise<boolean> {
-    const adminDocRef = doc(db, firestorePaths.admin(uid));
-    const adminDoc = await getDoc(adminDocRef);
-    return (
-      adminDoc.exists() || email?.toLowerCase() === "mdabubakkars182@gmail.com"
-    );
+    try {
+      const adminDocRef = doc(db, firestorePaths.admin(uid));
+      const adminDoc = await getDoc(adminDocRef);
+      return (
+        adminDoc.exists() ||
+        email?.toLowerCase() === "mdabubakkars182@gmail.com"
+      );
+    } catch (error) {
+      console.warn(
+        "checkAdmin: Failed to get admin doc, falling back to email check:",
+        error,
+      );
+      return email?.toLowerCase() === "mdabubakkars182@gmail.com";
+    }
   },
 
   syncUsers(callback: (users: UserProfile[]) => void): () => void {

@@ -7,6 +7,9 @@ import {
   FiArrowLeft,
   FiLoader as Loader,
 } from "react-icons/fi";
+import { adminService } from "@/features/admin/services/adminService";
+import { useLearningData } from "@/context/LearningDataContext";
+import toast from "react-hot-toast";
 
 type YouTubeVideo = {
   id: string;
@@ -58,6 +61,7 @@ export default function YouTubeImportPanel() {
   );
   const [aiFallback, setAiFallback] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { modules } = useLearningData();
 
   const handleFetchPlaylist = async () => {
     setLoading(true);
@@ -108,15 +112,42 @@ export default function YouTubeImportPanel() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Failed to generate course");
+        if (!skipAI) {
+          console.warn(
+            "AI enhancement failed, falling back to basic structure:",
+            data.error,
+          );
+          setAiFallback(true);
+          const basicModule = {
+            title: playlist?.title || "Imported Module",
+            description:
+              playlist?.description || "Imported from YouTube playlist",
+            month: 1,
+            order: 0,
+          };
+          const basicLessons = videos.map((video, index) => ({
+            title: video.title,
+            description: video.description || "",
+            difficulty: "Beginner" as const,
+            tasks: [
+              { id: `task-${index}-1`, title: "Watch the video" },
+              { id: `task-${index}-2`, title: "Take notes" },
+            ],
+          }));
+          setGeneratedModule(basicModule);
+          setGeneratedLessons(basicLessons);
+          setStep("review");
+        } else {
+          throw new Error(data.error || "Failed to generate course");
+        }
+      } else {
+        setGeneratedModule(data.module);
+        setGeneratedLessons(data.lessons);
+        if (data.aiFallback) {
+          setAiFallback(true);
+        }
+        setStep("review");
       }
-
-      setGeneratedModule(data.module);
-      setGeneratedLessons(data.lessons);
-      if (data.aiFallback) {
-        setAiFallback(true);
-      }
-      setStep("review");
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
       setStep("preview");
@@ -126,15 +157,67 @@ export default function YouTubeImportPanel() {
   };
 
   const handleSaveToFirebase = async () => {
+    if (
+      !generatedModule ||
+      videos.length === 0 ||
+      generatedLessons.length === 0
+    ) {
+      toast.error("Missing data to save");
+      return;
+    }
+
     setLoading(true);
     setError(null);
     setStep("saving");
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const moduleId = `imported-${Date.now()}`;
+      const maxOrder =
+        modules.length > 0 ? Math.max(...modules.map((m) => m.order)) + 1 : 0;
+
+      const moduleToSave = {
+        id: moduleId,
+        title: generatedModule.title,
+        description: generatedModule.description,
+        order: maxOrder,
+        month: generatedModule.month || 1,
+      };
+
+      await adminService.saveModule(moduleToSave);
+
+      for (let i = 0; i < generatedLessons.length; i++) {
+        const lesson = generatedLessons[i];
+        const video = videos[i];
+        const lessonId = `${moduleId}-lesson-${i}`;
+
+        const lessonToSave = {
+          id: lessonId,
+          moduleId: moduleId,
+          title: lesson.title,
+          description: lesson.description,
+          order: i,
+          difficulty: lesson.difficulty,
+          tasks: lesson.tasks,
+          videos: [
+            {
+              id: `${lessonId}-video-0`,
+              title: video.title,
+              youtubeId: video.id,
+              duration: "0:00",
+              embedUrl: `https://www.youtube.com/embed/${video.id}`,
+            },
+          ],
+        };
+
+        await adminService.saveLesson(lessonToSave);
+      }
+
+      toast.success("Course saved successfully!");
       setStep("success");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
+      console.error("Failed to save course:", err);
+      setError(err instanceof Error ? err.message : "Failed to save course");
+      toast.error("Failed to save course");
       setStep("review");
     } finally {
       setLoading(false);
@@ -169,6 +252,12 @@ export default function YouTubeImportPanel() {
         </p>
       </div>
 
+      {error && step !== "success" && (
+        <div className="bg-red-500/10 border border-red-500/20 p-4">
+          <p className="text-red-400 text-sm">{error}</p>
+        </div>
+      )}
+
       {step === "url" && (
         <div className="bg-white/5 border border-white/10 p-6 space-y-4">
           <div className="space-y-2">
@@ -200,12 +289,6 @@ export default function YouTubeImportPanel() {
               </button>
             </div>
           </div>
-
-          {error && (
-            <div className="bg-red-500/10 border border-red-500/20 p-4">
-              <p className="text-red-400 text-sm">{error}</p>
-            </div>
-          )}
         </div>
       )}
 

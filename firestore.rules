@@ -26,15 +26,24 @@ service cloud.firestore {
       return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
     }
 
-    // User Progress Rules
-    match /users/{userId} {
+    // ✅ User Rules - FIXED
+           match /users/{userId} {
       allow get: if isOwner(userId) || isAdmin();
       allow list: if isAdmin();
       allow create: if isOwner(userId) && isValidUser(request.resource.data);
-      allow update: if (isOwner(userId) && isValidUser(request.resource.data) && (
-        // Allow updating progress and personalized path
-        request.resource.data.diff(resource.data).affectedKeys().hasAny(['completedLessons', 'personalizedPath', 'lastActive', 'displayName'])
-      )) || isAdmin();
+      
+      // ✅ FIX 1: Allow admins to delete user documents
+      allow delete: if isAdmin();
+      
+      // ✅ FIX 2: Let admins bypass field restrictions (so they can update isAdmin, role, etc.)
+      allow update: if isAdmin() || (
+        isOwner(userId) && isValidUser(request.resource.data) && (
+          request.resource.data.diff(resource.data).affectedKeys().hasAny([
+            'completedLessons', 'personalizedPath', 'lastActive', 
+            'displayName', 'completedVideos', 'completedTasks'
+          ])
+        )
+      );
 
       function isValidUser(data) {
         return data.uid == request.auth.uid 
@@ -44,19 +53,21 @@ service cloud.firestore {
       }
     }
 
+    // ✅ Admin Rules - FIXED: Allow admins to promote/demote ANY user
     match /admins/{adminId} {
       allow get: if isSignedIn();
-      allow create: if isOwner(adminId) && request.auth.token.get('email', '').lower() == 'mdabubakkars182@gmail.com';
+      // ✅ FIX: Allow any admin to create admin docs for any user (not just themselves)
+      allow create: if isAdmin();
       allow list, update, delete: if isAdmin();
     }
 
     // Module Rules
     match /modules/{moduleId} {
-      allow read: if true;
+      allow read: if isSignedIn();
       allow write: if isAdmin();
       
       match /lessons/{lessonId} {
-        allow read: if true;
+        allow read: if isSignedIn();
         allow write: if isAdmin();
       }
     }
