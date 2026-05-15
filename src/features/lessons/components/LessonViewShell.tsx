@@ -18,6 +18,7 @@ import {
 import { getLessonVideoState } from "../utils/videoUnlocking";
 import { LessonNavigation } from "./LessonNavigation";
 import { LessonPlaylist } from "./LessonPlaylist";
+import { LessonResources } from "./LessonResources";
 import { LessonTaskList } from "./LessonTaskList";
 import { LessonVideoPlayer } from "./LessonVideoPlayer";
 
@@ -261,6 +262,8 @@ export function LessonViewShell({
             onToggleTask={onToggleTask}
             progressPercent={progressPercent}
           />
+
+          <LessonResources resources={lesson.resources} />
 
           <LessonNavigation
             onNext={onNext}
