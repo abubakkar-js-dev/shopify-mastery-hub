@@ -82,6 +82,7 @@ function extractPlaylistId(url: string): string | null {
   const patterns = [
     /[?&]list=([a-zA-Z0-9_-]+)/,
     /youtube\.com\/playlist\?list=([a-zA-Z0-9_-]+)/,
+    /youtu\.be\/playlist\?list=([a-zA-Z0-9_-]+)/,
   ];
 
   for (const pattern of patterns) {
