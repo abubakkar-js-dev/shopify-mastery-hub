@@ -39,6 +39,7 @@ export const MONTH_1_LESSONS: Lesson[] = [
   // ============================================================
   // WEEK 1: FULL STORE SETUP
   // ============================================================
+
   {
     id: "day-1",
     moduleId: "week-1",
@@ -96,6 +97,25 @@ export const MONTH_1_LESSONS: Lesson[] = [
         youtubeId: "r5pR6s3xCyU",
         duration: "09:50",
       },
+      {
+        id: "d1-v9",
+        title: "Getting Started with the Shopify CLI (Theme Development)",
+        youtubeId: "wX7q29PY2ps",
+        duration: "14:30",
+      },
+      {
+        id: "d1-v10",
+        title:
+          "Shopify Theme Development — Introduction & Local Environment Setup with CLI",
+        youtubeId: "1dznKWXkL3E",
+        duration: "18:45",
+      },
+      {
+        id: "d1-v11",
+        title: "How to Use Shopify CLI 3.x for Theme Development",
+        youtubeId: "keRtZNx_cco",
+        duration: "22:10",
+      },
     ],
     tasks: [
       {
@@ -119,8 +139,45 @@ export const MONTH_1_LESSONS: Lesson[] = [
         title: "Post intro on LinkedIn/X",
       },
     ],
+    resources: [
+      {
+        id: "d1-r1",
+        title: "Shopify Developer Docs — Getting Started Overview",
+        url: "https://shopify.dev/docs/themes/getting-started",
+        type: "docs",
+      },
+      {
+        id: "d1-r2",
+        title: "Shopify CLI — Install & Reference",
+        url: "https://shopify.dev/docs/api/shopify-cli",
+        type: "docs",
+      },
+      {
+        id: "d1-r3",
+        title: "Shopify Liquid VS Code Extension — Official Docs",
+        url: "https://shopify.dev/docs/storefronts/themes/tools/shopify-liquid-vscode",
+        type: "docs",
+      },
+      {
+        id: "d1-r4",
+        title: "Dawn Theme — Official Shopify Reference Theme on GitHub",
+        url: "https://github.com/Shopify/dawn",
+        type: "github",
+      },
+      {
+        id: "d1-r5",
+        title: "Shopify Partner Program — How to Become a Partner",
+        url: "https://www.shopify.com/partners",
+        type: "docs",
+      },
+      {
+        id: "d1-r6",
+        title: "Shopify Academy — Developer Learning Path",
+        url: "https://www.shopifyacademy.com/page/track-developer",
+        type: "blog",
+      },
+    ],
   },
-
   {
     id: "day-2",
     moduleId: "week-1",
@@ -178,6 +235,25 @@ export const MONTH_1_LESSONS: Lesson[] = [
         youtubeId: "6K5g9FbdNIE",
         duration: "10:20",
       },
+      {
+        id: "d2-v9",
+        title: "How to Create Shopify Collections and Display Them in Dawn",
+        youtubeId: "LwQhQwgXnus",
+        duration: "16:00",
+      },
+      {
+        id: "d2-v10",
+        title: "How To Create Collections On Shopify Store Step by Step",
+        youtubeId: "YCEmSQ7gz2g",
+        duration: "11:20",
+      },
+      {
+        id: "d2-v11",
+        title:
+          "Organize Your Products in Shopify — Collections, Subcollections & Subcategories",
+        youtubeId: "CgHWdGrV8S0",
+        duration: "09:45",
+      },
     ],
     tasks: [
       {
@@ -201,8 +277,45 @@ export const MONTH_1_LESSONS: Lesson[] = [
         title: "Install Judge.me, Klaviyo, and an upsell app",
       },
     ],
+    resources: [
+      {
+        id: "d2-r1",
+        title: "Shopify Help — Add and Update Products",
+        url: "https://help.shopify.com/en/manual/products/add-update-products",
+        type: "docs",
+      },
+      {
+        id: "d2-r2",
+        title: "Shopify Help — Create and Manage Collections",
+        url: "https://help.shopify.com/en/manual/products/collections",
+        type: "docs",
+      },
+      {
+        id: "d2-r3",
+        title: "Shopify Help — Setting Up Shipping",
+        url: "https://help.shopify.com/en/manual/shipping",
+        type: "docs",
+      },
+      {
+        id: "d2-r4",
+        title: "Shopify Help — Navigation and Menus",
+        url: "https://help.shopify.com/en/manual/online-store/menus-and-links",
+        type: "docs",
+      },
+      {
+        id: "d2-r5",
+        title: "Shopify Blog — How to Organize Products with Collections",
+        url: "https://www.shopify.com/blog/how-to-organize-your-shopify-products-into-collections",
+        type: "blog",
+      },
+      {
+        id: "d2-r6",
+        title: "Shopify Help — Shopify Payments Setup",
+        url: "https://help.shopify.com/en/manual/payments/shopify-payments/setting-up-shopify-payments",
+        type: "docs",
+      },
+    ],
   },
-
   {
     id: "day-3",
     moduleId: "week-1",
@@ -253,6 +366,25 @@ export const MONTH_1_LESSONS: Lesson[] = [
         youtubeId: "o3lHAe28AEE",
         duration: "09:10",
       },
+      {
+        id: "d3-v8",
+        title:
+          "Shopify Metafields Tutorial For Beginners — Everything You Need to Know",
+        youtubeId: "VghcPn3AzYs",
+        duration: "13:30",
+      },
+      {
+        id: "d3-v9",
+        title: "Shopify 2.0 Metafields Tutorial with Real Store Examples",
+        youtubeId: "Dh7EyD7-o50",
+        duration: "17:40",
+      },
+      {
+        id: "d3-v10",
+        title: "Shopify Checkout Page Customization Step-By-Step",
+        youtubeId: "dkdxHmhHeo8",
+        duration: "12:55",
+      },
     ],
     tasks: [
       {
@@ -272,8 +404,45 @@ export const MONTH_1_LESSONS: Lesson[] = [
         title: "Document architecture decisions in Notion",
       },
     ],
+    resources: [
+      {
+        id: "d3-r1",
+        title: "Shopify Dev — About Metafields (Official Docs)",
+        url: "https://shopify.dev/docs/apps/build/metafields",
+        type: "docs",
+      },
+      {
+        id: "d3-r2",
+        title: "Shopify Dev — Liquid Objects: Metafield Reference",
+        url: "https://shopify.dev/docs/api/liquid/objects/metafield",
+        type: "docs",
+      },
+      {
+        id: "d3-r3",
+        title: "Shopify Help — Place a Test Order",
+        url: "https://help.shopify.com/en/manual/orders/test-orders",
+        type: "docs",
+      },
+      {
+        id: "d3-r4",
+        title: "Shopify Partners Blog — How to Work with Metafields in Themes",
+        url: "https://www.shopify.com/partners/blog/metafields",
+        type: "blog",
+      },
+      {
+        id: "d3-r5",
+        title: "Shopify Dev — Metafield Types Reference",
+        url: "https://shopify.dev/docs/apps/build/metafields/types",
+        type: "reference",
+      },
+      {
+        id: "d3-r6",
+        title: "Shopify Help — SEO Best Practices for Your Store",
+        url: "https://help.shopify.com/en/manual/promoting-marketing/seo",
+        type: "docs",
+      },
+    ],
   },
-
   {
     id: "day-4",
     moduleId: "week-1",
@@ -325,6 +494,26 @@ export const MONTH_1_LESSONS: Lesson[] = [
         youtubeId: "MBFmHMRnJxg",
         duration: "12:10",
       },
+      {
+        id: "d4-v8",
+        title:
+          "Shopify Theme Customization Full Course 2024 — Step by Step for Beginners",
+        youtubeId: "GSAzs6OMufI",
+        duration: "28:15",
+      },
+      {
+        id: "d4-v9",
+        title: "Shopify Liquid in 2 Minutes — Objects, Tags & Filters",
+        youtubeId: "lUdyX2gycZs",
+        duration: "02:15",
+      },
+      {
+        id: "d4-v10",
+        title:
+          "Tags, Objects and Filters — Shopify Liquid Tutorial for Beginners",
+        youtubeId: "tOGzml44rqg",
+        duration: "11:50",
+      },
     ],
     tasks: [
       {
@@ -344,8 +533,45 @@ export const MONTH_1_LESSONS: Lesson[] = [
         title: "First Liquid touch: Locate product.liquid and read variables",
       },
     ],
+    resources: [
+      {
+        id: "d4-r1",
+        title: "Shopify Dev — Liquid Reference (Objects, Tags & Filters)",
+        url: "https://shopify.dev/docs/api/liquid",
+        type: "docs",
+      },
+      {
+        id: "d4-r2",
+        title: "Shopify Dev — Theme Architecture Overview",
+        url: "https://shopify.dev/docs/storefronts/themes/architecture",
+        type: "docs",
+      },
+      {
+        id: "d4-r3",
+        title: "Shopify Dev — Settings Schema Reference",
+        url: "https://shopify.dev/docs/storefronts/themes/architecture/settings",
+        type: "docs",
+      },
+      {
+        id: "d4-r4",
+        title: "Shopify Dev — Product Object in Liquid",
+        url: "https://shopify.dev/docs/api/liquid/objects/product",
+        type: "reference",
+      },
+      {
+        id: "d4-r5",
+        title: "Shopify Partners Blog — Mastering Liquid for Theme Development",
+        url: "https://www.shopify.com/partners/blog/liquid",
+        type: "blog",
+      },
+      {
+        id: "d4-r6",
+        title: "Google PageSpeed Insights — Test Your Store",
+        url: "https://pagespeed.web.dev",
+        type: "tool",
+      },
+    ],
   },
-
   {
     id: "day-5",
     moduleId: "week-1",
@@ -396,6 +622,20 @@ export const MONTH_1_LESSONS: Lesson[] = [
         youtubeId: "FD3SACvBc38",
         duration: "14:15",
       },
+      {
+        id: "d5-v8",
+        title:
+          "Faster Loading & Better SEO — Shopify Image Optimization Deep Dive",
+        youtubeId: "J3IrezcygIA",
+        duration: "16:30",
+      },
+      {
+        id: "d5-v9",
+        title:
+          "Shopify Speed Optimization — Fix Slow Loading, Improve SEO & Pass Core Web Vitals",
+        youtubeId: "IPLPb1Bd_oE",
+        duration: "21:40",
+      },
     ],
     tasks: [
       {
@@ -415,8 +655,47 @@ export const MONTH_1_LESSONS: Lesson[] = [
         title: "Analyze competitive stores in your niche",
       },
     ],
+    resources: [
+      {
+        id: "d5-r1",
+        title:
+          "Shopify Dev — Optimize Theme Images (image_url & image_tag filters)",
+        url: "https://shopify.dev/docs/storefronts/themes/best-practices/images",
+        type: "docs",
+      },
+      {
+        id: "d5-r2",
+        title: "Shopify Dev — Theme Performance Best Practices",
+        url: "https://shopify.dev/docs/storefronts/themes/best-practices/performance",
+        type: "docs",
+      },
+      {
+        id: "d5-r3",
+        title: "TinyPNG — Image Compression Tool",
+        url: "https://tinypng.com",
+        type: "tool",
+      },
+      {
+        id: "d5-r4",
+        title: "Google PageSpeed Insights — Run Your Store Audit",
+        url: "https://pagespeed.web.dev",
+        type: "tool",
+      },
+      {
+        id: "d5-r5",
+        title:
+          "Smashing Magazine — Mobile-First Design Strategies for eCommerce",
+        url: "https://www.smashingmagazine.com/2022/03/guide-mobile-ecommerce-ux/",
+        type: "blog",
+      },
+      {
+        id: "d5-r6",
+        title: "Shopify Help — Optimizing Your Store for Performance",
+        url: "https://help.shopify.com/en/manual/online-store/web-performance",
+        type: "docs",
+      },
+    ],
   },
-
   {
     id: "day-6",
     moduleId: "week-1",
@@ -444,8 +723,45 @@ export const MONTH_1_LESSONS: Lesson[] = [
         title: "Reach out to 3 local businesses on LinkedIn",
       },
     ],
+    resources: [
+      {
+        id: "d6-r1",
+        title: "Loom — Free Screen Recorder for Walkthroughs",
+        url: "https://www.loom.com",
+        type: "tool",
+      },
+      {
+        id: "d6-r2",
+        title: "OBS Studio — Free Open Source Screen Recording",
+        url: "https://obsproject.com",
+        type: "tool",
+      },
+      {
+        id: "d6-r3",
+        title: "Shopify Partners Blog — How to Write a Great Case Study",
+        url: "https://www.shopify.com/partners/blog/case-study",
+        type: "blog",
+      },
+      {
+        id: "d6-r4",
+        title: "Notion — Free Workspace for Case Studies & Portfolio Tracking",
+        url: "https://www.notion.so",
+        type: "tool",
+      },
+      {
+        id: "d6-r5",
+        title: "Shopify Help — Understanding Your Store's Admin Overview",
+        url: "https://help.shopify.com/en/manual/shopify-admin",
+        type: "docs",
+      },
+      {
+        id: "d6-r6",
+        title: "Smashing Magazine — Writing Compelling Developer Case Studies",
+        url: "https://www.smashingmagazine.com/2023/04/portfolio-case-studies-ux-designers/",
+        type: "blog",
+      },
+    ],
   },
-
   {
     id: "day-7",
     moduleId: "week-1",
@@ -473,11 +789,51 @@ export const MONTH_1_LESSONS: Lesson[] = [
         title: "Apply to 3-5 small Upwork/Fiverr gigs",
       },
     ],
+    resources: [
+      {
+        id: "d7-r1",
+        title:
+          "Shopify Partners Blog — How to Find Your First Client as a Shopify Developer",
+        url: "https://www.shopify.com/partners/blog/shopify-developer",
+        type: "blog",
+      },
+      {
+        id: "d7-r2",
+        title: "Upwork — Shopify Developer Gigs Marketplace",
+        url: "https://www.upwork.com/freelance-jobs/shopify/",
+        type: "community",
+      },
+      {
+        id: "d7-r3",
+        title: "Shopify Community — Developers & Partners Forum",
+        url: "https://community.shopify.com/c/shopify-apis-and-sdks/bd-p/shopify-apis-and-technology",
+        type: "community",
+      },
+      {
+        id: "d7-r4",
+        title: "Shopify Help — Shopify Partner Revenue Share Program",
+        url: "https://help.shopify.com/en/partners/getting-started/partner-revenue",
+        type: "docs",
+      },
+      {
+        id: "d7-r5",
+        title: "Dev.to — Shopify Developers Tag (Weekly Articles & Tips)",
+        url: "https://dev.to/t/shopify",
+        type: "community",
+      },
+      {
+        id: "d7-r6",
+        title: "Smashing Magazine — Building a Freelance Developer Portfolio",
+        url: "https://www.smashingmagazine.com/2022/05/developer-portfolio-case-studies/",
+        type: "blog",
+      },
+    ],
   },
 
   // ============================================================
   // WEEK 2: THEME CUSTOMIZATION
   // ============================================================
+
   {
     id: "day-8",
     moduleId: "week-2",
@@ -489,33 +845,49 @@ export const MONTH_1_LESSONS: Lesson[] = [
     videos: [
       {
         id: "d8-v1",
-        title: "Shopify Dawn Theme — Complete Overview 2024",
-        youtubeId: "yelJTyI-5gU",
+        title: "Shopify Dawn Theme Customization 2024 — Full Tutorial",
+        youtubeId: "wSiBxn7-sxE",
         duration: "18:00",
       },
       {
         id: "d8-v2",
-        title: "Shopify Horizon Theme — New Block-Based Architecture",
-        youtubeId: "5hAi2yTjxjk",
+        title:
+          "The NEW Shopify Horizon Theme & AI Theme Blocks — Developer Analysis",
+        youtubeId: "PBnQeTjOggM",
         duration: "14:30",
       },
       {
         id: "d8-v3",
-        title: "How to Duplicate and Rename a Shopify Theme",
-        youtubeId: "x7WXg6DKUHU",
-        duration: "05:50",
+        title: "Shopify Horizon Theme Tutorial 2025 — Step by Step",
+        youtubeId: "E8oftst3e94",
+        duration: "18:45",
       },
       {
         id: "d8-v4",
-        title: "Shopify Theme File Structure Explained",
-        youtubeId: "3WuI5_T3S-A",
+        title:
+          "Understanding Shopify Theme File Structure, Custom Layouts & Intro to Liquid",
+        youtubeId: "X_CjXF3Va1A",
         duration: "16:20",
       },
       {
         id: "d8-v5",
-        title: "Shopify Sections & Blocks — How They Work",
-        youtubeId: "Oc9zCbsN5Q4",
+        title:
+          "How to Use Shopify Horizon Theme Blocks to Build Custom Sections",
+        youtubeId: "fzHtCIqS-VI",
         duration: "13:10",
+      },
+      {
+        id: "d8-v6",
+        title:
+          "Shopify Dawn Theme Tutorial 2025 — Personalize Dawn Step by Step",
+        youtubeId: "IlXGpMl0oyc",
+        duration: "22:30",
+      },
+      {
+        id: "d8-v7",
+        title: "Shopify Horizon Theme Customization — Complete Guide",
+        youtubeId: "2cuQsy414oM",
+        duration: "19:50",
       },
     ],
     tasks: [
@@ -536,8 +908,46 @@ export const MONTH_1_LESSONS: Lesson[] = [
         title: "Map theme folder structure in Notion",
       },
     ],
+    resources: [
+      {
+        id: "d8-r1",
+        title: "Shopify Dev — Theme Architecture Overview (Official Docs)",
+        url: "https://shopify.dev/docs/storefronts/themes/architecture",
+        type: "docs",
+      },
+      {
+        id: "d8-r2",
+        title: "Shopify Dev — Sections & Blocks Reference",
+        url: "https://shopify.dev/docs/storefronts/themes/architecture/sections",
+        type: "docs",
+      },
+      {
+        id: "d8-r3",
+        title: "Shopify Dev — Theme Blocks (Full Reference)",
+        url: "https://shopify.dev/docs/storefronts/themes/architecture/blocks/theme-blocks",
+        type: "docs",
+      },
+      {
+        id: "d8-r4",
+        title: "Dawn — Official Shopify Reference Theme on GitHub",
+        url: "https://github.com/Shopify/dawn",
+        type: "github",
+      },
+      {
+        id: "d8-r5",
+        title: "Horizon — Official Shopify Theme on GitHub",
+        url: "https://github.com/Shopify/horizon",
+        type: "github",
+      },
+      {
+        id: "d8-r6",
+        title:
+          "Shopify Partners Blog — Introducing Theme Blocks in Developer Preview",
+        url: "https://www.shopify.com/partners/blog/themeblocks",
+        type: "blog",
+      },
+    ],
   },
-
   {
     id: "day-9",
     moduleId: "week-2",
@@ -584,7 +994,7 @@ export const MONTH_1_LESSONS: Lesson[] = [
       },
       {
         id: "d9-v7",
-        title: "Shopify Theme Editor — Spacing & Layout Controls",
+        title: "How to Customize Your Shopify Theme Without Code",
         youtubeId: "YTobKoB4438",
         duration: "10:45",
       },
@@ -603,8 +1013,47 @@ export const MONTH_1_LESSONS: Lesson[] = [
         title: "Add promotional banners and trust rows",
       },
     ],
+    resources: [
+      {
+        id: "d9-r1",
+        title: "Shopify Dev — Theme Settings Schema (fonts, colors, spacing)",
+        url: "https://shopify.dev/docs/storefronts/themes/architecture/settings/input-settings",
+        type: "docs",
+      },
+      {
+        id: "d9-r2",
+        title: "Shopify Dev — Font Object in Liquid",
+        url: "https://shopify.dev/docs/api/liquid/objects/font",
+        type: "docs",
+      },
+      {
+        id: "d9-r3",
+        title: "Google Fonts — Free Typeface Pairs for Web",
+        url: "https://fonts.google.com",
+        type: "tool",
+      },
+      {
+        id: "d9-r4",
+        title: "Coolors — Color Palette Generator",
+        url: "https://coolors.co",
+        type: "tool",
+      },
+      {
+        id: "d9-r5",
+        title:
+          "Smashing Magazine — Better Typography on the Web: Typographic Scales",
+        url: "https://www.smashingmagazine.com/2014/09/balancing-line-length-font-size-responsive-web-design/",
+        type: "blog",
+      },
+      {
+        id: "d9-r6",
+        title:
+          "Shopify Partners Blog — How to Create a Color Scheme for eCommerce",
+        url: "https://www.shopify.com/partners/blog/color-scheme",
+        type: "blog",
+      },
+    ],
   },
-
   {
     id: "day-10",
     moduleId: "week-2",
@@ -615,44 +1064,47 @@ export const MONTH_1_LESSONS: Lesson[] = [
     videos: [
       {
         id: "d10-v1",
-        title: "Shopify Liquid Objects, Filters & Variables (Full Course Ep.2)",
+        title: "Shopify Liquid Objects, Filters & Variables — Full Course Ep.2",
         youtubeId: "nM4anis2odE",
         duration: "20:10",
       },
       {
         id: "d10-v2",
-        title: "Shopify Theme Development – Liquid Full Tutorial",
+        title: "Shopify Theme Development — Liquid Full Tutorial",
         youtubeId: "Oc9zCbsN5Q4",
         duration: "15:45",
       },
       {
         id: "d10-v3",
-        title: "Shopify Liquid – Top Tips & Tricks (2024)",
-        youtubeId: "9UfGdd9blTE",
-        duration: "12:20",
-      },
-      {
-        id: "d10-v4",
-        title: "Shopify Liquid – New Array Filters Explained (2025)",
+        title: "Shopify Liquid — New Array Filters Explained (2025)",
         youtubeId: "7MxeawRnHFY",
         duration: "10:00",
       },
       {
+        id: "d10-v4",
+        title:
+          "Shopify Liquid in 2 Minutes — Objects, Tags & Filters (ShopifyDevs)",
+        youtubeId: "lUdyX2gycZs",
+        duration: "02:15",
+      },
+      {
         id: "d10-v5",
-        title: "Getting Started with Shopify Liquid",
-        youtubeId: "QTtXmARDG-Y",
-        duration: "14:00",
+        title:
+          "Tags, Objects and Filters — Shopify Liquid Tutorial for Beginners",
+        youtubeId: "tOGzml44rqg",
+        duration: "11:50",
       },
       {
         id: "d10-v6",
-        title: "Liquid Filters — money, upcase, img_url & more",
-        youtubeId: "RzWzM9LuQHE",
+        title: "Shopify Liquid — Top Tips & Tricks for Theme Developers",
+        youtubeId: "9UfGdd9blTE",
         duration: "09:30",
       },
       {
         id: "d10-v7",
-        title: "Shopify Product Object — All Properties Explained",
-        youtubeId: "bhAMaeePmsQ",
+        title:
+          "Shopify Liquid Update — New Find, Find_Index, Has & Reject Filters",
+        youtubeId: "ORlrp_1xvuY",
         duration: "11:50",
       },
     ],
@@ -670,8 +1122,46 @@ export const MONTH_1_LESSONS: Lesson[] = [
         title: "Download Liquid Cheat Sheet",
       },
     ],
+    resources: [
+      {
+        id: "d10-r1",
+        title: "Shopify Dev — Liquid Filters Reference (Complete List)",
+        url: "https://shopify.dev/docs/api/liquid/filters",
+        type: "docs",
+      },
+      {
+        id: "d10-r2",
+        title: "Shopify Dev — Liquid Objects Reference",
+        url: "https://shopify.dev/docs/api/liquid/objects",
+        type: "docs",
+      },
+      {
+        id: "d10-r3",
+        title: "Shopify Dev — Product Object Properties",
+        url: "https://shopify.dev/docs/api/liquid/objects/product",
+        type: "reference",
+      },
+      {
+        id: "d10-r4",
+        title: "Shopify Liquid Cheat Sheet — All Tags, Filters & Objects",
+        url: "https://www.shopify.com/partners/shopify-cheat-sheet",
+        type: "reference",
+      },
+      {
+        id: "d10-r5",
+        title: "Dev.to — Shopify Liquid Tips & Tricks for Theme Developers",
+        url: "https://dev.to/t/shopify",
+        type: "community",
+      },
+      {
+        id: "d10-r6",
+        title:
+          "Shopify Dev — Liquid Basics (Operators, Truthy/Falsy, Whitespace)",
+        url: "https://shopify.dev/docs/api/liquid/basics",
+        type: "docs",
+      },
+    ],
   },
-
   {
     id: "day-11",
     moduleId: "week-2",
@@ -682,44 +1172,48 @@ export const MONTH_1_LESSONS: Lesson[] = [
     videos: [
       {
         id: "d11-v1",
-        title: "Shopify Liquid For Loop Tutorial (in 3 Minutes!)",
+        title:
+          "Shopify Liquid For Loop Tutorial (in 3 Minutes!) + forloop Object Explained",
         youtubeId: "wF6CpVcUfoM",
         duration: "03:00",
       },
       {
         id: "d11-v2",
-        title: "Advanced Shopify Liquid For Loops – limit, offset, range",
+        title:
+          "Advanced Shopify Liquid For Loops — limit, offset, range, reversed Explained",
         youtubeId: "6eUFDtg_V9k",
         duration: "14:30",
       },
       {
         id: "d11-v3",
-        title: "How to Use If Statements in Shopify Liquid (Conditional Logic)",
+        title:
+          "How to Use if Statements in Shopify Liquid — Conditional Logic Tutorial",
         youtubeId: "NR8y9t7KnM8",
         duration: "16:15",
       },
       {
         id: "d11-v4",
-        title: "Shopify Liquid Conditionals – Full Course",
+        title: "Shopify Liquid Conditionals — Liquid Full Course",
         youtubeId: "0aPIc4-8xXs",
         duration: "12:00",
       },
       {
         id: "d11-v5",
         title: "Learn Shopify Liquid For Loop and Conditional CSS",
-        youtubeId: "QkE1JklzMjw",
+        youtubeId: "cE80q0roQUI",
         duration: "15:00",
       },
       {
         id: "d11-v6",
-        title: "Shopify Liquid — unless, case, when Tags Explained",
-        youtubeId: "6eUFDtg_V9k",
-        duration: "08:40",
+        title:
+          "Shopify Liquid For Loop Tricks — break, continue, cycle, else Explained",
+        youtubeId: "drk8bYslXo0",
+        duration: "12:40",
       },
       {
         id: "d11-v7",
-        title: "Building Dynamic Sold Out Badges with Liquid",
-        youtubeId: "Af8F29zSAn8",
+        title: "Shopify Liquid Tutorial — Conditional Theme Settings",
+        youtubeId: "MACgGUEOPSg",
         duration: "10:20",
       },
     ],
@@ -737,8 +1231,46 @@ export const MONTH_1_LESSONS: Lesson[] = [
         title: 'Add conditional "Sold Out" badges',
       },
     ],
+    resources: [
+      {
+        id: "d11-r1",
+        title: "Shopify Dev — Liquid Tags: for Loop",
+        url: "https://shopify.dev/docs/api/liquid/tags/for",
+        type: "docs",
+      },
+      {
+        id: "d11-r2",
+        title: "Shopify Dev — Liquid Tags: if / elsif / else",
+        url: "https://shopify.dev/docs/api/liquid/tags/if",
+        type: "docs",
+      },
+      {
+        id: "d11-r3",
+        title: "Shopify Dev — Liquid Basics: Control Flow",
+        url: "https://shopify.dev/docs/api/liquid/basics",
+        type: "docs",
+      },
+      {
+        id: "d11-r4",
+        title: "Shopify Dev — forloop Object Reference",
+        url: "https://shopify.dev/docs/api/liquid/objects/forloop",
+        type: "reference",
+      },
+      {
+        id: "d11-r5",
+        title: "Liquid Template Language — Control Flow (unless, case, when)",
+        url: "https://shopify.github.io/liquid/tags/control-flow/",
+        type: "reference",
+      },
+      {
+        id: "d11-r6",
+        title:
+          "Shopify Community — Liquid Conditionals & Loop Tips (Forum Thread)",
+        url: "https://community.shopify.com/c/shopify-apis-and-sdks/bd-p/shopify-apis-and-technology",
+        type: "community",
+      },
+    ],
   },
-
   {
     id: "day-12",
     moduleId: "week-2",
@@ -749,45 +1281,48 @@ export const MONTH_1_LESSONS: Lesson[] = [
     videos: [
       {
         id: "d12-v1",
-        title: "Shopify AJAX Cart API – Crash Course Tutorial",
+        title: "Shopify AJAX Cart — Crash Course Tutorial",
         youtubeId: "pdQCyUWFIcY",
         duration: "22:15",
       },
       {
         id: "d12-v2",
-        title: "Shopify Liquid – Ajax API Deep Dive (2025)",
-        youtubeId: "pde0Lzf0A_w",
+        title: "Creating a Shopify AJAX Cart Drawer from Scratch",
+        youtubeId: "gKXGjvl8Alc",
         duration: "18:40",
       },
       {
         id: "d12-v3",
-        title: "How To Add Sticky Add To Cart (Without App) – 2024",
+        title: "How To Add Sticky Add To Cart — Without APP (Shopify 2024)",
         youtubeId: "xdKrGL9X2Zo",
         duration: "12:50",
       },
       {
         id: "d12-v4",
-        title: "How to Add a Sticky Add to Cart in Shopify (2025)",
-        youtubeId: "qJP0EExF1a0",
+        title:
+          "How to Add Sticky Add to Cart Button on Shopify Dawn Theme — Without App",
+        youtubeId: "ATYy5Yg6TqM",
         duration: "11:00",
       },
       {
         id: "d12-v5",
-        title: "Shopify Liquid – Using JavaScript & the Section Rendering API",
-        youtubeId: "3WuI5_T3S-A",
+        title:
+          "Shopify Section Rendering API — Update Sections Without Page Reload",
+        youtubeId: "s1khSuOyAUA",
         duration: "15:00",
       },
       {
         id: "d12-v6",
-        title: "Shopify Cart API — add.js, change.js, update.js Explained",
-        youtubeId: "pdQCyUWFIcY",
+        title:
+          "Shopify Section Rendering API — Update a Section Without Page Refresh",
+        youtubeId: "LtogqzYUrPU",
         duration: "13:30",
       },
       {
         id: "d12-v7",
-        title: "Building a Cart Drawer from Scratch in Shopify",
-        youtubeId: "pde0Lzf0A_w",
-        duration: "20:00",
+        title: "Shopify Ajax add to cart Tutorial — Theme Development",
+        youtubeId: "VON2KS1b-ck",
+        duration: "19:20",
       },
     ],
     tasks: [
@@ -804,8 +1339,47 @@ export const MONTH_1_LESSONS: Lesson[] = [
         title: "Test thoroughly on mobile devices",
       },
     ],
+    resources: [
+      {
+        id: "d12-r1",
+        title: "Shopify Dev — AJAX API Reference (Cart Endpoints)",
+        url: "https://shopify.dev/docs/api/ajax/reference/cart",
+        type: "docs",
+      },
+      {
+        id: "d12-r2",
+        title: "Shopify Dev — Section Rendering API",
+        url: "https://shopify.dev/docs/api/section-rendering",
+        type: "docs",
+      },
+      {
+        id: "d12-r3",
+        title: "Shopify Dev — Cart Object in Liquid",
+        url: "https://shopify.dev/docs/api/liquid/objects/cart",
+        type: "reference",
+      },
+      {
+        id: "d12-r4",
+        title:
+          "Shopify Dev — Build Cart Interactions (add.js, change.js, update.js)",
+        url: "https://shopify.dev/docs/storefronts/themes/build/cart",
+        type: "docs",
+      },
+      {
+        id: "d12-r5",
+        title:
+          "Shopify Partners Blog — How to Build an Interactive Cart with the AJAX API",
+        url: "https://www.shopify.com/partners/blog/cart-drawer",
+        type: "blog",
+      },
+      {
+        id: "d12-r6",
+        title: "Liquid Ajax Cart — Open Source JS Library for AJAX Carts",
+        url: "https://liquid-ajax-cart.js.org",
+        type: "github",
+      },
+    ],
   },
-
   {
     id: "day-13",
     moduleId: "week-2",
@@ -816,39 +1390,41 @@ export const MONTH_1_LESSONS: Lesson[] = [
     videos: [
       {
         id: "d13-v1",
-        title: "Shopify Color Swatches – Set Up on Any Theme for FREE (2025)",
+        title: "Shopify Color Swatches — Set Up on Any Theme for FREE (2025)",
         youtubeId: "vk8KUZN0hrI",
         duration: "14:00",
       },
       {
         id: "d13-v2",
         title:
-          "Shopify Liquid Variants Loop – Display Unique Data & Create Swatches",
-        youtubeId: "Af8F29zSAn8",
+          "Shopify Development — Color Swatches to Product Page (Variant Switch Explained)",
+        youtubeId: "JmyQNJTt4gQ",
         duration: "16:00",
       },
       {
         id: "d13-v3",
-        title: "Shopify Liquid – Product Recommendations Section",
+        title: "Shopify Liquid Tutorial — Product Recommendations Section",
         youtubeId: "Kw-FhRUoSLM",
         duration: "18:00",
       },
       {
         id: "d13-v4",
-        title: "How To Create Product Recommendations Block – Dawn Theme 2024",
-        youtubeId: "q1bJikwMQoA",
-        duration: "12:00",
+        title:
+          "How to Add Shopify Color Swatches to Product & Collection Page — No App (Dawn)",
+        youtubeId: "lPMK2S_vS1Y",
+        duration: "15:30",
       },
       {
         id: "d13-v5",
-        title: "Shopify Variant Selector — Custom Radio Buttons with CSS",
-        youtubeId: "vk8KUZN0hrI",
+        title:
+          "How To Add Shopify Color Swatches on Product Page 2024 — For Beginners",
+        youtubeId: "O8ATLVw4akg",
         duration: "11:40",
       },
       {
         id: "d13-v6",
-        title: "Adding Quick View Modal to Shopify Without App",
-        youtubeId: "Kw-FhRUoSLM",
+        title: "Build a Product Modal Using the Shopify Section Rendering API",
+        youtubeId: "cT7hF1Yf0wE",
         duration: "16:30",
       },
     ],
@@ -866,8 +1442,46 @@ export const MONTH_1_LESSONS: Lesson[] = [
         title: "Improve product page trust icons",
       },
     ],
+    resources: [
+      {
+        id: "d13-r1",
+        title: "Shopify Dev — Variant Object in Liquid",
+        url: "https://shopify.dev/docs/api/liquid/objects/variant",
+        type: "docs",
+      },
+      {
+        id: "d13-r2",
+        title: "Shopify Dev — Product Recommendations (Liquid Object)",
+        url: "https://shopify.dev/docs/api/liquid/objects/recommendations",
+        type: "docs",
+      },
+      {
+        id: "d13-r3",
+        title: "Shopify Dev — Show Product Recommendations in a Theme",
+        url: "https://shopify.dev/docs/storefronts/themes/product-merchandising/recommendations/show-product-recommendations",
+        type: "docs",
+      },
+      {
+        id: "d13-r4",
+        title:
+          "Shopify Partners Blog — How to Build a Related Products Section",
+        url: "https://www.shopify.com/partners/blog/related-products",
+        type: "blog",
+      },
+      {
+        id: "d13-r5",
+        title: "Shopify Dev — Product Recommendations AJAX API Reference",
+        url: "https://shopify.dev/docs/api/ajax/reference/product-recommendations",
+        type: "reference",
+      },
+      {
+        id: "d13-r6",
+        title: "Shopify Help — Set Up Product Variants",
+        url: "https://help.shopify.com/en/manual/products/variants",
+        type: "docs",
+      },
+    ],
   },
-
   {
     id: "day-14",
     moduleId: "week-2",
@@ -890,748 +1504,1370 @@ export const MONTH_1_LESSONS: Lesson[] = [
         title: "Message 3-5 store owners with feedback",
       },
     ],
+    resources: [
+      {
+        id: "d14-r1",
+        title:
+          "Shopify Partners Blog — How to Write a Shopify Developer Case Study",
+        url: "https://www.shopify.com/partners/blog/case-study",
+        type: "blog",
+      },
+      {
+        id: "d14-r2",
+        title: "Shopify Dev — Changelog (Stay Current with New Features)",
+        url: "https://shopify.dev/changelog",
+        type: "docs",
+      },
+      {
+        id: "d14-r3",
+        title: "Shopify Community — Liquid & Theme Developer Forum",
+        url: "https://community.shopify.com/c/shopify-apis-and-sdks/bd-p/shopify-apis-and-technology",
+        type: "community",
+      },
+      {
+        id: "d14-r4",
+        title: "Upwork — Shopify Developer Freelance Jobs",
+        url: "https://www.upwork.com/freelance-jobs/shopify/",
+        type: "community",
+      },
+      {
+        id: "d14-r5",
+        title:
+          "Smashing Magazine — Writing a Strong Developer Portfolio Case Study",
+        url: "https://www.smashingmagazine.com/2022/05/developer-portfolio-case-studies/",
+        type: "blog",
+      },
+      {
+        id: "d14-r6",
+        title: "Dev.to — Shopify Tag (Weekly Developer Articles & Community)",
+        url: "https://dev.to/t/shopify",
+        type: "community",
+      },
+    ],
   },
 
   // ============================================================
   // WEEK 3: NO-CODE PROWESS
   // ============================================================
-  {
-    id: "day-15",
-    moduleId: "week-3",
-    title: "Day 15: Product Landing Page Strategy",
-    description: "Research and plan high-converting product pages.",
-    order: 1,
-    difficulty: "Intermediate",
-    videos: [
-      {
-        id: "d15-v1",
-        title: "Conversion Rate Optimization Intro",
-        youtubeId: "kSUpDkS63tM",
-        duration: "15:10",
-      },
-      {
-        id: "d15-v2",
-        title: "Lander Architecture & Flow",
-        youtubeId: "v8wR6w77464",
-        duration: "12:45",
-      },
-      {
-        id: "d15-v3",
-        title: "Competitive Research Framework",
-        youtubeId: "P79K7mDPu_0",
-        duration: "10:30",
-      },
-      {
-        id: "d15-v4",
-        title: "Above the Fold Design — What Really Converts",
-        youtubeId: "fX7WpAAb5S8",
-        duration: "13:20",
-      },
-      {
-        id: "d15-v5",
-        title: "Psychology of High-Converting Landing Pages",
-        youtubeId: "zLpOfMha7Kk",
-        duration: "11:00",
-      },
-      {
-        id: "d15-v6",
-        title: "How to Wireframe a Shopify Landing Page in Figma",
-        youtubeId: "v8wR6w77464",
-        duration: "09:40",
-      },
-    ],
-    tasks: [
-      {
-        id: "d15-t1",
-        title: "Research 5 high-converting landing pages",
-      },
-      {
-        id: "d15-t2",
-        title: "Sketch layout in Canva or Figma",
-      },
-      {
-        id: "d15-t3",
-        title: "Read 1 short CRO article",
-      },
-    ],
-  },
-
-  {
-    id: "day-16",
-    moduleId: "week-3",
-    title: "Day 16: PageFly Builder Deep Dive",
-    description: "Building mobile-first layouts with PageFly.",
-    order: 2,
-    difficulty: "Intermediate",
-    videos: [
-      {
-        id: "d16-v1",
-        title: "PageFly Editor Essentials",
-        youtubeId: "kSUpDkS63tM",
-        duration: "20:45",
-      },
-      {
-        id: "d16-v2",
-        title: "Building Mobile-First Hero Sections",
-        youtubeId: "fX7WpAAb5S8",
-        duration: "18:20",
-      },
-      {
-        id: "d16-v3",
-        title: "Dynamic Product Links in PageFly",
-        youtubeId: "zLpOfMha7Kk",
-        duration: "14:15",
-      },
-      {
-        id: "d16-v4",
-        title: "PageFly vs GemPages — Which Builder is Best in 2025?",
-        youtubeId: "v8wR6w77464",
-        duration: "12:00",
-      },
-      {
-        id: "d16-v5",
-        title: "Adding Custom CSS in PageFly for Advanced Styling",
-        youtubeId: "P79K7mDPu_0",
-        duration: "10:30",
-      },
-      {
-        id: "d16-v6",
-        title: "PageFly SEO Settings — Title, Meta & Alt Tags",
-        youtubeId: "kSUpDkS63tM",
-        duration: "08:15",
-      },
-    ],
-    tasks: [
-      {
-        id: "d16-t1",
-        title: "Build hero section with strong headline",
-      },
-      {
-        id: "d16-t2",
-        title: "Add trust bars and social proof signals",
-      },
-      {
-        id: "d16-t3",
-        title: "Test on mobile at every stage",
-      },
-    ],
-  },
-
-  {
-    id: "day-17",
-    moduleId: "week-3",
-    title: "Day 17: Trust & Social Proof Logic",
-    description: "Integrating reviews and FAQ sections for conversions.",
-    order: 3,
-    difficulty: "Intermediate",
-    videos: [
-      {
-        id: "d17-v1",
-        title: "Social Proof Psychology",
-        youtubeId: "v8wR6w77464",
-        duration: "11:20",
-      },
-      {
-        id: "d17-v2",
-        title: "Integrating UGC Widgets",
-        youtubeId: "P79K7mDPu_0",
-        duration: "15:10",
-      },
-      {
-        id: "d17-v3",
-        title: "Designing High-Conversion FAQs",
-        youtubeId: "zLpOfMha7Kk",
-        duration: "09:45",
-      },
-      {
-        id: "d17-v4",
-        title: "How to Add Judge.me Reviews to PageFly Pages",
-        youtubeId: "fX7WpAAb5S8",
-        duration: "12:30",
-      },
-      {
-        id: "d17-v5",
-        title: "Trust Badge Placement Strategy for eCommerce",
-        youtubeId: "kSUpDkS63tM",
-        duration: "08:50",
-      },
-      {
-        id: "d17-v6",
-        title: "Building Testimonial Carousels Without Code",
-        youtubeId: "v8wR6w77464",
-        duration: "11:00",
-      },
-    ],
-    tasks: [
-      {
-        id: "d17-t1",
-        title: "Add testimonial carousel with demo reviews",
-      },
-      {
-        id: "d17-t2",
-        title: "Build FAQ section with 3-5 questions",
-      },
-      {
-        id: "d17-t3",
-        title: "Apply custom CSS for smooth transitions",
-      },
-    ],
-  },
-
-  {
-    id: "day-18",
-    moduleId: "week-3",
-    title: "Day 18: Collection Page UX (GemPages)",
-    description: "Designing promo-led collection pages.",
-    order: 4,
-    difficulty: "Intermediate",
-    videos: [
-      {
-        id: "d18-v1",
-        title: "GemPages Editor Fundamentals",
-        youtubeId: "v8wR6w77464",
-        duration: "15:40",
-      },
-      {
-        id: "d18-v2",
-        title: "Building Collection Grids",
-        youtubeId: "P79K7mDPu_0",
-        duration: "12:10",
-      },
-      {
-        id: "d18-v3",
-        title: "GemPages — Advanced Layout Controls & Responsiveness",
-        youtubeId: "fX7WpAAb5S8",
-        duration: "14:00",
-      },
-      {
-        id: "d18-v4",
-        title: "How to Add Promotional Banners in GemPages",
-        youtubeId: "zLpOfMha7Kk",
-        duration: "09:20",
-      },
-      {
-        id: "d18-v5",
-        title: "Collection Page UX Best Practices for eCommerce",
-        youtubeId: "kSUpDkS63tM",
-        duration: "11:45",
-      },
-    ],
-    tasks: [
-      {
-        id: "d18-t1",
-        title: "Research filtering UX on competitor sites",
-      },
-      {
-        id: "d18-t2",
-        title: "Build GemPages collection grid",
-      },
-      {
-        id: "d18-t3",
-        title: "Add promotional categories and banners",
-      },
-    ],
-  },
-
-  {
-    id: "day-19",
-    moduleId: "week-3",
-    title: "Day 19: Filter Systems & Promo Badges",
-    description: "Advanced collection logic and visual badges.",
-    order: 5,
-    difficulty: "Intermediate",
-    videos: [
-      {
-        id: "d19-v1",
-        title: "Advanced Filtering in Shopify",
-        youtubeId: "kSUpDkS63tM",
-        duration: "14:20",
-      },
-      {
-        id: "d19-v2",
-        title: "Custom Promo Badge Logic",
-        youtubeId: "zLpOfMha7Kk",
-        duration: "11:15",
-      },
-      {
-        id: "d19-v3",
-        title: "Shopify Search & Discovery — Filter Setup Guide",
-        youtubeId: "v8wR6w77464",
-        duration: "13:00",
-      },
-      {
-        id: "d19-v4",
-        title: "Bestseller, New, Sale Badge System in GemPages",
-        youtubeId: "P79K7mDPu_0",
-        duration: "09:50",
-      },
-      {
-        id: "d19-v5",
-        title: "Newsletter Signup Blocks — Klaviyo + GemPages Integration",
-        youtubeId: "fX7WpAAb5S8",
-        duration: "10:10",
-      },
-    ],
-    tasks: [
-      {
-        id: "d19-t1",
-        title: "Implement stars/rating badge system",
-      },
-      {
-        id: "d19-t2",
-        title: "Add newsletter signup blocks",
-      },
-      {
-        id: "d19-t3",
-        title: "Perform final mobile QA pass",
-      },
-    ],
-  },
-
-  {
-    id: "day-20",
-    moduleId: "week-3",
-    title: "Day 20: [Assignment] Brand Storytelling Build",
-    description: "Crafting the narrative that builds trust.",
-    order: 6,
-    difficulty: "Intermediate",
-    videos: [],
-    tasks: [
-      {
-        id: "d20-t1",
-        title: "Research 5 strong About Us pages",
-      },
-      {
-        id: "d20-t2",
-        title: "Build brand origin section in PageFly",
-      },
-      {
-        id: "d20-t3",
-        title: "Add mission and values with icons",
-      },
-    ],
-  },
-
-  {
-    id: "day-21",
-    moduleId: "week-3",
-    title: "Day 21: [Assignment] Mid-Phase Audit",
-    description: "Reviewing performance and SEO across all no-code pages.",
-    order: 7,
-    difficulty: "Intermediate",
-    videos: [],
-    tasks: [
-      {
-        id: "d21-t1",
-        title: "Write mini case studies for Projects 3-5",
-      },
-      {
-        id: "d21-t2",
-        title: "Update portfolio with 3 new landing pages",
-      },
-      {
-        id: "d21-t3",
-        title: "Publish build threads on LinkedIn/X",
-      },
-    ],
-  },
+   {
+      id: "day-15",
+      moduleId: "week-3",
+      title: "Day 15: Product Landing Page Strategy",
+      description: "Research and plan high-converting product pages.",
+      order: 1,
+      difficulty: "Intermediate",
+      videos: [
+        {
+          id: "d15-v1",
+          title: "Shopify CRO: Beginner's Guide to Conversion Rate Optimization",
+          youtubeId: "N9Jn4kiXpYw",
+          duration: "15:10"
+        },
+        {
+          id: "d15-v2",
+          title: "How to Build Shopify Pages That Convert (2025)",
+          youtubeId: "vWOZpJama8E",
+          duration: "12:45"
+        },
+        {
+          id: "d15-v3",
+          title: "5 Strategies to Optimize Your Shopify Product Page for Max Conversions",
+          youtubeId: "aYB1Uqs3n9E",
+          duration: "10:30"
+        },
+        {
+          id: "d15-v4",
+          title: "How To Design High Converting Product Pages in 2025 (Shopify)",
+          youtubeId: "mf20MLXB_dg",
+          duration: "13:20"
+        },
+        {
+          id: "d15-v5",
+          title: "Before & After: Shopify Landing Page Using Figma + 3D",
+          youtubeId: "Mqx8CdTxCRw",
+          duration: "11:00"
+        }
+      ],
+      tasks: [
+        {
+          id: "d15-t1",
+          title: "Research 5 high-converting landing pages"
+        },
+        {
+          id: "d15-t2",
+          title: "Sketch layout in Canva or Figma"
+        },
+        {
+          id: "d15-t3",
+          title: "Read 1 short CRO article"
+        }
+      ],
+      resources: [
+        {
+          id: "d15-r1",
+          title: "Shopify Blog — Conversion Rate Optimization: Get Started",
+          url: "https://www.shopify.com/blog/120261189-conversion-rate-optimization",
+          type: "blog"
+        },
+        {
+          id: "d15-r2",
+          title: "Shopify Help — Understand Your Store's Analytics",
+          url: "https://help.shopify.com/en/manual/reports-and-analytics",
+          type: "docs"
+        },
+        {
+          id: "d15-r3",
+          title: "Shopify Academy — Conversion Rate Optimization Learning Path",
+          url: "https://www.shopifyacademy.com/path/conversion-rate-optimization-with-shopify",
+          type: "docs"
+        },
+        {
+          id: "d15-r4",
+          title: "Smashing Magazine — Designing High-Conversion Landing Pages",
+          url: "https://www.smashingmagazine.com/2022/04/landing-page-design-conversion/",
+          type: "blog"
+        },
+        {
+          id: "d15-r5",
+          title: "Figma — Free Wireframing Tool",
+          url: "https://www.figma.com",
+          type: "tool"
+        },
+        {
+          id: "d15-r6",
+          title: "Shopify Blog — CRO Statistics: 34 Vital Conversion Rate Stats",
+          url: "https://www.shopify.com/blog/cro-statistics",
+          type: "blog"
+        }
+      ]
+    },
+    {
+      id: "day-16",
+      moduleId: "week-3",
+      title: "Day 16: PageFly Builder Deep Dive",
+      description: "Building mobile-first layouts with PageFly.",
+      order: 2,
+      difficulty: "Intermediate",
+      videos: [
+        {
+          id: "d16-v1",
+          title: "How To Use PageFly On Shopify 2024 — PageFly Tutorial (Latest Version)",
+          youtubeId: "Z1J6lqVlGt4",
+          duration: "20:45"
+        },
+        {
+          id: "d16-v2",
+          title: "How to Create ONE PRODUCT Shopify Store With PageFly in 2024",
+          youtubeId: "jXx1P1dwrgA",
+          duration: "18:20"
+        },
+        {
+          id: "d16-v3",
+          title: "Shopify Landing Page Example Built by PageFly",
+          youtubeId: "2xTzlNRwmfQ",
+          duration: "14:15"
+        },
+        {
+          id: "d16-v4",
+          title: "How To Create Shopify Landing Page With PageFly (2024)",
+          youtubeId: "aSG1R3gvmgw",
+          duration: "12:00"
+        },
+        {
+          id: "d16-v5",
+          title: "How to use PageFly on Shopify — PageFly Tutorial 2024",
+          youtubeId: "KaVZdosTEO8",
+          duration: "10:30"
+        },
+        {
+          id: "d16-v6",
+          title: "How to create Shopify store banner section — PageFly Tutorial 2024",
+          youtubeId: "LvCVWkhctDQ",
+          duration: "08:15"
+        }
+      ],
+      tasks: [
+        {
+          id: "d16-t1",
+          title: "Build hero section with strong headline"
+        },
+        {
+          id: "d16-t2",
+          title: "Add trust bars and social proof signals"
+        },
+        {
+          id: "d16-t3",
+          title: "Test on mobile at every stage"
+        }
+      ],
+      resources: [
+        {
+          id: "d16-r1",
+          title: "PageFly — Official Shopify App Listing",
+          url: "https://apps.shopify.com/pagefly",
+          type: "docs"
+        },
+        {
+          id: "d16-r2",
+          title: "PageFly Help Center — How to Use Pages and Sections",
+          url: "https://help.pagefly.io/pages-and-sections-creation/general/how-to-use-pagefly-pages-and-sections",
+          type: "docs"
+        },
+        {
+          id: "d16-r3",
+          title: "Shopify Help — Online Store Pages Overview",
+          url: "https://help.shopify.com/en/manual/online-store/pages",
+          type: "docs"
+        },
+        {
+          id: "d16-r4",
+          title: "Shopify Blog — How to Create a Landing Page on Shopify",
+          url: "https://www.shopify.com/blog/landing-page",
+          type: "blog"
+        },
+        {
+          id: "d16-r5",
+          title: "Google PageSpeed Insights — Test Your Pages",
+          url: "https://pagespeed.web.dev",
+          type: "tool"
+        },
+        {
+          id: "d16-r6",
+          title: "Smashing Magazine — Mobile-First Design in Practice",
+          url: "https://www.smashingmagazine.com/2022/03/guide-mobile-ecommerce-ux/",
+          type: "blog"
+        }
+      ]
+    },
+    {
+      id: "day-17",
+      moduleId: "week-3",
+      title: "Day 17: Trust & Social Proof Logic",
+      description: "Integrating reviews and FAQ sections for conversions.",
+      order: 3,
+      difficulty: "Intermediate",
+      videos: [
+        {
+          id: "d17-v1",
+          title: "Judge.me Reviews Shopify Tutorial — How To Add Reviews on Shopify Store",
+          youtubeId: "K3TUuSYpYOo",
+          duration: "11:20"
+        },
+        {
+          id: "d17-v2",
+          title: "How To Use Judge.Me For Your Shopify Store — Full Guide 2024",
+          youtubeId: "plkEMDHubsA",
+          duration: "15:10"
+        },
+        {
+          id: "d17-v3",
+          title: "judge.me Reviews Shopify Tutorial — How to Use judge.me on Shopify (2024)",
+          youtubeId: "EqSlozdAoQk",
+          duration: "09:45"
+        },
+        {
+          id: "d17-v4",
+          title: "How to Customize Judge.Me Reviews For Shopify Store (2024)",
+          youtubeId: "cvnKbOg_Vv0",
+          duration: "12:30"
+        },
+        {
+          id: "d17-v5",
+          title: "Judge.Me Shopify Tutorial — How To Use Judge.Me On Shopify",
+          youtubeId: "BTZG5b7HJ1k",
+          duration: "08:50"
+        }
+      ],
+      tasks: [
+        {
+          id: "d17-t1",
+          title: "Add testimonial carousel with demo reviews"
+        },
+        {
+          id: "d17-t2",
+          title: "Build FAQ section with 3-5 questions"
+        },
+        {
+          id: "d17-t3",
+          title: "Apply custom CSS for smooth transitions"
+        }
+      ],
+      resources: [
+        {
+          id: "d17-r1",
+          title: "Judge.me — Official Shopify App Listing",
+          url: "https://apps.shopify.com/judgeme",
+          type: "docs"
+        },
+        {
+          id: "d17-r2",
+          title: "Shopify Help — Add Social Proof and Trust to Your Store",
+          url: "https://help.shopify.com/en/manual/promoting-marketing/trust-and-security",
+          type: "docs"
+        },
+        {
+          id: "d17-r3",
+          title: "Judge.me Blog — Tips for Shopify Social Proof 2024",
+          url: "https://judge.me/blog/tips-for-shopify-social-proof-2024",
+          type: "blog"
+        },
+        {
+          id: "d17-r4",
+          title: "Shopify Partners Blog — 6 Ways to Leverage Social Proof",
+          url: "https://www.shopify.com/partners/blog/social-proof",
+          type: "blog"
+        },
+        {
+          id: "d17-r5",
+          title: "Shopify Help — Adding an FAQ Page to Your Store",
+          url: "https://help.shopify.com/en/manual/online-store/pages/faq-page",
+          type: "docs"
+        },
+        {
+          id: "d17-r6",
+          title: "Shopify Community — Social Proof & Reviews Best Practices",
+          url: "https://community.shopify.com/c/shopify-discussions/bd-p/general-discussion",
+          type: "community"
+        }
+      ]
+    },
+    {
+      id: "day-18",
+      moduleId: "week-3",
+      title: "Day 18: Collection Page UX (GemPages)",
+      description: "Designing promo-led collection pages.",
+      order: 4,
+      difficulty: "Intermediate",
+      videos: [
+        {
+          id: "d18-v1",
+          title: "GemPages Shopify Tutorial 2024 — How to Use GemPages on Shopify",
+          youtubeId: "0zLi-2hZcT0",
+          duration: "15:40"
+        },
+        {
+          id: "d18-v2",
+          title: "How To Use GemPages For Shopify 2024 — GemPages Shopify Tutorial",
+          youtubeId: "r4o267TFBsw",
+          duration: "12:10"
+        },
+        {
+          id: "d18-v3",
+          title: "GemPages Shopify Landing Page Tutorial in 2024",
+          youtubeId: "ehuc_kGRb1E",
+          duration: "14:00"
+        },
+        {
+          id: "d18-v4",
+          title: "GemPages Product Page Customization Tutorial (Step-by-Step)",
+          youtubeId: "Qq5NbLoeM4k",
+          duration: "09:20"
+        },
+        {
+          id: "d18-v5",
+          title: "How to Create a Product Page — v6 Editor — GemPages Tutorial",
+          youtubeId: "SM5K7ICvwsM",
+          duration: "11:45"
+        }
+      ],
+      tasks: [
+        {
+          id: "d18-t1",
+          title: "Research filtering UX on competitor sites"
+        },
+        {
+          id: "d18-t2",
+          title: "Build GemPages collection grid"
+        },
+        {
+          id: "d18-t3",
+          title: "Add promotional categories and banners"
+        }
+      ],
+      resources: [
+        {
+          id: "d18-r1",
+          title: "GemPages — Official Shopify App Listing",
+          url: "https://apps.shopify.com/gempages",
+          type: "docs"
+        },
+        {
+          id: "d18-r2",
+          title: "Shopify Help — Customizing Collection Pages",
+          url: "https://help.shopify.com/en/manual/online-store/themes/theme-structure/collection-pages",
+          type: "docs"
+        },
+        {
+          id: "d18-r3",
+          title: "Shopify Dev — Collection Object in Liquid",
+          url: "https://shopify.dev/docs/api/liquid/objects/collection",
+          type: "reference"
+        },
+        {
+          id: "d18-r4",
+          title: "Shopify Blog — How to Design Collection Pages That Convert",
+          url: "https://www.shopify.com/blog/ecommerce-site-design",
+          type: "blog"
+        },
+        {
+          id: "d18-r5",
+          title: "Smashing Magazine — eCommerce UX: Collection & Category Pages",
+          url: "https://www.smashingmagazine.com/2021/01/ecommerce-ux-category-pages/",
+          type: "blog"
+        },
+        {
+          id: "d18-r6",
+          title: "Shopify Help — Add Filtering and Sorting to Collections",
+          url: "https://help.shopify.com/en/manual/online-store/storefront-filters",
+          type: "docs"
+        }
+      ]
+    },
+    {
+      id: "day-19",
+      moduleId: "week-3",
+      title: "Day 19: Filter Systems & Promo Badges",
+      description: "Advanced collection logic and visual badges.",
+      order: 5,
+      difficulty: "Intermediate",
+      videos: [
+        {
+          id: "d19-v1",
+          title: "How To Use Shopify Search And Discovery App",
+          youtubeId: "9GPOMJcXkl4",
+          duration: "14:20"
+        },
+        {
+          id: "d19-v2",
+          title: "How To Use New Shopify Search & Discovery App",
+          youtubeId: "CKrhh2v-33Y",
+          duration: "11:15"
+        },
+        {
+          id: "d19-v3",
+          title: "Filter by Category Meta Fields — Shopify Search & Discovery App — Winter Edition 25",
+          youtubeId: "EDp3yVxZHFA",
+          duration: "13:00"
+        },
+        {
+          id: "d19-v4",
+          title: "Klaviyo Shopify Integration Tutorial — Set Up in Minutes",
+          youtubeId: "GrMPs5Oq_XI",
+          duration: "09:50"
+        },
+        {
+          id: "d19-v5",
+          title: "How to Use Shopify Search and Discovery App (Enhanced Searches)",
+          youtubeId: "PCLUML9GkEg",
+          duration: "10:10"
+        }
+      ],
+      tasks: [
+        {
+          id: "d19-t1",
+          title: "Implement stars/rating badge system"
+        },
+        {
+          id: "d19-t2",
+          title: "Add newsletter signup blocks"
+        },
+        {
+          id: "d19-t3",
+          title: "Perform final mobile QA pass"
+        }
+      ],
+      resources: [
+        {
+          id: "d19-r1",
+          title: "Shopify Help — Shopify Search & Discovery App",
+          url: "https://help.shopify.com/en/manual/online-store/search-and-discovery/app",
+          type: "docs"
+        },
+        {
+          id: "d19-r2",
+          title: "Shopify Help — Set Up Storefront Filtering",
+          url: "https://help.shopify.com/en/manual/online-store/storefront-filters",
+          type: "docs"
+        },
+        {
+          id: "d19-r3",
+          title: "Klaviyo — Official Shopify Integration Guide",
+          url: "https://help.klaviyo.com/hc/en-us/articles/115005255808",
+          type: "docs"
+        },
+        {
+          id: "d19-r4",
+          title: "Shopify Dev — Product Badges & Metafields for Collection Pages",
+          url: "https://shopify.dev/docs/storefronts/themes/product-merchandising/badges",
+          type: "docs"
+        },
+        {
+          id: "d19-r5",
+          title: "Shopify Blog — How to Use Email Marketing to Boost Sales",
+          url: "https://www.shopify.com/blog/email-marketing",
+          type: "blog"
+        },
+        {
+          id: "d19-r6",
+          title: "Shopify Help — Add a Newsletter Signup to Your Store",
+          url: "https://help.shopify.com/en/manual/promoting-marketing/create-marketing/newsletter-signup",
+          type: "docs"
+        }
+      ]
+    },
+    {
+      id: "day-20",
+      moduleId: "week-3",
+      title: "Day 20: [Assignment] Brand Storytelling Build",
+      description: "Crafting the narrative that builds trust.",
+      order: 6,
+      difficulty: "Intermediate",
+      videos: [],
+      tasks: [
+        {
+          id: "d20-t1",
+          title: "Research 5 strong About Us pages"
+        },
+        {
+          id: "d20-t2",
+          title: "Build brand origin section in PageFly"
+        },
+        {
+          id: "d20-t3",
+          title: "Add mission and values with icons"
+        }
+      ],
+      resources: [
+        {
+          id: "d20-r1",
+          title: "Shopify Blog — 16 Great About Us Page Examples That Drive Results",
+          url: "https://www.shopify.com/blog/how-to-write-an-about-us-page",
+          type: "blog"
+        },
+        {
+          id: "d20-r2",
+          title: "Shopify Blog — Storytelling in Branding: How to Craft a Story That Sells",
+          url: "https://www.shopify.com/blog/brand-storytelling",
+          type: "blog"
+        },
+        {
+          id: "d20-r3",
+          title: "Shopify Blog — How to Build a Brand Story for Your Retail Store",
+          url: "https://www.shopify.com/retail/brand-story",
+          type: "blog"
+        },
+        {
+          id: "d20-r4",
+          title: "PageFly — Official Shopify App (Build About Us Pages)",
+          url: "https://apps.shopify.com/pagefly",
+          type: "docs"
+        },
+        {
+          id: "d20-r5",
+          title: "Canva — Free Design Tool for Brand Assets & Icons",
+          url: "https://www.canva.com",
+          type: "tool"
+        },
+        {
+          id: "d20-r6",
+          title: "Noun Project — Free Icons for Mission & Values Sections",
+          url: "https://thenounproject.com",
+          type: "tool"
+        }
+      ]
+    },
+    {
+      id: "day-21",
+      moduleId: "week-3",
+      title: "Day 21: [Assignment] Mid-Phase Audit",
+      description: "Reviewing performance and SEO across all no-code pages.",
+      order: 7,
+      difficulty: "Intermediate",
+      videos: [],
+      tasks: [
+        {
+          id: "d21-t1",
+          title: "Write mini case studies for Projects 3-5"
+        },
+        {
+          id: "d21-t2",
+          title: "Update portfolio with 3 new landing pages"
+        },
+        {
+          id: "d21-t3",
+          title: "Publish build threads on LinkedIn/X"
+        }
+      ],
+      resources: [
+        {
+          id: "d21-r1",
+          title: "Shopify Help — Web Performance Dashboard",
+          url: "https://help.shopify.com/en/manual/online-store/web-performance",
+          type: "docs"
+        },
+        {
+          id: "d21-r2",
+          title: "Shopify Help — SEO Best Practices for Your Store",
+          url: "https://help.shopify.com/en/manual/promoting-marketing/seo",
+          type: "docs"
+        },
+        {
+          id: "d21-r3",
+          title: "Google PageSpeed Insights — Audit Your Pages",
+          url: "https://pagespeed.web.dev",
+          type: "tool"
+        },
+        {
+          id: "d21-r4",
+          title: "Shopify Partners Blog — How to Write a Shopify Developer Case Study",
+          url: "https://www.shopify.com/partners/blog/case-study",
+          type: "blog"
+        },
+        {
+          id: "d21-r5",
+          title: "Loom — Free Screen Recorder for Portfolio Walkthroughs",
+          url: "https://www.loom.com",
+          type: "tool"
+        },
+        {
+          id: "d21-r6",
+          title: "Shopify Dev — Changelog (Stay Current with Platform Updates)",
+          url: "https://shopify.dev/changelog",
+          type: "docs"
+        }
+      ]
+    },
 
   // ============================================================
   // WEEK 4: CAMPAIGN ENGINEERING
   // ============================================================
   {
-    id: "day-22",
-    moduleId: "week-4",
-    title: "Day 22: Seasonal Campaign Strategies",
-    description: "Black Friday and flash sale psychology.",
-    order: 1,
-    difficulty: "Intermediate",
-    videos: [
-      {
-        id: "d22-v1",
-        title: "Psychology of Flash Sales",
-        youtubeId: "v8wR6w77464",
-        duration: "14:50",
-      },
-      {
-        id: "d22-v2",
-        title: "BFCM Strategy Overview",
-        youtubeId: "P79K7mDPu_0",
-        duration: "12:30",
-      },
-      {
-        id: "d22-v3",
-        title: "How Top Shopify Stores Build Seasonal Campaigns",
-        youtubeId: "fX7WpAAb5S8",
-        duration: "15:00",
-      },
-      {
-        id: "d22-v4",
-        title: "Urgency & Scarcity — Ethical eCommerce Tactics",
-        youtubeId: "kSUpDkS63tM",
-        duration: "11:30",
-      },
-      {
-        id: "d22-v5",
-        title: "Planning a Black Friday Shopify Store Campaign",
-        youtubeId: "zLpOfMha7Kk",
-        duration: "13:10",
-      },
-    ],
-    tasks: [
-      {
-        id: "d22-t1",
-        title: "Research 5 seasonal landing pages",
-      },
-      {
-        id: "d22-t2",
-        title: "Plan countdown and bundle sections",
-      },
-      {
-        id: "d22-t3",
-        title: "Sketch campaign layout",
-      },
-    ],
-  },
-
-  {
-    id: "day-23",
-    moduleId: "week-4",
-    title: "Day 23: Urgency & Scarcity Systems",
-    description: "Building live countdown timers and stock level alerts.",
-    order: 2,
-    difficulty: "Advanced",
-    videos: [
-      {
-        id: "d23-v1",
-        title: "Building Scarcity Widgets",
-        youtubeId: "F2T-nC27r_E",
-        duration: "20:15",
-      },
-      {
-        id: "d23-v2",
-        title: "Live Inventory Level logic",
-        youtubeId: "kSUpDkS63tM",
-        duration: "15:40",
-      },
-      {
-        id: "d23-v3",
-        title: "How to Build a Countdown Timer in GemPages",
-        youtubeId: "v8wR6w77464",
-        duration: "12:00",
-      },
-      {
-        id: "d23-v4",
-        title: "Strikethrough Pricing & Sale Logic in Shopify",
-        youtubeId: "P79K7mDPu_0",
-        duration: "10:20",
-      },
-      {
-        id: "d23-v5",
-        title: "Sticky Bar with Urgency Copy — GemPages Build",
-        youtubeId: "zLpOfMha7Kk",
-        duration: "09:45",
-      },
-    ],
-    tasks: [
-      {
-        id: "d23-t1",
-        title: "Build hero with countdown timer",
-      },
-      {
-        id: "d23-t2",
-        title: "Implement strikethrough pricing logic",
-      },
-      {
-        id: "d23-t3",
-        title: "Add sticky bottom bar with urgency copy",
-      },
-    ],
-  },
-
-  {
-    id: "day-24",
-    moduleId: "week-4",
-    title: "Day 24: Page Performance & SEO Cleanup",
-    description: "Final technical optimization for phase completion.",
-    order: 3,
-    difficulty: "Intermediate",
-    videos: [
-      {
-        id: "d24-v1",
-        title: "Shopify SEO Audit Checklist",
-        youtubeId: "zLpOfMha7Kk",
-        duration: "18:50",
-      },
-      {
-        id: "d24-v2",
-        title: "Lighthouse Performance Fixing",
-        youtubeId: "P79K7mDPu_0",
-        duration: "12:20",
-      },
-      {
-        id: "d24-v3",
-        title: "How to Fix Core Web Vitals on Shopify",
-        youtubeId: "fX7WpAAb5S8",
-        duration: "14:00",
-      },
-      {
-        id: "d24-v4",
-        title: "Image Compression Workflow for Shopify Stores",
-        youtubeId: "kSUpDkS63tM",
-        duration: "08:30",
-      },
-      {
-        id: "d24-v5",
-        title: "Shopify App Performance Impact — How to Audit",
-        youtubeId: "v8wR6w77464",
-        duration: "11:15",
-      },
-    ],
-    tasks: [
-      {
-        id: "d24-t1",
-        title: "Speed check all 6 portfolio projects",
-      },
-      {
-        id: "d24-t2",
-        title: "Verify SEO meta titles on all pages",
-      },
-      {
-        id: "d24-t3",
-        title: "Compress any heavy campaign images",
-      },
-    ],
-  },
-
-  {
-    id: "day-25",
-    moduleId: "week-4",
-    title: "Day 25: Marketing Your Skills",
-    description: "LinkedIn and X strategies for Shopify developers.",
-    order: 4,
-    difficulty: "Intermediate",
-    videos: [
-      {
-        id: "d25-v1",
-        title: "LinkedIn for Developers",
-        youtubeId: "fX7WpAAb5S8",
-        duration: "11:40",
-      },
-      {
-        id: "d25-v2",
-        title: "X/Twitter Growth Strategy",
-        youtubeId: "kSUpDkS63tM",
-        duration: "08:15",
-      },
-      {
-        id: "d25-v3",
-        title: "Building in Public — How to Document Your Journey",
-        youtubeId: "v8wR6w77464",
-        duration: "13:00",
-      },
-      {
-        id: "d25-v4",
-        title: "How to Write LinkedIn Posts That Get Developer Clients",
-        youtubeId: "P79K7mDPu_0",
-        duration: "10:45",
-      },
-      {
-        id: "d25-v5",
-        title: "Portfolio Strategy for Shopify Freelancers",
-        youtubeId: "zLpOfMha7Kk",
-        duration: "12:20",
-      },
-    ],
-    tasks: [
-      {
-        id: "d25-t1",
-        title: "Update LinkedIn headline for specialty",
-      },
-      {
-        id: "d25-t2",
-        title: "Add portfolio link to all profiles",
-      },
-      {
-        id: "d25-t3",
-        title: "Request skill endorsements",
-      },
-    ],
-  },
-
-  {
-    id: "day-26",
-    moduleId: "week-4",
-    title: "Day 26: Professional Gig Hunting",
-    description: "Pitching to clients and setting up freelance channels.",
-    order: 5,
-    difficulty: "Intermediate",
-    videos: [
-      {
-        id: "d26-v1",
-        title: "Upwork Case Studies & Bios",
-        youtubeId: "v8wR6w77464",
-        duration: "14:20",
-      },
-      {
-        id: "d26-v2",
-        title: "Client Pitching Masterclass",
-        youtubeId: "zLpOfMha7Kk",
-        duration: "10:50",
-      },
-      {
-        id: "d26-v3",
-        title: "How to Write a Winning Upwork Proposal for Shopify Jobs",
-        youtubeId: "fX7WpAAb5S8",
-        duration: "13:30",
-      },
-      {
-        id: "d26-v4",
-        title: "Fiverr Gig Setup for Shopify Developers — Full Guide",
-        youtubeId: "kSUpDkS63tM",
-        duration: "11:00",
-      },
-      {
-        id: "d26-v5",
-        title: "Value-First Outreach — Templates That Actually Work",
-        youtubeId: "P79K7mDPu_0",
-        duration: "09:30",
-      },
-    ],
-    tasks: [
-      {
-        id: "d26-t1",
-        title: "Configure Upwork and Fiverr professional bios",
-      },
-      {
-        id: "d26-t2",
-        title: "Draft value-first outreach templates",
-      },
-      {
-        id: "d26-t3",
-        title: "Identify 5 target stores for outreach",
-      },
-    ],
-  },
-
-  {
-    id: "day-27",
-    moduleId: "week-4",
-    title: "Day 27: [Assignment] Seasonal Campaign Build",
-    description: "The final build of Phase 1.",
-    order: 6,
-    difficulty: "Advanced",
-    videos: [],
-    tasks: [
-      {
-        id: "d27-t1",
-        title: "Complete GemPages seasonal page build",
-      },
-      {
-        id: "d27-t2",
-        title: "Add custom JS for timer logic",
-      },
-      {
-        id: "d27-t3",
-        title: "Prepare before/after assets",
-      },
-    ],
-  },
-
-  {
-    id: "day-28",
-    moduleId: "week-4",
-    title: "Day 28: [Assignment] Portfolio Showcase",
-    description: "Consolidating all projects into a professional showreel.",
-    order: 7,
-    difficulty: "Advanced",
-    videos: [],
-    tasks: [
-      {
-        id: "d28-t1",
-        title: "Record a full Phase 1 review video",
-      },
-      {
-        id: "d28-t2",
-        title: "Draft Project #6 Case Study",
-      },
-      {
-        id: "d28-t3",
-        title: "Apply to first 5 high-value gigs",
-      },
-    ],
-  },
-
-  {
-    id: "day-29",
-    moduleId: "week-4",
-    title: "Day 29: Maintenance & Documentation",
-    description: "Reviewing the competitive log and final documentation.",
-    order: 8,
-    difficulty: "Intermediate",
-    videos: [
-      {
-        id: "d29-v1",
-        title: "Documentation for Clients",
-        youtubeId: "fX7WpAAb5S8",
-        duration: "15:20",
-      },
-      {
-        id: "d29-v2",
-        title: "How to Write Shopify Project Case Studies That Win Clients",
-        youtubeId: "kSUpDkS63tM",
-        duration: "12:00",
-      },
-      {
-        id: "d29-v3",
-        title: "Creating a Notion Portfolio as a Developer",
-        youtubeId: "v8wR6w77464",
-        duration: "10:30",
-      },
-      {
-        id: "d29-v4",
-        title: "Competitive Store Audit — Full Walkthrough Framework",
-        youtubeId: "P79K7mDPu_0",
-        duration: "13:45",
-      },
-    ],
-    tasks: [
-      {
-        id: "d29-t1",
-        title: "Finalize competitive log (20+ stores)",
-      },
-      {
-        id: "d29-t2",
-        title: "Archive Day 1-29 logs in Notion",
-      },
-      {
-        id: "d29-t3",
-        title: "Engage with 10 industry posts",
-      },
-    ],
-  },
-
-  {
-    id: "day-30",
-    moduleId: "week-4",
-    title: "Day 30: PHASE 1 COMPLETED",
-    description: "Final checklist and transition to Phase 2.",
-    order: 9,
-    difficulty: "Advanced",
-    videos: [],
-    tasks: [
-      {
-        id: "d30-t1",
-        title: "Verify 6/6 Projects in Portfolio",
-      },
-      {
-        id: "d30-t2",
-        title: "Final Master Checklist Audit",
-      },
-      {
-        id: "d30-t3",
-        title: 'Post "Phase 1 Complete" on LinkedIn/X',
-      },
-    ],
-  },
+      id: "day-22",
+      moduleId: "week-4",
+      title: "Day 22: Seasonal Campaign Strategies",
+      description: "Black Friday and flash sale psychology.",
+      order: 1,
+      difficulty: "Intermediate",
+      videos: [
+        {
+          id: "d22-v1",
+          title: "$18,025 per Day on Shopify — Black Friday Strategy 2024",
+          youtubeId: "mMHm9G47J6I",
+          duration: "14:50"
+        },
+        {
+          id: "d22-v2",
+          title: "#1 Shopify Black Friday Strategy for More Sales",
+          youtubeId: "T-rIuvSNNws",
+          duration: "12:30"
+        },
+        {
+          id: "d22-v3",
+          title: "Shopify BFCM Strategy — Turn Black Friday Sales Into Long-Term Retention",
+          youtubeId: "eqVOa4nstsM",
+          duration: "15:00"
+        },
+        {
+          id: "d22-v4",
+          title: "How To Add A Shopify Countdown Timer Without Using Shopify Apps",
+          youtubeId: "vq2KihH5VPs",
+          duration: "11:30"
+        },
+        {
+          id: "d22-v5",
+          title: "The Truth About Shopify Countdown Timers (Real vs Fake)",
+          youtubeId: "b_vyOfNIVN8",
+          duration: "13:10"
+        }
+      ],
+      tasks: [
+        {
+          id: "d22-t1",
+          title: "Research 5 seasonal landing pages"
+        },
+        {
+          id: "d22-t2",
+          title: "Plan countdown and bundle sections"
+        },
+        {
+          id: "d22-t3",
+          title: "Sketch campaign layout"
+        }
+      ],
+      resources: [
+        {
+          id: "d22-r1",
+          title: "Shopify Blog — BFCM Campaigns: 13 Proven Strategies",
+          url: "https://www.shopify.com/blog/bfcm-campaigns",
+          type: "blog"
+        },
+        {
+          id: "d22-r2",
+          title: "Shopify Blog — Black Friday Checklist: 25 BFCM Prep Steps",
+          url: "https://www.shopify.com/blog/bfcm-checklist",
+          type: "blog"
+        },
+        {
+          id: "d22-r3",
+          title: "Shopify Help — Create Discount Codes for Sales Events",
+          url: "https://help.shopify.com/en/manual/discounts",
+          type: "docs"
+        },
+        {
+          id: "d22-r4",
+          title: "Shopify Help — Automatic Discounts for Flash Sales",
+          url: "https://help.shopify.com/en/manual/discounts/automatic-discounts",
+          type: "docs"
+        },
+        {
+          id: "d22-r5",
+          title: "PageFly Blog — Black Friday Landing Page Templates 2024",
+          url: "https://pagefly.io/blogs/shopify/black-friday-landing-page",
+          type: "blog"
+        },
+        {
+          id: "d22-r6",
+          title: "Shopify Blog — Black Friday Social Media Strategy",
+          url: "https://www.shopify.com/blog/5-black-friday-cyber-monday-social-media-campaigns",
+          type: "blog"
+        }
+      ]
+    },
+    {
+      id: "day-23",
+      moduleId: "week-4",
+      title: "Day 23: Urgency & Scarcity Systems",
+      description: "Building live countdown timers and stock level alerts.",
+      order: 2,
+      difficulty: "Advanced",
+      videos: [
+        {
+          id: "d23-v1",
+          title: "How to Add Shopify Countdown Timer Announcement Bar 2024 (Easy)",
+          youtubeId: "JW65gUtO_dQ",
+          duration: "10:15"
+        },
+        {
+          id: "d23-v2",
+          title: "How to Add Countdown Timer to Shopify Website (FREE)",
+          youtubeId: "zv0oZ4POvzw",
+          duration: "08:40"
+        },
+        {
+          id: "d23-v3",
+          title: "How to add Shopify Countdown Timer on Homepage 2025",
+          youtubeId: "u11AKLgjshs",
+          duration: "12:00"
+        },
+        {
+          id: "d23-v4",
+          title: "How To Setup Strikethrough Sale Price on Shopify",
+          youtubeId: "1KglWblFh58",
+          duration: "10:20"
+        },
+        {
+          id: "d23-v5",
+          title: "Shopify Core Web Vitals Score Too Low? Fix It in 5 Minutes",
+          youtubeId: "l4Ep4ZvSVnk",
+          duration: "09:45"
+        }
+      ],
+      tasks: [
+        {
+          id: "d23-t1",
+          title: "Build hero with countdown timer"
+        },
+        {
+          id: "d23-t2",
+          title: "Implement strikethrough pricing logic"
+        },
+        {
+          id: "d23-t3",
+          title: "Add sticky bottom bar with urgency copy"
+        }
+      ],
+      resources: [
+        {
+          id: "d23-r1",
+          title: "Shopify Help — Setting Sale Prices (Compare At Price)",
+          url: "https://help.shopify.com/en/manual/products/details/product-pricing/sale-pricing",
+          type: "docs"
+        },
+        {
+          id: "d23-r2",
+          title: "Shopify Dev — Liquid: product.compare_at_price Reference",
+          url: "https://shopify.dev/docs/api/liquid/objects/product#product-compare_at_price",
+          type: "reference"
+        },
+        {
+          id: "d23-r3",
+          title: "Shopify Help — Add a Countdown Timer Using Theme Editor",
+          url: "https://help.shopify.com/en/manual/online-store/themes/theme-structure/countdown",
+          type: "docs"
+        },
+        {
+          id: "d23-r4",
+          title: "Shopify App Store — Essential Countdown Timer Bar",
+          url: "https://apps.shopify.com/essential-countdown-timer",
+          type: "tool"
+        },
+        {
+          id: "d23-r5",
+          title: "Shopify Dev — inventory_quantity in Liquid",
+          url: "https://shopify.dev/docs/api/liquid/objects/variant#variant-inventory_quantity",
+          type: "reference"
+        },
+        {
+          id: "d23-r6",
+          title: "Shopify Blog — How to Create Urgency in Your Shopify Store",
+          url: "https://www.shopify.com/blog/ecommerce-urgency",
+          type: "blog"
+        }
+      ]
+    },
+    {
+      id: "day-24",
+      moduleId: "week-4",
+      title: "Day 24: Page Performance & SEO Cleanup",
+      description: "Final technical optimization for phase completion.",
+      order: 3,
+      difficulty: "Intermediate",
+      videos: [
+        {
+          id: "d24-v1",
+          title: "Shopify SEO Audit Guide — Complete Checklist Step by Step",
+          youtubeId: "vSRdFpG-9Qk",
+          duration: "18:50"
+        },
+        {
+          id: "d24-v2",
+          title: "Shopify SEO — Checklist + Best Google Optimization Tips (2025)",
+          youtubeId: "dbSPTZ54zDQ",
+          duration: "12:20"
+        },
+        {
+          id: "d24-v3",
+          title: "Watch Me Do A Shopify SEO Audit & Provide The Exact Strategy",
+          youtubeId: "tsR-FkzSQl0",
+          duration: "14:00"
+        },
+        {
+          id: "d24-v4",
+          title: "Steal My Shopify SEO Audit ($100k/mo Blueprint)",
+          youtubeId: "D8CzAmb8x4Y",
+          duration: "08:30"
+        },
+        {
+          id: "d24-v5",
+          title: "Mastering Shopify Core Web Vitals Optimization",
+          youtubeId: "vJaFYj2CUx8",
+          duration: "11:15"
+        }
+      ],
+      tasks: [
+        {
+          id: "d24-t1",
+          title: "Speed check all 6 portfolio projects"
+        },
+        {
+          id: "d24-t2",
+          title: "Verify SEO meta titles on all pages"
+        },
+        {
+          id: "d24-t3",
+          title: "Compress any heavy campaign images"
+        }
+      ],
+      resources: [
+        {
+          id: "d24-r1",
+          title: "Shopify Help — SEO Best Practices for Your Shopify Store",
+          url: "https://help.shopify.com/en/manual/promoting-marketing/seo",
+          type: "docs"
+        },
+        {
+          id: "d24-r2",
+          title: "Shopify Dev — Theme Performance Best Practices",
+          url: "https://shopify.dev/docs/storefronts/themes/best-practices/performance",
+          type: "docs"
+        },
+        {
+          id: "d24-r3",
+          title: "Google PageSpeed Insights — Audit Every Portfolio Page",
+          url: "https://pagespeed.web.dev",
+          type: "tool"
+        },
+        {
+          id: "d24-r4",
+          title: "TinyPNG — Compress Campaign Images",
+          url: "https://tinypng.com",
+          type: "tool"
+        },
+        {
+          id: "d24-r5",
+          title: "Shopify Help — Web Performance Dashboard",
+          url: "https://help.shopify.com/en/manual/online-store/web-performance",
+          type: "docs"
+        },
+        {
+          id: "d24-r6",
+          title: "Shopify Blog — How to Improve Your Shopify Store Speed",
+          url: "https://www.shopify.com/blog/how-to-improve-shopify-store-speed",
+          type: "blog"
+        }
+      ]
+    },
+    {
+      id: "day-25",
+      moduleId: "week-4",
+      title: "Day 25: Marketing Your Skills",
+      description: "LinkedIn and X strategies for Shopify developers.",
+      order: 4,
+      difficulty: "Intermediate",
+      videos: [
+        {
+          id: "d25-v1",
+          title: "Freelancing on LinkedIn — How to Get High Paying Clients",
+          youtubeId: "Fuz58Vk5wZc",
+          duration: "11:40"
+        },
+        {
+          id: "d25-v2",
+          title: "How to Find Clients on LinkedIn 2024 (without Sales Navigator)",
+          youtubeId: "4Nqq23BGSn0",
+          duration: "08:15"
+        },
+        {
+          id: "d25-v3",
+          title: "Building in Public — Leveraging Twitter for More Reach",
+          youtubeId: "BGnsF_Zx1Zg",
+          duration: "13:00"
+        },
+        {
+          id: "d25-v4",
+          title: "LinkedIn and Freelance Development in 2025",
+          youtubeId: "qhvarhwGlYY",
+          duration: "10:45"
+        },
+        {
+          id: "d25-v5",
+          title: "How to Create a Free Notion Portfolio Website for Freelancers",
+          youtubeId: "Gh-SHpSL7_E",
+          duration: "12:20"
+        }
+      ],
+      tasks: [
+        {
+          id: "d25-t1",
+          title: "Update LinkedIn headline for specialty"
+        },
+        {
+          id: "d25-t2",
+          title: "Add portfolio link to all profiles"
+        },
+        {
+          id: "d25-t3",
+          title: "Request skill endorsements"
+        }
+      ],
+      resources: [
+        {
+          id: "d25-r1",
+          title: "Shopify Partners Blog — How to Find Your First Shopify Client",
+          url: "https://www.shopify.com/partners/blog/shopify-developer",
+          type: "blog"
+        },
+        {
+          id: "d25-r2",
+          title: "LinkedIn — Optimize Your Developer Profile (Official Guide)",
+          url: "https://www.linkedin.com/business/talent/blog/talent-acquisition/linkedin-profile-tips",
+          type: "blog"
+        },
+        {
+          id: "d25-r3",
+          title: "Notion — Free Workspace for Portfolio & Case Study Docs",
+          url: "https://www.notion.so",
+          type: "tool"
+        },
+        {
+          id: "d25-r4",
+          title: "Shopify Partners Blog — Building a Freelance Shopify Business",
+          url: "https://www.shopify.com/partners/blog/freelance-shopify",
+          type: "blog"
+        },
+        {
+          id: "d25-r5",
+          title: "Smashing Magazine — Developer Portfolio Case Studies",
+          url: "https://www.smashingmagazine.com/2022/05/developer-portfolio-case-studies/",
+          type: "blog"
+        },
+        {
+          id: "d25-r6",
+          title: "Dev.to — Shopify Tag (Weekly Community Articles)",
+          url: "https://dev.to/t/shopify",
+          type: "community"
+        }
+      ]
+    },
+    {
+      id: "day-26",
+      moduleId: "week-4",
+      title: "Day 26: Professional Gig Hunting",
+      description: "Pitching to clients and setting up freelance channels.",
+      order: 5,
+      difficulty: "Intermediate",
+      videos: [
+        {
+          id: "d26-v1",
+          title: "Upwork Proposal Tutorial for Beginners — The Complete Cover Letter Guide",
+          youtubeId: "dOVtO9JVLVY",
+          duration: "14:20"
+        },
+        {
+          id: "d26-v2",
+          title: "How to Write Upwork Proposals That Win Jobs — Step-by-Step Guide",
+          youtubeId: "2AzR_ORXQYg",
+          duration: "10:50"
+        },
+        {
+          id: "d26-v3",
+          title: "Behind-The-Scenes REAL Upwork Proposals — What Clients Look For",
+          youtubeId: "r6BJYtVBIhU",
+          duration: "13:30"
+        },
+        {
+          id: "d26-v4",
+          title: "2025 Fiverr Gig Ranking — Shopify Gig Ranking Strategy",
+          youtubeId: "96W2xk9dsvI",
+          duration: "11:00"
+        },
+        {
+          id: "d26-v5",
+          title: "How to Get Freelance Clients from LinkedIn — Step by Step",
+          youtubeId: "4TEdR9x-oT4",
+          duration: "09:30"
+        }
+      ],
+      tasks: [
+        {
+          id: "d26-t1",
+          title: "Configure Upwork and Fiverr professional bios"
+        },
+        {
+          id: "d26-t2",
+          title: "Draft value-first outreach templates"
+        },
+        {
+          id: "d26-t3",
+          title: "Identify 5 target stores for outreach"
+        }
+      ],
+      resources: [
+        {
+          id: "d26-r1",
+          title: "Upwork — Shopify Developer Jobs Marketplace",
+          url: "https://www.upwork.com/freelance-jobs/shopify/",
+          type: "community"
+        },
+        {
+          id: "d26-r2",
+          title: "Fiverr — Shopify Gig Category",
+          url: "https://www.fiverr.com/categories/programming-tech/shopify-development",
+          type: "community"
+        },
+        {
+          id: "d26-r3",
+          title: "Shopify Partners Blog — How to Price Your Shopify Services",
+          url: "https://www.shopify.com/partners/blog/pricing-shopify",
+          type: "blog"
+        },
+        {
+          id: "d26-r4",
+          title: "Shopify Experts Marketplace — Join as a Shopify Expert",
+          url: "https://www.shopify.com/partners/experts",
+          type: "docs"
+        },
+        {
+          id: "d26-r5",
+          title: "Shopify Partners Blog — Writing a Winning Client Proposal",
+          url: "https://www.shopify.com/partners/blog/client-proposal",
+          type: "blog"
+        },
+        {
+          id: "d26-r6",
+          title: "Shopify Community — Partners & Developers Forum",
+          url: "https://community.shopify.com/c/shopify-apis-and-sdks/bd-p/shopify-apis-and-technology",
+          type: "community"
+        }
+      ]
+    },
+    {
+      id: "day-27",
+      moduleId: "week-4",
+      title: "Day 27: [Assignment] Seasonal Campaign Build",
+      description: "The final build of Phase 1.",
+      order: 6,
+      difficulty: "Advanced",
+      videos: [],
+      tasks: [
+        {
+          id: "d27-t1",
+          title: "Complete GemPages seasonal page build"
+        },
+        {
+          id: "d27-t2",
+          title: "Add custom JS for timer logic"
+        },
+        {
+          id: "d27-t3",
+          title: "Prepare before/after assets"
+        }
+      ],
+      resources: [
+        {
+          id: "d27-r1",
+          title: "GemPages — Official Shopify App (Build Seasonal Pages)",
+          url: "https://apps.shopify.com/gempages",
+          type: "docs"
+        },
+        {
+          id: "d27-r2",
+          title: "Shopify Dev — JavaScript in Themes (assets/)",
+          url: "https://shopify.dev/docs/storefronts/themes/architecture/assets",
+          type: "docs"
+        },
+        {
+          id: "d27-r3",
+          title: "Shopify Blog — BFCM Checklist for Merchants",
+          url: "https://www.shopify.com/blog/bfcm-checklist",
+          type: "blog"
+        },
+        {
+          id: "d27-r4",
+          title: "GemPages Blog — Black Friday Marketing Ideas for Shopify",
+          url: "https://gempages.net/blogs/shopify/black-friday-marketing-ideas",
+          type: "blog"
+        },
+        {
+          id: "d27-r5",
+          title: "Loom — Record Before/After Walkthroughs",
+          url: "https://www.loom.com",
+          type: "tool"
+        },
+        {
+          id: "d27-r6",
+          title: "Shopify Help — Preview Themes Before Publishing",
+          url: "https://help.shopify.com/en/manual/online-store/themes/managing-themes/previewing-themes",
+          type: "docs"
+        }
+      ]
+    },
+    {
+      id: "day-28",
+      moduleId: "week-4",
+      title: "Day 28: [Assignment] Portfolio Showcase",
+      description: "Consolidating all projects into a professional showreel.",
+      order: 7,
+      difficulty: "Advanced",
+      videos: [],
+      tasks: [
+        {
+          id: "d28-t1",
+          title: "Record a full Phase 1 review video"
+        },
+        {
+          id: "d28-t2",
+          title: "Draft Project #6 Case Study"
+        },
+        {
+          id: "d28-t3",
+          title: "Apply to first 5 high-value gigs"
+        }
+      ],
+      resources: [
+        {
+          id: "d28-r1",
+          title: "Loom — Free Screen Recorder for Showreel Videos",
+          url: "https://www.loom.com",
+          type: "tool"
+        },
+        {
+          id: "d28-r2",
+          title: "Shopify Partners Blog — How to Write a Great Case Study",
+          url: "https://www.shopify.com/partners/blog/case-study",
+          type: "blog"
+        },
+        {
+          id: "d28-r3",
+          title: "Notion — Portfolio & Case Study Workspace Template",
+          url: "https://www.notion.so/templates/portfolio",
+          type: "tool"
+        },
+        {
+          id: "d28-r4",
+          title: "Upwork — Shopify Developer Jobs Marketplace",
+          url: "https://www.upwork.com/freelance-jobs/shopify/",
+          type: "community"
+        },
+        {
+          id: "d28-r5",
+          title: "Smashing Magazine — Writing Compelling Developer Case Studies",
+          url: "https://www.smashingmagazine.com/2023/04/portfolio-case-studies-ux-designers/",
+          type: "blog"
+        },
+        {
+          id: "d28-r6",
+          title: "Shopify Experts — How to Get Listed as a Shopify Expert",
+          url: "https://www.shopify.com/partners/experts",
+          type: "docs"
+        }
+      ]
+    },
+    {
+      id: "day-29",
+      moduleId: "week-4",
+      title: "Day 29: Maintenance & Documentation",
+      description: "Reviewing the competitive log and final documentation.",
+      order: 8,
+      difficulty: "Intermediate",
+      videos: [
+        {
+          id: "d29-v1",
+          title: "How to Create a Freelance Portfolio Using Notion (+ Free Template)",
+          youtubeId: "o2GvoLAwHMk",
+          duration: "15:20"
+        },
+        {
+          id: "d29-v2",
+          title: "How to Create a Freelance Portfolio Using Notion — Free Template & Walkthrough",
+          youtubeId: "m75O6oqXx70",
+          duration: "12:00"
+        },
+        {
+          id: "d29-v3",
+          title: "Complete Shopify SEO Optimization Masterclass for Beginners 2024",
+          youtubeId: "zy1Zy7ENq6w",
+          duration: "10:30"
+        },
+        {
+          id: "d29-v4",
+          title: "Shopify SEO — Checklist You Can Revisit",
+          youtubeId: "40iiUlN24hs",
+          duration: "13:45"
+        }
+      ],
+      tasks: [
+        {
+          id: "d29-t1",
+          title: "Finalize competitive log (20+ stores)"
+        },
+        {
+          id: "d29-t2",
+          title: "Archive Day 1-29 logs in Notion"
+        },
+        {
+          id: "d29-t3",
+          title: "Engage with 10 industry posts"
+        }
+      ],
+      resources: [
+        {
+          id: "d29-r1",
+          title: "Notion — Free Workspace for Documentation & Client Logs",
+          url: "https://www.notion.so",
+          type: "tool"
+        },
+        {
+          id: "d29-r2",
+          title: "Shopify Partners Blog — How to Document Client Work Professionally",
+          url: "https://www.shopify.com/partners/blog/client-documentation",
+          type: "blog"
+        },
+        {
+          id: "d29-r3",
+          title: "Shopify Dev — Changelog (Track Platform Updates)",
+          url: "https://shopify.dev/changelog",
+          type: "docs"
+        },
+        {
+          id: "d29-r4",
+          title: "Shopify Help — Analytics & Store Reports",
+          url: "https://help.shopify.com/en/manual/reports-and-analytics",
+          type: "docs"
+        },
+        {
+          id: "d29-r5",
+          title: "Smashing Magazine — Developer Portfolio Case Studies That Win Work",
+          url: "https://www.smashingmagazine.com/2022/05/developer-portfolio-case-studies/",
+          type: "blog"
+        },
+        {
+          id: "d29-r6",
+          title: "Shopify Community — Developers & Partners Discussion Forum",
+          url: "https://community.shopify.com/c/shopify-apis-and-sdks/bd-p/shopify-apis-and-technology",
+          type: "community"
+        }
+      ]
+    },
+    {
+      id: "day-30",
+      moduleId: "week-4",
+      title: "Day 30: PHASE 1 COMPLETED",
+      description: "Final checklist and transition to Phase 2.",
+      order: 9,
+      difficulty: "Advanced",
+      videos: [],
+      tasks: [
+        {
+          id: "d30-t1",
+          title: "Verify 6/6 Projects in Portfolio"
+        },
+        {
+          id: "d30-t2",
+          title: "Final Master Checklist Audit"
+        },
+        {
+          id: "d30-t3",
+          title: "Post \"Phase 1 Complete\" on LinkedIn/X"
+        }
+      ],
+      resources: [
+        {
+          id: "d30-r1",
+          title: "Shopify Dev — Developer Roadmap & Learning Path",
+          url: "https://shopify.dev/docs/themes/getting-started",
+          type: "docs"
+        },
+        {
+          id: "d30-r2",
+          title: "Shopify Partners Blog — Grow Your Shopify Business",
+          url: "https://www.shopify.com/partners/blog",
+          type: "blog"
+        },
+        {
+          id: "d30-r3",
+          title: "Shopify Experts — Apply to the Shopify Experts Marketplace",
+          url: "https://www.shopify.com/partners/experts",
+          type: "docs"
+        },
+        {
+          id: "d30-r4",
+          title: "Notion — Final Portfolio & Project Archive Template",
+          url: "https://www.notion.so/templates/portfolio",
+          type: "tool"
+        },
+        {
+          id: "d30-r5",
+          title: "Shopify Dev — Changelog (Stay Current for Phase 2)",
+          url: "https://shopify.dev/changelog",
+          type: "docs"
+        },
+        {
+          id: "d30-r6",
+          title: "Shopify Community — Share Your Phase 1 Work & Get Feedback",
+          url: "https://community.shopify.com/c/shopify-discussions/bd-p/general-discussion",
+          type: "community"
+        }
+      ]
+    },
 ];
