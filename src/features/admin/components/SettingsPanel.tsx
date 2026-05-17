@@ -2,11 +2,16 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
-import { LuSave as Save, LuLoader as Loader, LuX as X, LuFileCode as RiFileLine } from "react-icons/lu";
-import { useAdmin } from "../../../context/AdminContext";
-import { adminService } from "../services/adminService";
-import { cn } from "../../../lib/utils";
 import toast from "react-hot-toast";
+import {
+  LuLoader as Loader,
+  LuFileCode as RiFileLine,
+  LuSave as Save,
+  LuX as X,
+} from "react-icons/lu";
+import { useAdmin } from "../../../context/AdminContext";
+import { cn } from "../../../lib/utils";
+import { adminService } from "../services/adminService";
 
 export default function SettingsPanel() {
   const { admins } = useAdmin();
@@ -14,6 +19,7 @@ export default function SettingsPanel() {
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
   const [importJson, setImportJson] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
 
   const handleSeed = async () => {
     setIsSeeding(true);
@@ -29,6 +35,12 @@ export default function SettingsPanel() {
       setImportJson("");
     }
     setIsSaving(false);
+  };
+
+  const handleResetProgress = async () => {
+    setIsResetting(true);
+    await adminService.resetAllUserProgress();
+    setIsResetting(false);
   };
 
   const getExampleJson = () => {
@@ -141,14 +153,14 @@ export default function SettingsPanel() {
 
       <div className="p-8 bg-brand-surface border border-white/10">
         <h3 className="section-label mb-8">System Maintenance</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="p-6 bg-black/40 border border-white/5">
             <h4 className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-4">
               Database Initialization
             </h4>
             <p className="text-xs text-white/60 mb-6 leading-relaxed">
-              Population of the Firestore database with the underlying
-              roadmap architecture.
+              Population of the Firestore database with the underlying roadmap
+              architecture.
             </p>
             <button
               onClick={handleSeed}
@@ -171,6 +183,23 @@ export default function SettingsPanel() {
               className="w-full py-4 bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition-all flex items-center justify-center gap-2"
             >
               <RiFileLine size={16} /> Import from JSON
+            </button>
+          </div>
+
+          <div className="p-6 bg-black/40 border border-red-500/30">
+            <h4 className="text-[10px] font-black uppercase tracking-widest text-red-400 mb-4">
+              Reset User Progress
+            </h4>
+            <p className="text-xs text-white/60 mb-6 leading-relaxed">
+              Reset ALL user progress (completed lessons, videos, and tasks).
+              Start fresh from day one.
+            </p>
+            <button
+              onClick={handleResetProgress}
+              disabled={isResetting}
+              className="w-full py-4 bg-red-500/10 border border-red-500/30 text-red-400 text-[10px] font-black uppercase tracking-widest hover:bg-red-500/20 transition-all flex items-center justify-center gap-2"
+            >
+              {isResetting ? "Resetting..." : "Reset All Progress"}
             </button>
           </div>
         </div>
