@@ -3,6 +3,7 @@ import {
   deleteDoc,
   doc,
   getDoc,
+  getDocs,
   onSnapshot,
   query,
   setDoc,
@@ -208,5 +209,35 @@ export const adminService = {
         console.error("Error syncing admins:", error);
       },
     );
+  },
+
+  async resetAllUserProgress(): Promise<boolean> {
+    if (
+      !confirm(
+        "Reset ALL user progress? This will clear completed lessons, videos, and tasks for ALL users!",
+      )
+    ) {
+      return false;
+    }
+    try {
+      const usersQuery = query(collection(db, firestorePaths.users()));
+      const usersSnapshot = await getDocs(usersQuery);
+
+      for (const docSnapshot of usersSnapshot.docs) {
+        await updateDoc(docSnapshot.ref, {
+          completedLessons: [],
+          completedVideos: [],
+          completedTasks: [],
+          lastActive: new Date().toISOString(),
+        });
+      }
+
+      toast.success("All user progress has been reset!");
+      return true;
+    } catch (error) {
+      console.error("Error resetting user progress:", error);
+      toast.error("Failed to reset user progress");
+      return false;
+    }
   },
 };

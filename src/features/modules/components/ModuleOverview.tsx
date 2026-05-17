@@ -49,12 +49,12 @@ export default function ModuleOverview({
           <div className="text-4xl md:text-6xl font-black italic tracking-tighter text-brand-primary">
             {lessons.length > 0
               ? Math.round(
-                  (lessons.filter((l) =>
-                    (profile?.completedLessons || []).includes(l.id),
-                  ).length /
-                    lessons.length) *
-                    100,
-                )
+                (lessons.filter((l) =>
+                  (profile?.completedLessons || []).includes(l.id),
+                ).length /
+                  lessons.length) *
+                100,
+              )
               : 0}
             %
           </div>
@@ -96,7 +96,7 @@ export default function ModuleOverview({
                         className={cn(
                           "w-full h-full object-cover transition-all duration-700 grayscale",
                           isUnlocked &&
-                            "group-hover/thumb:scale-110 group-hover/thumb:grayscale-0 group-hover/thumb:opacity-40",
+                          "group-hover/thumb:scale-110 group-hover/thumb:grayscale-0 group-hover/thumb:opacity-40",
                           !isUnlocked ? "opacity-10" : "opacity-40",
                         )}
                         onError={(e) => {
@@ -108,7 +108,7 @@ export default function ModuleOverview({
                       />
                       {/* Grid Overlay for Premium Feel */}
                       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03] pointer-events-none" />
-                      
+
                       <div className="fallback-thumb absolute inset-0 hidden flex-col items-center justify-center p-4 text-center">
                         <div className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center mb-3 relative">
                           <div className="absolute inset-0 rounded-full bg-brand-primary/5 animate-ping" />
@@ -121,10 +121,10 @@ export default function ModuleOverview({
                           ID: {lesson.id.split('-')[1]} NODE_READY
                         </p>
                       </div>
-                      
+
                       {/* Animated Scanner Line */}
                       {isUnlocked && (
-                        <motion.div 
+                        <motion.div
                           initial={{ top: "-100%" }}
                           animate={{ top: "100%" }}
                           transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
@@ -137,7 +137,7 @@ export default function ModuleOverview({
                       <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/5 to-transparent opacity-50" />
                       <div className="relative z-10 flex flex-col items-center">
                         <div className="w-10 h-10 border border-white/10 flex items-center justify-center mb-3 group-hover/empty:border-brand-primary/30 transition-colors">
-                           <div className="w-1 h-1 bg-brand-primary animate-pulse" />
+                          <div className="w-1 h-1 bg-brand-primary animate-pulse" />
                         </div>
                         <span className="text-[8px] font-black uppercase tracking-[0.4em] text-brand-primary/60">
                           Workshop Active
@@ -213,7 +213,7 @@ export default function ModuleOverview({
                   isUnlocked ? "group-hover:text-brand-primary" : "text-white/40"
                 )}>{lesson?.title}</h3>
                 <p className="text-white/40 text-sm uppercase tracking-widest font-bold leading-relaxed line-clamp-2">
-                  {isUnlocked ? lesson.description : "Complete the previous day to unlock this content."}
+                  {isUnlocked ? (lesson.description.length > 200 ? lesson.description.substring(0, 200) + "..." : lesson.description) : "Complete the previous day to unlock this content."}
                 </p>
               </div>
 
