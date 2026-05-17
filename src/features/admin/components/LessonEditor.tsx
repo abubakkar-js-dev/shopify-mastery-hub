@@ -60,9 +60,15 @@ export default function LessonEditor({
 
   const addResource = () => {
     if (newResource.title && newResource.url) {
+      const newRes = {
+        id: `res-${Date.now()}`,
+        title: newResource.title,
+        url: newResource.url,
+        type: "blog", // Default type
+      }
       setData({
         ...data,
-        resources: [...(data.resources || []), { ...newResource }],
+        resources: [...(data.resources || []), { ...newRes }],
       });
       setNewResource({ title: "", url: "" });
     }
