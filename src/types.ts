@@ -29,7 +29,7 @@ export interface Lesson {
   order: number;
   difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
   tasks: Task[];
-  resources?: { title: string; url: string }[];
+  resources?: { id: string; title: string; url: string; type: string }[];
 }
 
 export interface AdminRecord {
